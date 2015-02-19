@@ -7,70 +7,14 @@
       <input type="text" class="form-control" placeholder="Search" />
     </div>
   </div>
-  <div class="textgroups col-md-3" ng-class="{ 'deactivated': !layout.isSelected('textgroups') }">
-    <p class="text-center" ng-click="layout.select('textgroups')">
-      <a><span class="glyphicon glyphicon-user"></span></a>
-    </p>
-    <div class="browsing-div">
-      <ul class="list-unstyled">
-        <li ng-repeat="(textgroup, children) in items.available.textgroups">
-          <a ng-click="items.selectFor('works', textgroup)">{{textgroup}}</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="works col-md-3" ng-class="{ 'deactivated': !layout.isSelected('works') }">
-    <p class="text-center" ng-click="layout.select('works')">
-      <a><span class="glyphicon glyphicon-book"></span></a>
-    </p>
-    <div class="browsing-div">
-      <ul class="list-unstyled">
-        <li ng-repeat="(work, children) in items.available.works">
-          <a ng-click="items.selectFor('texts', work)">{{work}}</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="texts col-md-2" ng-class="{ 'deactivated': !layout.isSelected('texts') }">
-    <p class="text-center" ng-click="layout.select('texts')">
-      <a><span class="glyphicon glyphicon-align-justify"></span></a>
-    </p>
-    <div class="browsing-div">
-      <ul class="list-unstyled">
-        <li ng-repeat="(textType, children) in items.available.texts">
-          {{textType | uppercase}}
-          <ul class="list-unstyled">
-            <li ng-click="items.selectFor('passages', textElement)" ng-repeat="(text, textElement) in children"><a>{{text}}</a></li>
-          </ul>
-          <hr />
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="passages col-md-3" ng-class="{ 'deactivated': !layout.isSelected('passages') }">
-    <p class="text-center" ng-click="layout.select('passages')">
-      <a><span class="glyphicon glyphicon-th-list"></span></a>
-    </p>
-    <div class="browsing-div">
-      <!-- Start -->
-      <h5>Start of the passage</h5>
-      <div class="form-group" ng-repeat="(value, key) in items.selected.text.text.citations">
-        <label>{{key}}</label>
-        <input ng-model="items.selected.text.start[value]" type="text" class="form-control" />
-      </div>
-      <!-- End -->
-      <h5>End of the passage</h5>
-      <div class="form-group" ng-repeat="(value, key) in items.selected.text.text.citations">
-        <label>{{key}}</label>
-        <input ng-model="items.selected.text.end[value]" type="text" class="form-control" />
-      </div>
-      <button class="btn btn-default" ng-click="items.selectFor('pages')">Retrieve</button>
-    </div>
-  </div>
-  <div class="page col-md-6 col-md-push-1" ng-show="items.selected.page">
-    <h2>{{items.selected.page.author}}</h2>
-    <h1>{{items.selected.page.title}}</h1>
-    <p>{{items.selected.page.text}}</p>
+  <nemo-browse layout="layout" label="'textgroups'" nextstep="'works'"    icon="'glyphicon-user'"    current="items.available.textgroups"  next="items.available.works"></nemo-browse>
+  <nemo-browse layout="layout" label="'works'"      nextstep="'texts'"    icon="'glyphicon-book'"    current="items.available.works"       next="items.available.texts"></nemo-browse>
+  <nemo-browse layout="layout" label="'texts'"      nextstep="'passages'" icon="'glyphicon-align-justify'" current="items.available.texts" next="items.available.text"></nemo-browse>
+  <nemo-passage layout="layout" text="items.available.text" passage="items.selected.passage" injector="Repository"></nemo-passage>
+  <div class="page col-md-6 col-md-push-1" ng-show="items.selected.passage">
+    <h2>{{items.selected.passage.author}}</h2>
+    <h1>{{items.selected.passage.title}}</h1>
+    <p>{{items.selected.passage.getText()}}</p>
   </div>
 
 </div>
