@@ -1,9 +1,8 @@
 {
-  "name": "angular-seed",
-  "private": true,
+  "name": "capitains-nemo",
   "version": "0.0.0",
-  "description": "A starter project for AngularJS",
-  "repository": "https://github.com/angular/angular-seed",
+  "description": "A simple CTS API browser app",
+  "repository": "https://github.com/PerseusDL/Capitains-Nemo",
   "license": "MIT",
   "devDependencies": {
     "karma": "~0.10",
@@ -11,7 +10,8 @@
     "http-server": "^0.6.1",
     "bower": "^1.3.1",
     "shelljs": "^0.2.6",
-    "karma-junit-reporter": "^0.2.2"
+    "karma-junit-reporter": "^0.2.2",
+    "capitains-sparrow": "~1.0.x"
   },
   "scripts": {
     "postinstall": "bower install",

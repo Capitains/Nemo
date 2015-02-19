@@ -1,0 +1,66 @@
+.textgroups {
+  background-color:#332C2F;
+  color:white;
+}
+.works {
+  background-color:#67655D;
+  color:white;
+}
+.texts {
+  background-color:#AA9A66;
+  color:white;
+}
+.passages {
+  background-color:#577492;
+  color:white;
+}
+
+.search {
+  background-color: #121212;
+  color:white;
+}
+
+.textgroups, .works, .texts, .passages, .search {
+  height:100%;
+  -webkit-box-shadow: inset 8px 0px 10px 0px rgba(0,0,0,0.42);
+  -moz-box-shadow: inset 8px 0px 10px 0px rgba(0,0,0,0.42);
+  box-shadow: inset 8px 0px 10px 0px rgba(0,0,0,0.42);
+  overflow-y: auto;
+  padding-top:10px;
+
+  a {
+    color:white;
+    cursor: pointer;
+  }
+
+  &.deactivated {
+    width: 50px;
+    font-size:1.8em;
+    padding-left:-1em;
+
+    > .browsing-div {
+      display:none;
+    }
+  }
+  > browsing-div > ul {
+    margin-top:10px;
+  }
+}
+
+.page {
+  -webkit-box-shadow: -8px 0px 10px 0px rgba(0,0,0,0.42);
+  -moz-box-shadow: -8px 0px 10px 0px rgba(0,0,0,0.42);
+  box-shadow: -8px 0px 10px 0px rgba(0,0,0,0.42);
+  border-right: 1px solid rgba(0,0,0,0.42);
+  background-color: white;
+  overflow-y: auto;
+  padding-top:10px;
+}
+
+body, html, body > div, .view, .page {
+  height:100%;
+}
+
+body {
+  background-color: #D4D8D1;
+}
