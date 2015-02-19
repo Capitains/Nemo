@@ -40,6 +40,7 @@ angular
 
             passage.load().then.call(this, function() {
               $scope.passage = passage.Passage;
+              $scope.passage.source = $scope.text;
             });
           };
 

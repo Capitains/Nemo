@@ -12,10 +12,11 @@ angular.module('capitainsNemo.home', ['ngRoute'])
 .controller('HomeCtrl', ['$scope', 'Repository', function($scope, Repository) {
   $scope.layout = {
     categories : {
-      textgroups : true,
+      textgroups : false,
       works : false,
       texts : false,
-      passages : false
+      passages : false,
+      search : true,
     },
     isSelected : function(div) {
       return ($scope.layout.categories[div] === true) ? true : false;
@@ -56,10 +57,12 @@ angular.module('capitainsNemo.home', ['ngRoute'])
   /* 
     Loading the data
   */
+ $scope.fullstringTexts = [];
+
   $scope.repository.load().then(
     //Success
     function() {
-      angular.forEach($scope.repository.Repository.inventories, function(inventory) {
+      angular.forEach($scope.repository.Repository.inventories, function(inventory, inventoryName) {
         var textgroups = inventory.getRaw();
         var modified = {}
         angular.forEach(textgroups, function(works, textgroup) {
@@ -74,8 +77,11 @@ angular.module('capitainsNemo.home', ['ngRoute'])
                 object.display   = object.getTitle();
                 object.start     = object.citations.map(function(val) { return ""; });
                 object.end       = object.citations.map(function(val) { return ""; });
-                editions["("+ inventory + " ) " + title] = object;
+                editions["("+ inventoryName + " ) " + title] = object;
+
                 delete editions[title];
+                var tempTitle = [inventoryName, textgroup, work, title].join(", ")
+                $scope.fullstringTexts.push(object);
               })
             })
             textgroups[textgroup][work] = {display : work, author : textgroup, children : editions};

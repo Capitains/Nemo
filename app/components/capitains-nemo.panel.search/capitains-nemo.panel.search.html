@@ -1,0 +1,11 @@
+<div class="search col-md-3" ng-class="{ 'deactivated': !layout.isSelected('search') }">
+  <p class="text-center" ng-click="layout.select('search')">
+    <a><span class="glyphicon glyphicon-search"></span></a>
+  </p>
+  <div class="browsing-div">
+    <input type="text" class="form-control" ng-model="query" placeholder="Search" />
+    <ul class="list-unstyled">
+      <li ng-repeat="text in search()" ng-click="select(text)"><a>{{text.getTitle()}}</li>
+    </ul>
+  </div>
+</div>

@@ -54,11 +54,11 @@
 .search.deactivated > .browsing-div {
   display: none;
 }
-.textgroups > browsing-div > ul,
-.works > browsing-div > ul,
-.texts > browsing-div > ul,
-.passages > browsing-div > ul,
-.search > browsing-div > ul {
+.textgroups .browsing-div > ul,
+.works .browsing-div > ul,
+.texts .browsing-div > ul,
+.passages .browsing-div > ul,
+.search .browsing-div > ul {
   margin-top: 10px;
 }
 .page {

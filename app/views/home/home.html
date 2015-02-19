@@ -1,19 +1,12 @@
 <div class="view">
-  <div class="search col-md-3" ng-class="{ 'deactivated': !layout.isSelected('search') }">
-    <p class="text-center" ng-click="layout.select('textgroups')">
-      <a><span class="glyphicon glyphicon-search"></span></a>
-    </p>
-    <div class="browsing-div">
-      <input type="text" class="form-control" placeholder="Search" />
-    </div>
-  </div>
+  <nemo-search layout="layout" texts="fullstringTexts" target="items.available.text"></nemo-search>
   <nemo-browse layout="layout" label="'textgroups'" nextstep="'works'"    icon="'glyphicon-user'"    current="items.available.textgroups"  next="items.available.works"></nemo-browse>
   <nemo-browse layout="layout" label="'works'"      nextstep="'texts'"    icon="'glyphicon-book'"    current="items.available.works"       next="items.available.texts"></nemo-browse>
   <nemo-browse layout="layout" label="'texts'"      nextstep="'passages'" icon="'glyphicon-align-justify'" current="items.available.texts" next="items.available.text"></nemo-browse>
   <nemo-passage layout="layout" text="items.available.text" passage="items.selected.passage" injector="Repository"></nemo-passage>
   <div class="page col-md-6 col-md-push-1" ng-show="items.selected.passage">
-    <h2>{{items.selected.passage.author}}</h2>
-    <h1>{{items.selected.passage.title}}</h1>
+    <h2>{{items.selected.passage.source.author}}</h2>
+    <h1>{{items.selected.passage.source.title}}</h1>
     <p>{{items.selected.passage.getText()}}</p>
   </div>
 

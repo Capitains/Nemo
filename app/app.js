@@ -6,7 +6,8 @@ angular.module('capitainsNemo', [
   'capitainsSparrow.models',
   'capitainsNemo.home',
   'capitainsNemo.panel-passage',
-  'capitainsNemo.panel-browse'
+  'capitainsNemo.panel-browse',
+  'capitainsNemo.panel-search'
 ]).
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.otherwise({redirectTo: '/home'});
