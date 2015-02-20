@@ -4,6 +4,7 @@
   </p>
   <div class="browsing-div">
     <input type="text" class="form-control" ng-model="query" placeholder="Search" />
+    <div class="alert-info" ng-show="loading">Loading texts...</div>
     <div class="list-group">
       <a class="list-group-item" ng-repeat="text in search()" ng-click="select(text)">
         <h5 class="list-group-item-heading">{{text.getTitle()}}<span class="badge pull-right">{{text.lang}}</span></h5>

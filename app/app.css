@@ -1288,6 +1288,7 @@ body > div,
   display: none;
 }
 .bottom-bar ul.square-list .triple.expandable.expanded {
+  font-size: smaller;
   width: 238px;
   text-align: left;
 }
@@ -1310,7 +1311,6 @@ body {
   background-color: #2b5797;
 }
 .informations {
-  background-color: #95a5a6;
+  background-color: #7f8c8d;
   color: white;
-  font-size: smaller;
 }
