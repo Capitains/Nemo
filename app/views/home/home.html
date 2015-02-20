@@ -1,4 +1,3 @@
-
   <div class="top-bar">
   </div>
   <div class="content">
@@ -39,5 +38,13 @@
         <div class="text">Close menu</div>
       </a>
     </li>
+    <li class="navigation" ng-click="items.selected.passage.goPrevious()" ng-class="{'deactivated' : !items.selected.passage.previous}">
+      <a>
+        <div class="icon"><span class="glyphicon glyphicon-chevron-left"></span></div>
+        <div class="text">Previous</div>
+      </a>
+    </li>
+    <nemo-square-nav passage="items.selected.passage" injector="Passage" direction="'prev'"></nemo-square-nav>
+    <nemo-square-nav passage="items.selected.passage" injector="Passage" direction="'next'"></nemo-square-nav>
   </ul>
 </div>

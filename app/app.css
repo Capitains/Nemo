@@ -1273,3 +1273,6 @@ body {
 .cancel .text {
   font-size: smaller;
 }
+.navigation {
+  background-color: #2b5797;
+}

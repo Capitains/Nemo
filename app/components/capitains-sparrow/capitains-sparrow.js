@@ -57,14 +57,37 @@ angular.module('capitainsSparrow.models', [])
   }])
   .factory('Passage', ['$q', function($q) {
     return function(urn, endpoint, inventory, text) {
-      this.Passage = new CTS.text.Passage(urn, endpoint, inventory);
-      this.Passage.source = text;
+      this.text = text;
+
+      var createPassage = function(urn) {
+        var $this = this;
+        $this.Passage = new CTS.text.Passage(urn, endpoint, inventory);
+        $this.Passage.source = this.text;
+        $this.Passage.next = false;
+        $this.Passage.prev = false;
+      }
+
+      createPassage.call(this, urn);
+
       this.load = function() {
         var deferred = $q.defer(),
             $this = this;
         this.Passage.retrieve({
           success : function() {
               $this.Passage.body = $this.Passage.getXml("body", "string");
+              $this.Passage.next = (function() { 
+                var next = $this.Passage.getXml("next");
+                if(next.length === 1 && next[0].textContent !== "") { return next[0].textContent; }
+                else { return false; }
+              })()
+              /**
+              For now, broken.
+              $this.Passage.prev = (function() { 
+                var prev = $this.Passage.getXml("prev");
+                if(prev.length === 1 && prev[0].textContent !== "") { return prev[0].textContent; }
+                else { return false; }
+              })()
+              */
               deferred.resolve();
             },
           error : function(error) {
