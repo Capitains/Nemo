@@ -30,11 +30,16 @@
   overflow-y: auto;
   padding-top: 10px;
 }
-.textgroups a,
-.works a,
-.texts a,
-.passages a,
-.search a {
+.textgroups li > a,
+.works li > a,
+.texts li > a,
+.passages li > a,
+.search li > a,
+.textgroups .text-center a,
+.works .text-center a,
+.texts .text-center a,
+.passages .text-center a,
+.search .text-center a {
   color: white;
   cursor: pointer;
 }
@@ -60,6 +65,20 @@
 .passages .browsing-div > ul,
 .search .browsing-div > ul {
   margin-top: 10px;
+}
+.textgroups .list-group,
+.works .list-group,
+.texts .list-group,
+.passages .list-group,
+.search .list-group {
+  margin-top: 10px;
+}
+.textgroups .list-group-item,
+.works .list-group-item,
+.texts .list-group-item,
+.passages .list-group-item,
+.search .list-group-item {
+  padding: 5px 10px;
 }
 .page {
   -webkit-box-shadow: -8px 0px 10px 0px rgba(0, 0, 0, 0.42);

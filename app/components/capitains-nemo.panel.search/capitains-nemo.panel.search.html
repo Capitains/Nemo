@@ -4,8 +4,11 @@
   </p>
   <div class="browsing-div">
     <input type="text" class="form-control" ng-model="query" placeholder="Search" />
-    <ul class="list-unstyled">
-      <li ng-repeat="text in search()" ng-click="select(text)"><a>{{text.getTitle()}}</li>
-    </ul>
+    <div class="list-group">
+      <a class="list-group-item" ng-repeat="text in search()" ng-click="select(text)">
+        <h5 class="list-group-item-heading">{{text.getTitle()}}<span class="badge pull-right">{{text.lang}}</span></h5>
+        <p class="list-group-item-text">{{text.author}}</p>
+      </a>
+    </div>
   </div>
 </div>
