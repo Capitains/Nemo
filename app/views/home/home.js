@@ -3,30 +3,17 @@
 angular.module('capitainsNemo.home', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/home', {
+  var HomeController = {
     templateUrl: 'views/home/home.html',
     controller: 'HomeCtrl'
-  });
+  };
+  $routeProvider.when('/', HomeController);
+  $routeProvider.when('/:urn', HomeController);
 }])
 
-.controller('HomeCtrl', ['$scope', 'Repository', function($scope, Repository) {
-  $scope.layout = {
-    categories : {
-      textgroups : false,
-      works : false,
-      texts : false,
-      passages : false,
-      search : true,
-    },
-    isSelected : function(div) {
-      return ($scope.layout.categories[div] === true) ? true : false;
-    },
-    select : function(div) {
-      angular.forEach($scope.layout.categories, function(value, key) {
-        $scope.layout.categories[key] = (div === key);
-      });
-    },
-  }
+.controller('HomeCtrl', ['$scope', '$route', 'Repository', 'Layout', function($scope, $route, Repository, Layout) {
+  console.log($route.current.pathParams.urn)
+  $scope.layout = new Layout();
 
   $scope.items = {
     parents : {

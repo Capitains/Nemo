@@ -1,5 +1,5 @@
 angular
-  .module('capitainsNemo.panel-passage', [])
+  .module('capitainsNemo.panels')
   .directive('nemoPassage', function () {
       return {
         restrict: 'E',
@@ -41,6 +41,8 @@ angular
             passage.load().then.call(this, function() {
               $scope.passage = passage.Passage;
               $scope.passage.source = $scope.text;
+              $scope.passage.body = $scope.passage.getXml("body", "string");
+              console.log($scope.passage)
             });
           };
 

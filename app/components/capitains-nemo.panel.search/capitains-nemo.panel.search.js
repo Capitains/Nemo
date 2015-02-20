@@ -1,5 +1,5 @@
 angular
-  .module('capitainsNemo.panel-search', [])
+  .module('capitainsNemo.panels')
   .directive('nemoSearch', function () {
       return {
         restrict: 'E',

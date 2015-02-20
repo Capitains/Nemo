@@ -7,7 +7,7 @@
   <div class="page col-md-6 col-md-push-1" ng-show="items.selected.passage">
     <h2>{{items.selected.passage.source.author}}</h2>
     <h1>{{items.selected.passage.source.title}}</h1>
-    <p>{{items.selected.passage.getText()}}</p>
+    <div tei-parser="items.selected.passage.body"></div>
   </div>
 
 </div>

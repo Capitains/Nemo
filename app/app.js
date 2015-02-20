@@ -5,10 +5,11 @@ angular.module('capitainsNemo', [
   'ngRoute',
   'capitainsSparrow.models',
   'capitainsNemo.home',
-  'capitainsNemo.panel-passage',
-  'capitainsNemo.panel-browse',
-  'capitainsNemo.panel-search'
+  'capitainsNemo.utils',
+  'capitainsNemo.panels',
+  'arethusa.tei'
 ]).
   config(['$routeProvider', function($routeProvider) {
-    $routeProvider.otherwise({redirectTo: '/home'});
+    $routeProvider
+    .otherwise({redirectTo: '/'});
   }]);

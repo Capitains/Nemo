@@ -1,3 +1,16 @@
+.tei-l {
+  display: block;
+  margin-left: 30px;
+  position: relative;
+}
+.tei-l:nth-child(5n):before {
+  position: absolute;
+  display: block;
+  content: attr(n);
+  color: grey;
+  top: 0;
+  left: -30px;
+}
 .textgroups {
   background-color: #332C2F;
   color: white;
