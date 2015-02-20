@@ -1225,6 +1225,7 @@ body > div,
   bottom: 0;
   height: 80px;
   width: 100%;
+  padding-right: 1px;
 }
 .bottom-bar ul.square-list {
   list-style-type: none;
@@ -1264,6 +1265,38 @@ body > div,
   margin: 0;
   overflow: hidden;
 }
+.bottom-bar ul.square-list .triple {
+  width: 238px;
+  text-align: left;
+  padding: 5px;
+}
+.bottom-bar ul.square-list .triple.expandable {
+  -webkit-transition: width 0.3s ease, margin 0.3s ease;
+  -moz-transition: width 0.3s ease, margin 0.3s ease;
+  -o-transition: width 0.3s ease, margin 0.3s ease;
+  transition: width 0.3s ease, margin 0.3s ease;
+  width: 78px;
+  text-align: center;
+}
+.bottom-bar ul.square-list .triple.expandable.deactivated {
+  padding: 0;
+}
+.bottom-bar ul.square-list .triple.expandable > .reduced {
+  display: block;
+}
+.bottom-bar ul.square-list .triple.expandable > .expanded {
+  display: none;
+}
+.bottom-bar ul.square-list .triple.expandable.expanded {
+  width: 238px;
+  text-align: left;
+}
+.bottom-bar ul.square-list .triple.expandable.expanded > .reduced {
+  display: none;
+}
+.bottom-bar ul.square-list .triple.expandable.expanded > .expanded {
+  display: block;
+}
 body {
   background-color: #D4D8D1;
 }
@@ -1275,4 +1308,9 @@ body {
 }
 .navigation {
   background-color: #2b5797;
+}
+.informations {
+  background-color: #95a5a6;
+  color: white;
+  font-size: smaller;
 }

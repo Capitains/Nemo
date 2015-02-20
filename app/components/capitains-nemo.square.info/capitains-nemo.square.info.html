@@ -1,0 +1,12 @@
+<li class="triple pull-right expandable informations" ng-class="{'expanded' : expanded, 'deactivated' : !passage}">
+  <div class="reduced" ng-click="expand()">
+    <a>
+      <div class="icon"><span class="glyphicon glyphicon-info-sign"></span></div>
+      <div class="text">Infos</div>
+    </a>
+  </div>
+  <div class="expanded">
+    <a class="pull-right" ng-click="expand()"><span class="glyphicon glyphicon-remove"></span></a>
+    URN : {{passage.urn}}
+  </div>
+</li>
