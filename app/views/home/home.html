@@ -32,6 +32,12 @@
         <div class="icon"><span class="glyphicon glyphicon-book"></span></div>
         <div class="text">Browse</div>
       </a>
-      </li>
+    </li>
+    <li class="cancel" ng-click="layout.menu = false" ng-class="{'deactivated' : !layout.menu}">
+      <a>
+        <div class="icon"><span class="glyphicon glyphicon-remove"></span></div>
+        <div class="text">Close menu</div>
+      </a>
+    </li>
   </ul>
 </div>

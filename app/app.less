@@ -1,6 +1,13 @@
 @import "less/tei.less";
 @import "less/schemes.less";
 
+.animation {
+  -webkit-transition: width 0.3s ease, margin 0.3s ease;
+  -moz-transition: width 0.3s ease, margin 0.3s ease;
+  -o-transition: width 0.3s ease, margin 0.3s ease;
+  transition: width 0.3s ease, margin 0.3s ease;
+}
+
 .content {
   .textgroups, .works, .texts, .passages, .search {
     height:100%;
@@ -13,10 +20,7 @@
     overflow-x:hidden;
     padding-top:10px;
 
-    -webkit-transition: width 0.3s ease, margin 0.3s ease;
-    -moz-transition: width 0.3s ease, margin 0.3s ease;
-    -o-transition: width 0.3s ease, margin 0.3s ease;
-    transition: width 0.3s ease, margin 0.3s ease;
+    .animation;
 
     li > a, .text-center a {
       color:white;
@@ -106,6 +110,7 @@ body, html, body > div, .view, .content, .page {
     padding: 0;
 
     > li {
+      .animation;
 
       float:left;
       display:block;
@@ -117,7 +122,10 @@ body, html, body > div, .view, .content, .page {
       .icon {
         height: 50px;
         line-height:50px;
-        font-size:1.5em;
+        font-size:1.8em;
+      }
+      .text {
+        line-height:28px;
       }
 
       a {
@@ -128,10 +136,22 @@ body, html, body > div, .view, .content, .page {
         }
       }
 
+      &.deactivated {
+        width:0;
+        height:0;
+        margin:0;
+        overflow:hidden;
+      }
+
     }
   }
 }
 
 body {
   background-color: #D4D8D1;
+}
+
+.cancel {
+  background-color:#da532c;
+  .text { font-size :smaller; }
 }

@@ -34,6 +34,12 @@
   background-color: #da532c;
   color: white;
 }
+.animation {
+  -webkit-transition: width 0.3s ease, margin 0.3s ease;
+  -moz-transition: width 0.3s ease, margin 0.3s ease;
+  -o-transition: width 0.3s ease, margin 0.3s ease;
+  transition: width 0.3s ease, margin 0.3s ease;
+}
 .content .textgroups,
 .content .works,
 .content .texts,
@@ -163,6 +169,10 @@ body > div,
   padding: 0;
 }
 .bottom-bar ul.square-list > li {
+  -webkit-transition: width 0.3s ease, margin 0.3s ease;
+  -moz-transition: width 0.3s ease, margin 0.3s ease;
+  -o-transition: width 0.3s ease, margin 0.3s ease;
+  transition: width 0.3s ease, margin 0.3s ease;
   float: left;
   display: block;
   margin: 1px;
@@ -173,7 +183,10 @@ body > div,
 .bottom-bar ul.square-list > li .icon {
   height: 50px;
   line-height: 50px;
-  font-size: 1.5em;
+  font-size: 1.8em;
+}
+.bottom-bar ul.square-list > li .text {
+  line-height: 28px;
 }
 .bottom-bar ul.square-list > li a {
   color: white;
@@ -182,6 +195,18 @@ body > div,
 .bottom-bar ul.square-list > li a:hover {
   text-decoration: none;
 }
+.bottom-bar ul.square-list > li.deactivated {
+  width: 0;
+  height: 0;
+  margin: 0;
+  overflow: hidden;
+}
 body {
   background-color: #D4D8D1;
+}
+.cancel {
+  background-color: #da532c;
+}
+.cancel .text {
+  font-size: smaller;
 }
