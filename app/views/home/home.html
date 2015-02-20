@@ -12,8 +12,9 @@
       <div class="page">
         <h2>{{items.selected.passage.source.author}}</h2>
         <h1>{{items.selected.passage.source.title}}</h1>
-        <div tei-parser="items.selected.passage.body"></div>
+        <div tei-parser="items.selected.passage.body" notebook="items.selected.passage.notes"></div>
       </div>
+      <nemo-notes notes="items.selected.passage.notes"></nemo-notes>
     </div>
 
 </div>

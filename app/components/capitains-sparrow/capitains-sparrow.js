@@ -80,8 +80,12 @@ angular.module('capitainsSparrow.models', [])
                 if(next.length === 1 && next[0].textContent !== "") { return next[0].textContent; }
                 else { return false; }
               })()
+              $this.Passage.notes = {};
+              [].forEach.call($this.Passage.getXml("note"), function(node) {
+                $this.Passage.notes[node.innerHTML] = node;
+              });
               /**
-              For now, broken.
+              For now, broken in the API
               $this.Passage.prev = (function() { 
                 var prev = $this.Passage.getXml("prev");
                 if(prev.length === 1 && prev[0].textContent !== "") { return prev[0].textContent; }

@@ -8,6 +8,7 @@ angular.module('capitainsNemo', [
   'capitainsNemo.utils',
   'capitainsNemo.panels',
   'capitainsNemo.square',
+  'capitainsNemo.reading',
   'arethusa.tei'
 ]).
   config(['$routeProvider', function($routeProvider) {
