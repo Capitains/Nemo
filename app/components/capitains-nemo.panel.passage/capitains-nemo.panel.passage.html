@@ -1,20 +1,26 @@
-<div class="passages col-md-3" ng-class="{ 'deactivated': !layout.isSelected('passages') }">
+<div class="passages" ng-class="{ 'deactivated': !layout.isSelected('passages') }">
   <p class="text-center" ng-click="layout.select('passages')">
     <a><span class="glyphicon glyphicon-th-list"></span></a>
   </p>
   <div class="browsing-div">
+    <form class="form-horizontal" ng-submit="select()">
     <!-- Start -->
     <h5>Start of the passage</h5>
-    <div class="form-group" ng-repeat="(value, key) in text.citations">
-      <label>{{key}}</label>
-      <input ng-model="text.start[value]" type="text" class="form-control" />
+    <div class="form-group" ng-repeat="(value, key) in text.citations" >
+      <label class="col-md-6 control-label">{{key}}</label>
+      <div class="col-md-6">
+        <input ng-model="text.start[value]" type="text" class="form-control" />
+      </div>
     </div>
     <!-- End -->
     <h5>End of the passage</h5>
     <div class="form-group" ng-repeat="(value, key) in text.citations">
-      <label>{{key}}</label>
-      <input ng-model="text.end[value]" type="text" class="form-control" />
+      <label class="col-md-6 control-label">{{key}}</label>
+      <div class="col-md-6">
+        <input ng-model="text.end[value]" type="text" class="form-control" />
+      </div>
     </div>
-    <button class="btn btn-default" ng-click="select()">Retrieve</button>
+    <button class="btn btn-default" type="submit">Retrieve</button>
+    </form>
   </div>
 </div>

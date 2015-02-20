@@ -2,6 +2,7 @@ angular.module('capitainsNemo.utils', [])
   .factory('Layout', ['$q', function($q) {
     var Layout =  function() {
       this.categories = {};
+      this.menu = false;
       /**
        * For a given categories, checks if this has to be shown
        * @param   {string}  div Category
@@ -18,6 +19,8 @@ angular.module('capitainsNemo.utils', [])
        */
       this.select = function(div) {
         var $this = this;
+        console.log(div);
+        this.menu = (div !== "page");
         angular.forEach(this.categories, function(value, key) {
           $this.categories[key] = (div === key);
         });

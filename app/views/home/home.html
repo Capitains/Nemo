@@ -1,13 +1,37 @@
-<div class="view">
-  <nemo-search layout="layout" texts="indexes.fulltext" target="items.available.text"></nemo-search>
-  <nemo-browse layout="layout" label="'textgroups'" nextstep="'works'"    icon="'glyphicon-user'"    current="items.available.textgroups"  next="items.available.works"></nemo-browse>
-  <nemo-browse layout="layout" label="'works'"      nextstep="'texts'"    icon="'glyphicon-book'"    current="items.available.works"       next="items.available.texts"></nemo-browse>
-  <nemo-browse layout="layout" label="'texts'"      nextstep="'passages'" icon="'glyphicon-align-justify'" current="items.available.texts" next="items.available.text"></nemo-browse>
-  <nemo-passage layout="layout" text="items.available.text" passage="items.selected.passage" injector="Passage"></nemo-passage>
-  <div class="page col-md-6 col-md-push-1" ng-show="items.selected.passage">
-    <h2>{{items.selected.passage.source.author}}</h2>
-    <h1>{{items.selected.passage.source.title}}</h1>
-    <div tei-parser="items.selected.passage.body"></div>
-  </div>
 
+  <div class="top-bar">
+  </div>
+  <div class="content">
+    <div class="col-md-3 col-menu" ng-class="{'deactivated' : !layout.menu}">
+      <nemo-search layout="layout" texts="indexes.fulltext" target="items.available.text"></nemo-search>
+      <nemo-browse layout="layout" label="'textgroups'" nextstep="'works'"    icon="'glyphicon-user'"    current="items.available.textgroups"  next="items.available.works"></nemo-browse>
+      <nemo-browse layout="layout" label="'works'"      nextstep="'texts'"    icon="'glyphicon-book'"    current="items.available.works"       next="items.available.texts"></nemo-browse>
+      <nemo-browse layout="layout" label="'texts'"      nextstep="'passages'" icon="'glyphicon-align-justify'" current="items.available.texts" next="items.available.text"></nemo-browse>
+      <nemo-passage layout="layout" text="items.available.text" passage="items.selected.passage" injector="Passage"></nemo-passage>
+    </div>
+    <div ng-class="{'col-md-10 col-md-push-1' : !layout.menu, 'col-md-7' : layout.menu}" ng-show="items.selected.passage">
+      <div class="page">
+        <h2>{{items.selected.passage.source.author}}</h2>
+        <h1>{{items.selected.passage.source.title}}</h1>
+        <div tei-parser="items.selected.passage.body"></div>
+      </div>
+    </div>
+
+</div>
+
+<div class="bottom-bar">
+  <ul class="square-list">
+    <li class="search" ng-click="layout.select('search')">
+      <a>
+        <div class="icon"><span class="glyphicon glyphicon-search"></span></div>
+        <div class="text">Search</div>
+      </a>
+    </li>
+    <li class="textgroups" ng-click="layout.select('textgroups')">
+      <a>
+        <div class="icon"><span class="glyphicon glyphicon-book"></span></div>
+        <div class="text">Browse</div>
+      </a>
+      </li>
+  </ul>
 </div>
