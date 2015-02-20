@@ -9,7 +9,7 @@
       <nemo-browse layout="layout" label="'texts'"      nextstep="'passages'" icon="'glyphicon-align-justify'" current="items.available.texts" next="items.available.text"></nemo-browse>
       <nemo-passage layout="layout" text="items.available.text" passage="items.selected.passage" injector="Passage"></nemo-passage>
     </div>
-    <div ng-class="{'col-md-10 col-md-push-1' : !layout.menu, 'col-md-7' : layout.menu}" ng-show="items.selected.passage">
+    <div class="animation" ng-class="{'col-md-10 col-md-push-1' : !layout.menu, 'col-md-7' : layout.menu}" ng-show="items.selected.passage">
       <div class="page">
         <h2>{{items.selected.passage.source.author}}</h2>
         <h1>{{items.selected.passage.source.title}}</h1>
