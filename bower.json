@@ -12,7 +12,6 @@
     "angular-mocks": "~1.2.x",
     "bootstrap" : "~3.3",
     "lunr.js" : "0.5.7",
-    "metro-bootstrap" : "3.1.1.2",
     "capitains-sparrow": "git@github.com:PerseusDL/Capitains-Sparrow.git"
   }
 }
