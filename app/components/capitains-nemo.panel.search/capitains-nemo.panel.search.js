@@ -21,10 +21,12 @@ angular
           var indexing = function() {
             $scope.lunr = lunr(function () {
               this.field('title', {boost: 10})
+              this.field('lang', {boost: 1})
               this.field('author', {boost: 10})
               this.ref('urn')
             })
             angular.forEach($scope.texts, function(text) {
+              text.title = text.getTitle();
               $scope.lunr.add(text);
               $scope.index[text.urn] = text;
             });

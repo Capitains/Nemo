@@ -12,7 +12,7 @@ angular
           injector : '@'
         },
         controller: function ($scope, $injector) {
-          var Repository = $injector.get($scope.injector);
+          var Passage = $injector.get($scope.injector);
 
           $scope.retrieve = function () {
             var urn = $scope.text.urn;
@@ -32,17 +32,15 @@ angular
             };
             var urn = urn + ":" + start.join(".") + "-" + end.join(".");
 
-            var passage = Repository.passage(
+            var passage = new Passage(
               urn,
               "http://localhost:8080/exist/rest/db/xq/CTS.xq?",
-              $scope.text.inventory
+              $scope.text.inventory,
+              $scope.text
             );
 
             passage.load().then.call(this, function() {
               $scope.passage = passage.Passage;
-              $scope.passage.source = $scope.text;
-              $scope.passage.body = $scope.passage.getXml("body", "string");
-              console.log($scope.passage)
             });
           };
 
