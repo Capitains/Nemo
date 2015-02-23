@@ -9,7 +9,8 @@ angular.module('capitainsNemo', [
   'capitainsNemo.panels',
   'capitainsNemo.square',
   'capitainsNemo.reading',
-  'arethusa.tei'
+  'arethusa.tei',
+  'sanitizeHTML'
 ]).
   config(['$routeProvider', function($routeProvider) {
     $routeProvider

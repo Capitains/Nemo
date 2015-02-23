@@ -1067,6 +1067,9 @@ select[multiple].form-group-lg .form-control {
 *[rend="italics"] {
   font-style: italic;
 }
+.tei-note {
+  cursor: pointer;
+}
 .textgroups {
   background-color: #1e7145;
   color: white;

@@ -9,7 +9,6 @@ angular
           notebook: '=',
         },
         controller: ['$scope', function ($scope) {
-          console.log($scope.notebook);
           $scope.show = function() {
             return (typeof $scope.notebook !== "undefined" && $scope.notebook.length > 0)
           }

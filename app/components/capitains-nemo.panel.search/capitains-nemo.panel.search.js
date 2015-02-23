@@ -58,10 +58,7 @@ angular
             if($scope.texts.length === 0) {
               return [];
             }
-            if($scope.lunr === null) {
-              indexing();
-            }
-            if($scope.query.length > 3) {
+            if($scope.query.length >= 3) {
               $scope.lunr.search($scope.query).forEach(function(ref) {
                 results.push($scope.index[ref.ref])
               });

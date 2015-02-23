@@ -9,12 +9,14 @@
       <nemo-passage layout="layout" text="items.available.text" passage="items.selected.passage" injector="Passage"></nemo-passage>
     </div>
     <div class="animation" ng-class="{'col-md-10 col-md-push-1' : !layout.menu, 'col-md-7' : layout.menu}" ng-show="items.selected.passage">
-      <div class="page">
+      <div class="page row">
+      <div class="col-md-10">
         <h2>{{items.selected.passage.source.author}}</h2>
         <h1>{{items.selected.passage.source.title}}</h1>
         <div tei-parser="items.selected.passage.body" notebook="items.selected.passage.notes"></div>
       </div>
-      <nemo-notes notes="items.selected.passage.notes"></nemo-notes>
+      <nemo-notes class="col-md-2" notebook="items.selected.passage.notes"></nemo-notes>
+      </div>
     </div>
 
 </div>

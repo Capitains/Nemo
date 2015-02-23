@@ -82,7 +82,11 @@ angular.module('capitainsSparrow.models', [])
               })()
               $this.Passage.notes = {};
               [].forEach.call($this.Passage.getXml("note"), function(node) {
-                $this.Passage.notes[node.innerHTML] = node;
+                $this.Passage.notes[Object.keys($this.Passage.notes).length] = {
+                  html      : node.innerHTML,
+                  reveal    : true,
+                  focus     : false
+                };
               });
               /**
               For now, broken in the API

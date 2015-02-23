@@ -22,8 +22,13 @@ angular.module('arethusa.tei').directive('teiParser', [
           }
         });
 
-        function init() {
-          var template = scope.template.replace("<note>", "<note target=\"notebook\">");
+        var init = function() {
+          var template = scope.template;
+          var counter = 0;
+          while(template !== template.replace("<note>", "<note notebook=\"notebook\" identifier=\"" + counter + "\">")) {
+            template = template.replace("<note>", "<note notebook=\"notebook\" identifier=\"" + counter + "\">");
+            counter++;
+          }
           element.append($compile(template)(scope));
         }
       }

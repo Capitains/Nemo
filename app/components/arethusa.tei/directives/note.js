@@ -5,16 +5,15 @@ angular.module('arethusa.tei').directive('note', [
     return {
       restrict: 'E',
       scope: {
-        notebook : '='
+        notebook   : '=',
+        identifier : '='
       },
-      link: function($scope, $element, $attrs) {
-        console.log($scope.notebook)
-        var identifier = $element[0].innerHTML;
-        $scope.showNote = function() {
-          return;
+      controller: function($scope, $element, $attrs) {
+        $scope.showNote = function(status) {
+          $scope.notebook[$scope.identifier].focus = status;
         }
-        //'<a ng-click="showNote()">*</a>'
-      }
+      },
+      template : '<a class=\"tei-note\" ng-mouseenter="showNote(true)" ng-mouseleave="showNote(false)">●</a>'
     };
   }
 ]);

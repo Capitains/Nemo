@@ -22,7 +22,18 @@
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
-
+  <script type="text/javascript">
+    String.prototype.hashCode = function() {
+      var hash = 0, i, chr, len;
+      if (this.length == 0) return hash;
+      for (i = 0, len = this.length; i < len; i++) {
+        chr   = this.charCodeAt(i);
+        hash  = ((hash << 5) - hash) + chr;
+        hash |= 0; // Convert to 32bit integer
+      }
+      return hash;
+    };
+  </script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/lunr.js/lunr.min.js"></script>
@@ -32,6 +43,7 @@
   <script src="app.js"></script>
   <script src="views/home/home.js"></script>
 
+  <script src="components/html_unsafe.js"></script>
   <script src="components/capitains-nemo.panels.js"></script>
   <script src="components/capitains-nemo.square.js"></script>
   <script src="components/capitains-nemo.reading.js"></script>

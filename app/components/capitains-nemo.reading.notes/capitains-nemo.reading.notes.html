@@ -1,1 +1,6 @@
-<h1 ng-show="show()">HELLO</h1>
+<div>
+<ul class="list-unstyled">
+<li ng-class="{'text-primary' : note.focus}" class="small" ng-repeat="(hash, note) in notebook" ng-bind-html="note.html | sanitize">
+</li>
+</ul>
+</div>
