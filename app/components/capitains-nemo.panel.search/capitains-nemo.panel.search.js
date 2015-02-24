@@ -35,20 +35,21 @@ angular
            * @return {[type]} [description]
            */
           $scope.search = function() {
-            if($scope.texts.length === 0) {
+            if(Object.keys($scope.texts).length === 0) {
               return [];
             }
             if($scope.engine === null) {
               indexing().then(function() {
                 $scope.search = search;
                 $scope.loading = false;
+                console.log($scope.engine)
                 $scope.search();
               });
             }
           }
           var search = function() {
             var results = [];
-            if($scope.texts.length === 0) {
+            if(Object.keys($scope.texts).length === 0) {
               return [];
             }
             if($scope.query.length >= 3) {
