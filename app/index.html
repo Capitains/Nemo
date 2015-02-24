@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="capitainsNemo" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="capitainsNemo" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="capitainsNemo" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="capitainsNemo" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Capitains Nemo - Browsing CTS is fun !</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="app.css">
+  <script type="text/javascript">
+    window.CTSAPI = "http://localhost:8080/exist/rest/db/xq/CTS.xq?";
+  </script>
+</head>
+<body>
+
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+  <div ng-view></div>
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+  <script type="text/javascript">
+    String.prototype.hashCode = function() {
+      var hash = 0, i, chr, len;
+      if (this.length == 0) return hash;
+      for (i = 0, len = this.length; i < len; i++) {
+        chr   = this.charCodeAt(i);
+        hash  = ((hash << 5) - hash) + chr;
+        hash |= 0; // Convert to 32bit integer
+      }
+      return hash;
+    };
+  </script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+
+  <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="bower_components/typeahead.js/dist/bloodhound.min.js"></script>
+
+  <script src="bower_components/capitains-sparrow/build/cts.min.js"></script>
+
+  <script src="app.js"></script>
+  <script src="views/home/home.js"></script>
+
+  <script src="components/html_unsafe.js"></script>
+  <script src="components/capitains-nemo.panels.js"></script>
+  <script src="components/capitains-nemo.square.js"></script>
+  <script src="components/capitains-nemo.reading.js"></script>
+
+  <script src="components/capitains-sparrow/capitains-sparrow.js"></script>
+
+  <script src="components/capitains-nemo.layout/capitains-nemo.layout.js"></script>
+
+  <script src="components/capitains-nemo.panel.passage/capitains-nemo.panel.passage.js"></script>
+  <script src="components/capitains-nemo.panel.browse/capitains-nemo.panel.browse.js"></script>
+  <script src="components/capitains-nemo.panel.search/capitains-nemo.panel.search.js"></script>
+
+  <script src="components/capitains-nemo.square.nav/capitains-nemo.square.nav.js"></script>
+  <script src="components/capitains-nemo.square.info/capitains-nemo.square.info.js"></script>
+  <script src="components/capitains-nemo.square.layout/capitains-nemo.square.layout.js"></script>
+
+  <script src="components/capitains-nemo.reading.notes/capitains-nemo.reading.notes.js"></script>
+
+  <script src="components/arethusa.tei/tei.js"></script>
+  <script src="components/arethusa.tei/directives/l.js"></script>
+  <script src="components/arethusa.tei/directives/lg.js"></script>
+  <script src="components/arethusa.tei/directives/met.js"></script>
+  <script src="components/arethusa.tei/directives/pc.js"></script>
+  <script src="components/arethusa.tei/directives/quote.js"></script>
+  <script src="components/arethusa.tei/directives/tei_parser.js"></script>
+  <script src="components/arethusa.tei/directives/w.js"></script>
+  <script src="components/arethusa.tei/directives/note.js"></script>
+</body>
+</html>

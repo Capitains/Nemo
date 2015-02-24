@@ -1,0 +1,15 @@
+<div class="search" ng-class="{ 'deactivated': !layout.isSelected('search') }">
+  <p class="text-center" ng-click="layout.select('search')">
+    <a><span class="glyphicon glyphicon-search"></span></a>
+  </p>
+  <div class="browsing-div">
+    <input type="text" class="form-control" ng-model="query" placeholder="Search" />
+    <div class="alert-info" ng-show="loading">Loading texts...</div>
+    <div class="list-group">
+      <a class="list-group-item" ng-repeat="text in search()" ng-click="select(text)">
+        <h5 class="list-group-item-heading">{{text.getTitle()}}<span class="badge pull-right">{{text.lang}}</span></h5>
+        <p class="list-group-item-text">{{text.author}}</p>
+      </a>
+    </div>
+  </div>
+</div>

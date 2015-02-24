@@ -1,0 +1,7 @@
+<div class="notes" ng-class="{ 'deactivated': !layout.isSelected('notes') }">
+<p class="text-center"><span class="glyphicon glyphicon-list"></span></p>
+<ol>
+<li ng-class="{'note-focused' : note.focus}" class="small" ng-repeat="note in notebookArray | orderBy:'id'" ng-bind-html="notebook[note.id].html | sanitize">
+</li>
+</ul>
+</div>

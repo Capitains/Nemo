@@ -1,0 +1,10 @@
+<div ng-class="{ 'deactivated': !layout.isSelected(label), {{label}} : true}">
+  <p class="text-center" ng-click="layout.select(label)">
+    <a><span class="glyphicon" ng-class="icon"></span></a>
+  </p>
+  <div class="browsing-div">
+    <ul class="list-unstyled">
+      <li ng-repeat="item in current" ng-click="select(item)"><a>{{item.display}}</a></li>
+    </ul>
+  </div>
+</div>
