@@ -10,12 +10,14 @@
     </div>
     <div class="animation" ng-class="{'col-md-12' : !layout.menu, 'col-md-9' : layout.menu}" ng-show="items.selected.passage">
       <div class="page row">
-        <div class="col-md-10">
+        <div class="text" ng-class="{'col-md-9' : sidebar.menu, 'col-md-12' : !sidebar.menu}">
           <h2>{{items.selected.passage.source.author}}</h2>
           <h1>{{items.selected.passage.source.title}}</h1>
-          <div tei-parser="items.selected.passage.body" notebook="items.selected.passage.notes"></div>
+          <div layout="sidebar" tei-parser="items.selected.passage.body" notebook="items.selected.passage.notes"></div>
         </div>
-        <nemo-notes class="col-md-2" notebook="items.selected.passage.notes"></nemo-notes>
+        <div class="sidebar" ng-class="{'col-md-3' : sidebar.menu, 'deactivated' : !sidebar.menu}">
+          <nemo-notes layout="sidebar" notebook="items.selected.passage.notes"></nemo-notes>
+        </div>
       </div>
     </div>
 
@@ -23,26 +25,19 @@
 
 <div class="bottom-bar">
   <ul class="square-list">
-    <li class="search" ng-click="layout.select('search')">
-      <a>
-        <div class="icon"><span class="glyphicon glyphicon-search"></span></div>
-        <div class="text">Search</div>
-      </a>
-    </li>
-    <li class="textgroups" ng-click="layout.select('textgroups')">
-      <a>
-        <div class="icon"><span class="glyphicon glyphicon-book"></span></div>
-        <div class="text">Browse</div>
-      </a>
-    </li>
+    <nemo-square-layout layout="layout" class="search" target="'search'" label="'Search'" icon="'glyphicon-search'"></nemo-square-layout>
+    <nemo-square-layout layout="layout" class="textgroups" target="'textgroups'" label="'Browse'" icon="'glyphicon-book'"></nemo-square-layout>
     <li class="cancel" ng-click="layout.menu = false" ng-class="{'deactivated' : !layout.menu}">
       <a>
         <div class="icon"><span class="glyphicon glyphicon-remove"></span></div>
         <div class="text">Close menu</div>
       </a>
     </li>
+    <!-- Text related square -->
     <nemo-square-nav passage="items.selected.passage" injector="Passage" direction="'prev'"></nemo-square-nav>
     <nemo-square-nav passage="items.selected.passage" injector="Passage" direction="'next'"></nemo-square-nav>
+    <nemo-square-layout ng-show="items.selected.passage.notes" layout="sidebar" class="notes" target="'notes'" label="'Notes'" apply="layout.toggle" icon="'glyphicon-list'"></nemo-square-layout>
+
     <nemo-square-info passage="items.selected.passage"></nemo-square-info>
   </ul>
   <div class="clearfix"></div>

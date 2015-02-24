@@ -7,7 +7,8 @@ angular.module('arethusa.tei').directive('teiParser', [
       restrict: 'A',
       scope: {
         template    : '=teiParser',
-        notebook    : '=notebook'
+        notebook    : '=notebook',
+        layout      : '=layout'
       },
       link: function(scope, element, attrs) {
         scope.$watch('template', function(newVal, oldVal) {
@@ -26,7 +27,7 @@ angular.module('arethusa.tei').directive('teiParser', [
           var template = scope.template;
           var counter = 0;
           while(template !== template.replace("<note>", "<note notebook=\"notebook\" identifier=\"" + counter + "\">")) {
-            template = template.replace("<note>", "<note notebook=\"notebook\" identifier=\"" + counter + "\">");
+            template = template.replace("<note>", "<note layout=\"layout\" notebook=\"notebook\" identifier=\"" + counter + "\">");
             counter++;
           }
           element.append($compile(template)(scope));

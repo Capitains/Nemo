@@ -20,6 +20,7 @@ angular.module('capitainsNemo.home', ['ngRoute'])
   function($scope, $route, Repository, Passage, Layout) {
 
   $scope.layout = new Layout();
+  $scope.sidebar = new Layout(['notes']);
 
   $scope.items = {
     parents : {

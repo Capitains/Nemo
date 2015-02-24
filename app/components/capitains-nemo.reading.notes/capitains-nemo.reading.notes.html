@@ -1,6 +1,7 @@
-<div>
-<ul class="list-unstyled">
-<li ng-class="{'text-primary' : note.focus}" class="small" ng-repeat="(hash, note) in notebook" ng-bind-html="note.html | sanitize">
+<div class="notes" ng-class="{ 'deactivated': !layout.isSelected('notes') }">
+<p class="text-center"><span class="glyphicon glyphicon-list"></span></p>
+<ol>
+<li ng-class="{'note-focused' : note.focus}" class="small" ng-repeat="note in notebookArray | orderBy:'id'" ng-bind-html="notebook[note.id].html | sanitize">
 </li>
 </ul>
 </div>

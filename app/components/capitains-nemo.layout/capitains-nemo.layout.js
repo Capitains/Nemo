@@ -19,11 +19,21 @@ angular.module('capitainsNemo.utils', [])
        */
       this.select = function(div) {
         var $this = this;
-        console.log(div);
+
         this.menu = (div !== "page");
         angular.forEach(this.categories, function(value, key) {
           $this.categories[key] = (div === key);
         });
+      }
+      this.toggle = function(div) {
+        var $this = this;
+
+        angular.forEach(this.categories, function(value, key) {
+          $this.categories[key] = (key === div) ? !$this.categories[key] : false;
+        });
+        if(div !== "page") {
+          this.menu = this.categories[div];
+        }
       }
     }
     return Layout;

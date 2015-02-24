@@ -85,7 +85,7 @@ angular.module('capitainsSparrow.models', [])
               [].forEach.call($this.Passage.getXml("note"), function(node) {
                 $this.Passage.notes[Object.keys($this.Passage.notes).length] = {
                   html      : node.innerHTML,
-                  reveal    : true,
+                  id        : Object.keys($this.Passage.notes).length,
                   focus     : false
                 };
               });
