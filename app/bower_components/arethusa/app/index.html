@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="arethusa" ng-di-strict>
+<head>
+  <link rel="stylesheet" href="../dist/arethusa.min.css">
+  <link rel="stylesheet" href="../vendor/foundation-icons/foundation-icons.css">
+  <link rel="stylesheet" href="../vendor/font-awesome-4.1.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../vendor/angular-foundation-colorpicker/css/colorpicker.css">
+
+  <script src="../dist/arethusa_packages.min.js"></script>
+  <script src="../dist/arethusa.min.js"></script>
+
+  <!--<script src="../dist/arethusa_external.min.js"></script>-->
+
+
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body key-capture>
+  <div id="arethusa-main-view"  class="fade very-slow" ng-view></div>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-52883631-1', 'auto');
+  </script>
+</body>
+</html>
