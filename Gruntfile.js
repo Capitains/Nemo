@@ -2,7 +2,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     'gh-pages': {
-      src: ['app/**']
+      src: ['app/**', 'index.html']
     }
   });
 
@@ -10,5 +10,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-gh-pages');
 
   // Default task. 
-  grunt.registerTask('page', ['doc', 'gh-pages'])
+  grunt.registerTask('page', ['gh-pages'])
 };
