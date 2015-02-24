@@ -34,7 +34,7 @@ angular
 
             var passage = new Passage(
               urn,
-              "http://localhost:8080/exist/rest/db/xq/CTS.xq?",
+              window.CTSAPI,
               $scope.text.inventory,
               $scope.text
             );
