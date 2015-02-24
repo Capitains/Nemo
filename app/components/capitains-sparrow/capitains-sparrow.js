@@ -44,6 +44,7 @@ angular.module('capitainsSparrow.models', [])
                   object.end       = object.citations.map(function(val) { return ""; });
                   HierarchicalIndex[textgroup].children[work].children[object.urn] = object;
                   var tempTitle = [inventoryName, textgroup, work, title].join(", ")
+                  object.fulltext = tempTitle;
                   FulltextIndex.push(object);
                 });
               });

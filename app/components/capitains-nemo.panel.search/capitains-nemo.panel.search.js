@@ -11,31 +11,24 @@ angular
           target: '='
         },
         controller: ['$scope', '$q',function ($scope, $q) {
-          console.log($q)
+
           if(typeof $scope.layout.categories.search === "undefined") {
             $scope.layout.categories.search = false;
           }
           $scope.query = "";
           $scope.index = {};
-          $scope.lunr = null;
+          $scope.engine = null;
+
 
           var indexing = function() {
-            var deferred = $q.defer();
-            (function() {
-              $scope.lunr = lunr(function () {
-                this.field('title', {boost: 10})
-                this.field('lang', {boost: 1})
-                this.field('author', {boost: 10})
-                this.ref('urn')
-              })
-              angular.forEach($scope.texts, function(text) {
-                text.title = text.getTitle();
-                $scope.lunr.add(text);
-                $scope.index[text.urn] = text;
-              });
-              deferred.resolve();
-            })();
-            return deferred.promise;
+            $scope.engine = new Bloodhound({
+              local: $scope.texts,
+              datumTokenizer: function(d) {
+                return Bloodhound.tokenizers.whitespace(d.fulltext);
+              },
+              queryTokenizer: Bloodhound.tokenizers.whitespace
+            });
+            return $scope.engine.initialize();
           }
           /**
            * Placeholder function ulti
@@ -45,12 +38,12 @@ angular
             if($scope.texts.length === 0) {
               return [];
             }
-            if($scope.lunr === null) {
+            if($scope.engine === null) {
               indexing().then(function() {
-              $scope.search = search;
-              $scope.loading = false;
-              $scope.search();
-            });
+                $scope.search = search;
+                $scope.loading = false;
+                $scope.search();
+              });
             }
           }
           var search = function() {
@@ -59,8 +52,8 @@ angular
               return [];
             }
             if($scope.query.length >= 3) {
-              $scope.lunr.search($scope.query).forEach(function(ref) {
-                results.push($scope.index[ref.ref])
+              $scope.engine.get($scope.query, function(suggestions) {
+                results = suggestions;
               });
             }
             return results;
