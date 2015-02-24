@@ -8,14 +8,14 @@
       <nemo-browse layout="layout" label="'texts'"      nextstep="'passages'" icon="'glyphicon-align-justify'" current="items.available.texts" next="items.available.text"></nemo-browse>
       <nemo-passage layout="layout" text="items.available.text" passage="items.selected.passage" injector="Passage"></nemo-passage>
     </div>
-    <div class="animation" ng-class="{'col-md-10 col-md-push-1' : !layout.menu, 'col-md-7' : layout.menu}" ng-show="items.selected.passage">
+    <div class="animation" ng-class="{'col-md-12' : !layout.menu, 'col-md-9' : layout.menu}" ng-show="items.selected.passage">
       <div class="page row">
-      <div class="col-md-10">
-        <h2>{{items.selected.passage.source.author}}</h2>
-        <h1>{{items.selected.passage.source.title}}</h1>
-        <div tei-parser="items.selected.passage.body" notebook="items.selected.passage.notes"></div>
-      </div>
-      <nemo-notes class="col-md-2" notebook="items.selected.passage.notes"></nemo-notes>
+        <div class="col-md-10">
+          <h2>{{items.selected.passage.source.author}}</h2>
+          <h1>{{items.selected.passage.source.title}}</h1>
+          <div tei-parser="items.selected.passage.body" notebook="items.selected.passage.notes"></div>
+        </div>
+        <nemo-notes class="col-md-2" notebook="items.selected.passage.notes"></nemo-notes>
       </div>
     </div>
 
@@ -39,12 +39,6 @@
       <a>
         <div class="icon"><span class="glyphicon glyphicon-remove"></span></div>
         <div class="text">Close menu</div>
-      </a>
-    </li>
-    <li class="navigation" ng-click="items.selected.passage.goPrevious()" ng-class="{'deactivated' : !items.selected.passage.previous}">
-      <a>
-        <div class="icon"><span class="glyphicon glyphicon-chevron-left"></span></div>
-        <div class="text">Previous</div>
       </a>
     </li>
     <nemo-square-nav passage="items.selected.passage" injector="Passage" direction="'prev'"></nemo-square-nav>
