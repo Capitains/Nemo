@@ -24,12 +24,26 @@ angular.module('arethusa.tei').directive('teiParser', [
         });
 
         var init = function() {
-          var template = scope.template;
-          var counter = 0;
-          while(template !== template.replace("<note>", "<note notebook=\"notebook\" identifier=\"" + counter + "\">")) {
-            template = template.replace("<note>", "<note layout=\"layout\" notebook=\"notebook\" identifier=\"" + counter + "\">");
-            counter++;
+          var template = scope.template,
+              parser,
+              xmlDoc;
+          /*
+          Modifying the template
+           */
+          if(window.DOMParser) {
+            parser=new DOMParser();
+            xmlDoc=parser.parseFromString(template,"text/xml");
+          } else {
+            xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+            xmlDoc.async=false;
+            xmlDoc.loadXML(template); 
           }
+          for (var i = xmlDoc.getElementsByTagName("note").length - 1; i >= 0; i--) {
+            xmlDoc.getElementsByTagName("note")[i].setAttribute("layout", "layout")
+            xmlDoc.getElementsByTagName("note")[i].setAttribute("notebook", "notebook")
+            xmlDoc.getElementsByTagName("note")[i].setAttribute("identifier", i)
+          };
+          template = (new XMLSerializer()).serializeToString(xmlDoc); 
           element.append($compile(template)(scope));
         }
       }
