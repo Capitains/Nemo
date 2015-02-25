@@ -25,7 +25,9 @@ angular
               $scope.text.inventory,
               $scope.text
             );
-            passage.Passage.prev = $scope.passage.urn;
+            if($scope.direction === "next") {
+              passage.Passage.prev = $scope.passage.urn;
+            }
 
             passage.load().then.call(this, function() {
               $scope.passage = passage.Passage;
