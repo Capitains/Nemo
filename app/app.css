@@ -1385,6 +1385,9 @@ body {
     min-height: 80px;
     position: static;
   }
+  .bottom-bar .pull-right {
+    float: left !important;
+  }
   body {
     background-color: #1d1d1d;
   }
