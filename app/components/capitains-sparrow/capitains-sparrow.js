@@ -14,11 +14,25 @@ angular.module('capitainsSparrow.models', [])
         );
         return deferred.promise;
       };
-      this.Repository = new CTS.repository.repository(endpoint, 3),
+      this.Repository = new CTS.repository.repository(endpoint, 3)
+
+      this.find = function (urn) {
+        var textUrn = urn.split(':').slice(0,4).join(":");
+
+        var deferred = $q.defer();
+
+        if(typeof this.urnIndex[textUrn] !== "undefined") {
+          deferred.resolve(this.urnIndex[textUrn]);
+        } else {
+          deferred.reject();
+        }
+        return deferred.promise;
+      }
       this.indexing = function(callback) {
         var $this = this,
             HierarchicalIndex = {},
-            FulltextIndex = [];
+            FulltextIndex = [],
+            URNIndex = {};
         angular.forEach(this.Repository.inventories, function(inventory, inventoryName) {
           var textgroups = inventory.getRaw();
           // Works : Works
@@ -46,11 +60,13 @@ angular.module('capitainsSparrow.models', [])
                   var tempTitle = [inventoryName, textgroup, work, title].join(", ")
                   object.fulltext = tempTitle;
                   FulltextIndex.push(object);
+                  URNIndex[object.urn] = object;
                 });
               });
             });
           })
         });
+        $this.urnIndex = URNIndex;
         callback.call($this, HierarchicalIndex, FulltextIndex)
       }
     }
@@ -72,6 +88,7 @@ angular.module('capitainsSparrow.models', [])
       }
 
       this.splitURN(urn)
+      console.log(this.text)
 
       if(typeof window.texts === "undefined") {
         window.texts = {};
