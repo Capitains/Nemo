@@ -1,36 +1,43 @@
 angular.module('capitainsSparrow.models', [])
-  .factory('Repository', ['$q', '$route', function($q, $route) {
+  .factory('Repository', ['$q', '$route', 'localStorageService', function($q, $route, localStorageService) {
     //We create a repo
     var CTSrepo =  function(endpoint, version) { 
+      var self = this;
       this.load = function() {
         var deferred = $q.defer();
-        this.Repository.load(
-            function() {
-              deferred.resolve();
-            },
-            function(error) {
-              deferred.reject("An error occured while fetching items");
-            }
-        );
+
+        if(localStorageService.get("inventories")) {
+          self.Repository.fromObject(localStorageService.get("inventories"));
+          deferred.resolve();
+        } else {
+          self.Repository.load(
+              function() {
+                localStorageService.set("inventories", self.Repository.inventories);
+                deferred.resolve();
+              },
+              function(error) {
+                deferred.reject("An error occured while fetching items");
+              }
+          );
+        }
         return deferred.promise;
       };
       this.Repository = new CTS.repository.repository(endpoint, 3)
 
       this.find = function (urn) {
+        var index = localStorageService.get("index-urn");
         var textUrn = urn.split(':').slice(0,4).join(":");
-
         var deferred = $q.defer();
 
-        if(typeof this.urnIndex[textUrn] !== "undefined") {
-          deferred.resolve(this.urnIndex[textUrn]);
+        if(typeof index[textUrn] !== "undefined") {
+          deferred.resolve(index[textUrn]);
         } else {
           deferred.reject();
         }
         return deferred.promise;
       }
       this.indexing = function(callback) {
-        var $this = this,
-            HierarchicalIndex = {},
+        var HierarchicalIndex = {},
             FulltextIndex = [],
             URNIndex = {};
         angular.forEach(this.Repository.inventories, function(inventory, inventoryName) {
@@ -66,8 +73,9 @@ angular.module('capitainsSparrow.models', [])
             });
           })
         });
-        $this.urnIndex = URNIndex;
-        callback.call($this, HierarchicalIndex, FulltextIndex)
+        self.urnIndex = URNIndex;
+        localStorageService.set("index-urn", URNIndex);
+        callback.call(self, HierarchicalIndex, FulltextIndex)
       }
     }
     return CTSrepo;
@@ -119,7 +127,7 @@ angular.module('capitainsSparrow.models', [])
       } else {
         this.Passage = window.texts[this.urn].passages[this.passage]
       }
-      
+
       this.updatePassage = function() {
         var self = this;
         $location.search("urn", window.texts[self.urn].passages[self.passage].urn);
@@ -151,17 +159,17 @@ angular.module('capitainsSparrow.models', [])
 
       this.load = function() {
         var deferred = $q.defer(),
-            $this = this;
+            self = this;
         if(window.texts[this.urn].passages[this.passage].body) {
           (function () {
-            $this.Passage = window.texts[$this.urn].passages[$this.passage];
+            self.Passage = window.texts[self.urn].passages[self.passage];
             deferred.resolve();
           })()
           return deferred.promise;
         }
         window.texts[this.urn].passages[this.passage].retrieve({
           success : function() {
-              $this.updatePassage.call($this);
+              self.updatePassage.call(self);
               deferred.resolve();
             },
           error : function(error) {
@@ -174,12 +182,12 @@ angular.module('capitainsSparrow.models', [])
 
       this.firstPassage = function() {
         var deferred = $q.defer(),
-            $this = this;
+            self = this;
         window.texts[this.urn].getFirstPassagePlus({
           success : function(ref) {
-              $this.passage = ref;
-              createPassage.call($this);
-              $this.updatePassage.call($this);
+              self.passage = ref;
+              createPassage.call(self);
+              self.updatePassage.call(self);
               deferred.resolve();
             },
           error : function(error) {
