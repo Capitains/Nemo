@@ -1,0 +1,98 @@
+{
+  "nested" : {
+    "ATR" : {
+      "short" : "ATR",
+      "long" : "attributive",
+      "sections" : "2049-2053",
+      "nested" : {
+        "PROP" : {
+          "short" : "PROP",
+          "long" : "proper"
+        },
+        "IMPROP" : {
+          "short" : "IMPROP",
+          "long" : "improper"
+        }
+      }
+    },
+    "CRC" : {
+      "short" : "CRC",
+      "long" : "circumstantial",
+      "sections" : "2054-2087",
+      "nested" : {
+        "TMP" : {
+          "short" : "TMP",
+          "long" : "of time",
+          "sections" : "2061"
+        },
+        "MNN" : {
+          "short" : "MNN",
+          "long" : "of manner",
+          "sections" : "2062"
+        },
+        "MEA" : {
+          "short" : "MEA",
+          "long" : "of measure",
+          "sections" : "2063"
+        },
+        "CAU" : {
+          "short" : "CAU",
+          "long" : "of cause",
+          "sections" : "2064"
+        },
+        "PUR" : {
+          "short" : "PUR",
+          "long" : "of purpose",
+          "sections" : "2065"
+        },
+        "CNC" : {
+          "short" : "CNC",
+          "long" : "of concession",
+          "sections" : "2066"
+        },
+        "CND" : {
+          "short" : "CND",
+          "long" : "of condition",
+          "sections" : "2067"
+        },
+        "ATD" : {
+          "short" : "ATD",
+          "long" : "of any attendant circumstance",
+          "sections" : "2068"
+        }
+      }
+    },
+    "SUPL" : {
+      "short" : "SUPL",
+      "long" : "supplementary",
+      "sections" : "2088-2148",
+      "nested" : {
+        "INDD" : {
+          "short" : "INDD",
+          "long" : "in indirect discourse"
+        },
+        "NIND" : {
+          "short" : "NIND",
+          "long" : "not in indirect discourse"
+        }
+      }
+    },
+    "PRH" : {
+      "short" : "PRH",
+      "long" : "periphrastic",
+      "sections" : "2091"
+    },
+    "SBS" : {
+      "short" : "SBS",
+      "long" : "substantive",
+      "nestedDependency" : true,
+      "@include" : "sg/sg_labels/cases.json"
+    },
+    "ATC" : {
+      "short" : "ATC",
+      "long" : "attraction",
+      "sections" : "2522-2528",
+      "@include" : "sg/sg_labels/cases.json"
+    }
+  }
+}

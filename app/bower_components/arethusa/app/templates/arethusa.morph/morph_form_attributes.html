@@ -1,0 +1,65 @@
+<div class="small-12 columns note">
+  <alert
+    class="error radius center fade-in"
+    ng-if="confirmationRequested">
+    Do you really want to remove this form?
+    <div class="small-1 columns">
+      <i ng-click="removeForm()" class="clickable fi-check"></i>
+    </div>
+    <div class="small-1 columns">
+      <i ng-click="skipRemoval()" class="clickable fi-x"></i>
+    </div>
+  </alert>
+
+  <div class="right">
+    <a
+      mirror-morph-form="form"
+      reveal-toggle="mfc{{ tokenId }}"
+      always-reveal="true"
+      token-id="tokenId">
+      Create new
+    </a>
+    <span>&nbsp;-&nbsp;</span>
+    <a
+      target="_blank"
+      href="http://http://www.perseus.tufts.edu/">
+      Report Error
+    </a>
+    <span>&nbsp;-&nbsp;</span>
+    <a
+      ng-click="askForRemoval()">
+      Remove Form
+    </a>
+  </div>
+</div>
+<div class="small-12 columns text" ng-repeat="o in attrs">
+  <span class="small-5 columns note">
+    <span class="right">{{ m.longAttributeName(o.attr) }}</span>
+  </span>
+  <span class="small-7 columns"> {{ m.longAttributeValue(o.attr, o.val) }}</span>
+</div>
+
+
+<div ng-if="inv" class="small-12 columns">
+  <hr>
+  <div>
+    <p>
+      <span class="small-8 columns"><em>Lexical Inventory</em></span>
+      <span class="small-4 columns note">
+        <a href="{{ inv.uri }}" target="_blank">{{ inv.urn }}</a>
+      </span>
+    </p>
+  </div>
+  <br>
+  <div class="small-12 columns" style="margin-top: 1em">
+    <ul class="text">
+      <li>Dictionary Entries
+        <ul class="text">
+          <li ng-repeat="(name, link) in inv.dictionaries">
+            <a href="{{ link }}" target="_blank">{{ name }}</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<p lang-specific>
+  <span ng-repeat="token in plugin.tokens">
+    <span
+      token="token"
+      colorize="true"
+      click="true"
+      hover="true"
+      highlight="true">
+    </span>
+    <!--Deactivated for now - not safe to use with ellipsis-->
+    <!--<br ng-if="token.terminator && !$last"/>-->
+  </span>
+</p>

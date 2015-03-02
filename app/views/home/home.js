@@ -18,7 +18,6 @@ angular.module('capitainsNemo.home', ['ngRoute'])
     'Passage', 
     'Layout', 
   function($scope, $route, Repository, Passage, Layout) {
-
   $scope.layout = new Layout();
   $scope.sidebar = new Layout(['notes']);
 
@@ -63,6 +62,22 @@ angular.module('capitainsNemo.home', ['ngRoute'])
         $scope.indexes.hierarchical = HierarchicalIndex;
         $scope.indexes.fulltext = FulltextIndex;
         $scope.items.available.textgroups = $scope.indexes.hierarchical;
+        //If we have a urn.
+        if(typeof $route.current.params.urn !== "undefined") {
+          $scope.repository.find($route.current.params.urn).then(function(text) {
+
+            var passage = new Passage(
+              $route.current.params.urn,
+              window.CTSAPI,
+              text.inventory,
+              text
+            );
+
+            passage.load().then.call(this, function() {
+              $scope.items.selected.passage = passage.Passage;
+            });
+          });
+        }
       });
     },
     function() {

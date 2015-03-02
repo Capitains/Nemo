@@ -1,0 +1,116 @@
+{
+  "nested" : {
+    "DPD" : {
+      "short" : "DPD",
+      "long" : "dependent",
+      "nested" : {
+        "EFF" : {
+          "short" : "EFF",
+          "long" : "as internal object",
+          "sections" : "1563-1577",
+          "nested" : {
+            "CGN" : {
+              "short" : "CGN",
+              "long" : "of result/cognate",
+              "sections" : "1563-1579"
+            },
+            "IDK" : {
+              "short" : "IDK",
+              "long" : "I don't know"
+            }
+          }
+        },
+        "AFF" : {
+          "short" : "AFF",
+          "long" : "as external object",
+          "sections" : "1590-1598"
+        },
+        "EXT" : {
+          "short" : "EXT",
+          "long" : "of extent",
+          "sections" : "1580-1587",
+          "nested" : {
+            "TMP" : {
+              "short" : "TMP",
+              "long" : "of time",
+              "sections" : "1582-1587"
+            },
+            "SPC" : {
+              "short" : "SPC",
+              "long" : "of space",
+              "sections" : "1581"
+            },
+            "IDK" : {
+              "short" : "IDK",
+              "long" : "I don't know"
+            }
+          }
+        },
+        "TRM" : {
+          "short" : "TRM",
+          "long" : "terminal of space",
+          "sections" : "1588-1589"
+        },
+        "RSP" : {
+          "short" : "RSP",
+          "long" : "of respect",
+          "sections" : "1600-1605"
+        },
+        "ADP" : {
+          "short" : "ADP",
+          "long" : "from adposition",
+          "nested" : {
+            "TMP" : {
+              "short" : "TMP",
+              "long" : "terminal of time (with ἀνά, εἰς, μετά, κατά, παρά, πρός, ὑπό, ὑπέρ)"
+            },
+            "MNN" : {
+              "short" : "MNN",
+              "long" : "of manner (with ἀνά, εἰς, κατά)"
+            },
+            "CAU" : {
+              "short" : "CAU",
+              "long" : "of cause (with διά, παρά)"
+            },
+            "PUR" : {
+              "short" : "PUR",
+              "long" : "of purpose (with διά, εἰς, ἐπί, κατά, πρός)"
+            },
+            "MEA" : {
+              "short" : "MEA",
+              "long" : "of measure (with εἰς, ἐπί, παρά, ὑπέρ)"
+            },
+            "STN" : {
+              "short" : "STN",
+              "long" : "of standard of judgement (with πρός)"
+            }
+          }
+        },
+        "UNS" : {
+          "short" : "UNS",
+          "long" : "unspecified (only if depending on adj., adv. or adp.)"
+        },
+        "IDK" : {
+          "short" : "IDK",
+          "long" : "I don't know"
+        }
+      }
+    },
+    "INN" : {
+      "short" : "INN",
+      "long" : "independent",
+      "sections" : "1599",
+      "nested" : {
+        "ELL" : {
+          "short" : "ELL",
+          "long" : "in elliptical use",
+          "sections" : "1599"
+        },
+        "IDK" : {
+          "short" : "IDK",
+          "long" : "I don't know"
+        }
+      }
+    }
+  }
+}

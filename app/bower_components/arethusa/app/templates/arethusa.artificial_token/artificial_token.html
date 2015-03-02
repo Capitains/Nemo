@@ -1,0 +1,44 @@
+<div class="small-12 columns text-center">
+  <span
+    class="button tiny radius"
+    ng-click="plugin.toggleMode('create')">
+    <span translate="create"/>
+  </span>
+  <span
+    class="button tiny radius"
+    ng-click="plugin.toggleMode('list')">
+    <span translate="list"/>
+  </span>
+  <div delimiter/>
+  <div ng-if="plugin.mode === 'create'">
+    <form name="cAT">
+      <label>
+        <span translate="aT.visualRepresentation"/>
+        <input
+          type="text"
+          foreign-keys
+          ng-model="plugin.model.string"/>
+      </label>
+      <div class="text-left">
+        <select
+          class="compact"
+          required
+          ng-model="plugin.model.type"
+          ng-options="type for type in plugin.supportedTypes">
+        </select>
+      </div>
+      <span artificial-token-insertion-pointer/>
+      <div delimiter/>
+    </form>
+    <button
+      class="tiny radius"
+      ng-disabled="!plugin.modelValid()"
+      ng-click="plugin.propagateToState()">
+      <span translate="aT.addToken"/>
+    </button>
+  </div>
+  <div
+    ng-if="plugin.mode === 'list'"
+    artificial-token-list>
+  </div>
+</div>

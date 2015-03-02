@@ -1,0 +1,34 @@
+{
+  "nested" : {
+    "DPD" : {
+      "short" : "DPD",
+      "long" : "dependent",
+      "sections" : "940-941"
+    },
+    "INN" : {
+      "short" : "INN",
+      "long" : "independent",
+      "sections" : "938-939",
+      "nested" : {
+        "CIT" : {
+          "short" : "CIT",
+          "long" : "of citation"
+        },
+        "PND" : {
+          "short" : "PND",
+          "long" : "pending (nom. pendens)",
+          "sections" : "941"
+        },
+        "EXC" : {
+          "short" : "EXC",
+          "long" : "of exclamation",
+          "sections" : "1288"
+        },
+        "IDK" : {
+          "short" : "IDK",
+          "long" : "I don't know"
+        }
+      }
+    }
+  }
+}

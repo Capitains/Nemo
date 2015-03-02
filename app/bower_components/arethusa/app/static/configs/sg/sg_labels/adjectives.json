@@ -1,0 +1,29 @@
+{
+  "nested" : {
+    "SBS" : {
+      "short" : "SBS",
+      "long" : "substantive",
+      "nestedDependency" : true,
+      "sections" : "1021-1029",
+      "@include" : "sg/sg_labels/cases.json"
+    },
+    "NORM" : {
+      "short" : "NORM",
+      "long" : "normal"
+    },
+    "VRB" : {
+      "short" : "VRB",
+      "long" : "verbal"
+    },
+    "ATC" : {
+      "short" : "ATC",
+      "long" : "attraction",
+      "sections" : "2522-2528",
+      "@include" : "sg/sg_labels/cases.json"
+    },
+    "IDK" : {
+      "short" : "IDK",
+      "long" : "I don't know"
+    }
+  }
+}

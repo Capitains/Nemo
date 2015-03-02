@@ -1,0 +1,38 @@
+<div ng-if="active" class="fade">
+  <p class="text" translate="globalSettings.title"/>
+  <div class="small-12 columns scrollable text">
+    <ul class="no-list in-columns" style="height: 240px">
+      <li
+        class="fade"
+        ng-repeat="name in gS.settings | keys"
+        ng-init="setting = gS.settings[name]">
+        <div ng-switch="setting.type">
+          <div
+            ng-switch-when="custom"
+            dynamic-directive="{{ setting.directive }}"/>
+          <div ng-switch-default>
+            <input
+              type="{{ setting.type }}"
+              ng-change="gS.propagateSetting(setting.property)"
+              ng-model="gS[setting.property]"/>
+            <label>
+              <span translate="{{ setting.label }}"/>
+            </label>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <div
+      ng-click="togglePluginSettings()"
+      translate="globalSettings.pluginSettings"
+      class="underline clickable">
+    </div>
+
+    <div
+      class="fade"
+      ng-if="pluginSettingsVisible"
+      collected-plugin-settings>
+    </div>
+  </div>
+</div>

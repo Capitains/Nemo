@@ -1,0 +1,5 @@
+<ul>
+  <li ng-repeat="(attr, val) in form.attributes">
+    {{ plugin.longAttributeName(attr) }}: {{ plugin.abbrevAttributeValue(attr, val) }}
+  </li>
+</ul>

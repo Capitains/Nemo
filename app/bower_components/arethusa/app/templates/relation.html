@@ -1,0 +1,19 @@
+<div
+  class="note right span-settings-button"
+  style="margin-top: 10px"
+  unused-token-highlighter
+  uth-check-property="relation.label">
+</div>
+
+<div ng-if="plugin.advancedMode">
+  <div relation-multi-changer class="small-12 columns"/>
+  <div delimiter/>
+</div>
+
+<div ng-repeat="(id, obj) in plugin.currentLabels()">
+    <div class="small-12 columns" style="padding-bottom: 1rem">
+      <div token-with-id value="obj.string" token-id="id" style="padding-bottom: .4rem"/>
+      <div label-selector obj="obj.relation"/>
+    </div>
+</div>
+

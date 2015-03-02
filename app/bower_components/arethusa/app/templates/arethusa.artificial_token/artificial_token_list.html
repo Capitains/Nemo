@@ -1,0 +1,33 @@
+<p
+  ng-if="aT.count === 0"
+  class="text"
+  style="margin-left: 0.75rem">
+  <span translate="aT.noArtTokensPresent"/>
+</p>
+
+<div class="panel" ng-repeat="(id, token) in aT.createdTokens">
+  <div>
+    <span class="left">
+      <span
+        class="normal-size"
+        token="token"
+        colorize="true"
+        click="true"
+        hover="true">
+      </span>
+      <sup
+        class="note">
+        {{ formatId(id) }}
+      </sup>
+    </span>
+    <span class="right">
+      <span
+        ng-click="aT.removeToken(id)"
+        class="button tiny radius">
+        <span translate="delete"/>
+      </span>
+    </span>
+  </div>
+
+  <div artificial-token-edit="token"/>
+</div>

@@ -1,0 +1,97 @@
+{
+  "nested" : {
+    "DPD" : {
+      "short" : "DPD",
+      "long" : "dependent",
+      "nested" : {
+        "ART" : {
+          "short" : "ART",
+          "long" : "articular",
+          "nested" : {
+            "NMN" : {
+              "short" : "NMN",
+              "sections" : "2031",
+              "long" : "in nominative",
+              "@include" : "sg/sg_labels/nominative_cases.json"
+            },
+            "GNT" : {
+              "short" : "GNT",
+              "sections" : "2031",
+              "long" : "in genitive",
+              "@include" : "sg/sg_labels/genetive_cases.json"
+            },
+            "DTV" : {
+              "short" : "DTV",
+              "sections" : "2031",
+              "long" : "in dative",
+              "@include" : "sg/sg_labels/dative_cases.json"
+            },
+            "ACC" : {
+              "short" : "ACC",
+              "sections" : "2031",
+              "long" : "in accusative",
+              "@include" : "sg/sg_labels/accusative_cases.json"
+            }
+          }
+        },
+        "VRB" : {
+          "short" : "VRB",
+          "long" : "verbal",
+          "nested" : {
+            "NMN" : {
+              "short" : "NMN",
+              "long" : "in nominative"
+            },
+            "ACC" : {
+              "short" : "ACC",
+              "long" : "in accusative"
+            }
+          }
+        },
+        "UNC" : {
+          "short" : "UNC",
+          "long" : "uncertain case",
+          "nested" : {
+            "PUR" : {
+              "short" : "PUR",
+              "long" : "of purpose",
+              "sections" : "2008-2010"
+            },
+            "RSL" : {
+              "short" : "RSL",
+              "long" : "of result",
+              "sections" : "2011"
+            },
+            "PRI" : {
+              "short" : "PRI",
+              "long" : "with πρίν",
+              "sections" : "2453-2461"
+            }
+          }
+        }
+      }
+    },
+    "INN" : {
+      "short" : "INN",
+      "long" : "independent",
+      "nested" : {
+        "COM" : {
+          "short" : "COM",
+          "long" : "of command"
+        },
+        "WSH" : {
+          "short" : "WSH",
+          "long" : "of wish"
+        },
+        "EXC" : {
+          "short" : "EXC",
+          "long" : "of exclamation"
+        },
+        "ABS" : {
+          "short" : "ABS",
+          "long" : "in absolute use"
+        }
+      }
+    }
+  }
+}

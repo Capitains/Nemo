@@ -1,0 +1,28 @@
+<div class="small-12 columns">
+  <label>
+    <span translate="aT.insertionPoint"/>
+    <div class="small-panel row text-left">
+      <span ng-if="!insertionPoint">-</span>
+      <span ng-if=" insertionPoint">
+        <span>{{ insertDirText }}</span>
+        <span
+          token-with-id
+          value="insertionPoint.string"
+          token-id="insertionPoint.id">
+        </span>
+      </span>
+      <span class="right">
+        <span
+          ng-click="enterSelectMode()"
+          class="button micro radius">
+          <i class="fa fa-crosshairs rotate-on-hover"></i>
+        </span>
+        <span class="button micro radius"
+          ng-click="toggleDir()"
+          title="{{ insertDirHint }}">
+          <i class="fa fa-arrow-{{ arrow }}"></i>
+        </span>
+      </span>
+    </div>
+  </label>
+</div>

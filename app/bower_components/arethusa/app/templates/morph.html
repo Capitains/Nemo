@@ -1,0 +1,11 @@
+<h3>Morph plugin</h3>
+<ul>
+  <li ng-repeat="analysis in plugin.currentAnalyses()">
+    Forms of {{ analysis.string}}
+    <ol>
+      <li ng-repeat="form in analysis.forms">
+        <morph-form></morph-form>
+      </li>
+    </ol>
+  </li>
+</ul>

@@ -1,0 +1,84 @@
+{
+  "nested" : {
+    "TMP" : {
+      "short" : "TMP",
+      "long" : "of time (with force of genitive/dative)"
+    },
+    "PLC" : {
+      "short" : "PLC",
+      "long" : "of place (with force of genitive/dative)"
+    },
+    "TMP-AE" : {
+      "short" : "TMP-AE",
+      "long" : "of time (with force of accusative of extent)"
+    },
+    "TMP-AT" : {
+      "short" : "TMP-AT",
+      "long" : "of time (with force of terminal accusative)"
+    },
+    "SPC" : {
+      "short" : "SPC",
+      "long" : "of space (with force of accusative of extent)"
+    },
+    "SPC-AT" : {
+      "short" : "SPC-AT",
+      "long" : "of space (with force of accusative of extent)"
+    },
+    "STR" : {
+      "short" : "STR",
+      "long" : "of temporal starting point"
+    },
+    "SPR" : {
+      "short" : "SPR",
+      "long" : "of separation"
+    },
+    "SRC" : {
+      "short" : "SRC",
+      "long" : "of source"
+    },
+    "CAU" : {
+      "short" : "CAU",
+      "long" : "of cause"
+    },
+    "RSL" : {
+      "short" : "RSL",
+      "long" : "of result"
+    },
+    "MNN" : {
+      "short" : "MNN",
+      "long" : "of manner"
+    },
+    "MEA" : {
+      "short" : "MEA",
+      "long" : "of measure"
+    },
+    "INS" : {
+      "short" : "INS",
+      "long" : "of intruments or means"
+    },
+    "PUR" : {
+      "short" : "PUR",
+      "long" : "of purpose"
+    },
+    "CNC" : {
+      "short" : "CNC",
+      "long" : "of concession"
+    },
+    "NGT" : {
+      "short" : "NGT",
+      "long" : "of negation"
+    },
+    "MDL" : {
+      "short" : "MDL",
+      "long" : "of mode"
+    },
+    "UNS" : {
+      "short" : "UNS",
+      "long" : "unspecific"
+    },
+    "IDK" : {
+      "short" : "IDK",
+      "long" : "I don't know"
+    }
+  }
+}

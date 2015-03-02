@@ -3,6 +3,9 @@
 // Declare app level module which depends on views, and components
 angular.module('capitainsNemo', [
   'ngRoute',
+
+  'arethusa.core',
+
   'capitainsSparrow.models',
   'capitainsNemo.home',
   'capitainsNemo.utils',

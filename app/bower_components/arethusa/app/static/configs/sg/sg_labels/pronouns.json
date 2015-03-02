@@ -1,0 +1,20 @@
+{
+  "nested" : {
+    "SBS" : {
+      "short" : "SBS",
+      "long" : "substantive",
+      "nestedDependency" : true,
+      "@include" : "sg/sg_labels/cases.json"
+    },
+    "ADJ" : {
+      "short" : "ADJ",
+      "long" : "adjective"
+    },
+    "ATC" : {
+      "short" : "ATC",
+      "long" : "attraction",
+      "sections" : "2522-2528",
+      "@include" : "sg/sg_labels/cases.json"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+<div class="small-12 columns small-text-center" ng-hide="plugin.started">
+  <em>Read the instructions and hit start when you're ready</em>
+</div>
+
+<div class="small-12 columns" ng-show="plugin.started">
+  <p class="text-justify">
+  <span ng-repeat="(id, token) in state.tokens">
+    <span ng-if="plugin.isExerciseTarget(id)">
+      <span fill-in-the-blank-form></span>
+      <span class="note"><em>({{ plugin.hintFor(id) }})</em></span>
+    </span>
+    <span ng-if="! plugin.isExerciseTarget(id)"
+      hover="true"
+      token="token">
+    </span>
+    <br ng-if="aU.isTerminatingPunctuation(token.string)"/>
+  </span>
+  </p>
+</div>

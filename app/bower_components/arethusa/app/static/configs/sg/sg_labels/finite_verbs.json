@@ -1,0 +1,47 @@
+{
+  "nested" : {
+    "DPD" : {
+      "short" : "DPD",
+      "long" : "dependent"
+    },
+    "INN" : {
+      "short" : "INN",
+      "long" : "independent",
+      "nested" : {
+        "STM" : {
+          "short" : "STM",
+          "long" : "as statement",
+          "sections" : "2153"
+        },
+        "COM" : {
+          "short" : "COM",
+          "long" : "as command",
+          "sections" : "2155"
+        },
+        "WSH" : {
+          "short" : "WSH",
+          "long" : "as wish",
+          "sections" : "2156"
+        },
+        "QST" : {
+          "short" : "QST",
+          "long" : "as question",
+          "sections" : "2157"
+        },
+        "EXC" : {
+          "short" : "EXC",
+          "long" : "as exclamation",
+          "sections" : "2158"
+        },
+        "IDK" : {
+          "short" : "IDK",
+          "long" : "I don't know"
+        }
+      },
+      "IDK" : {
+        "short" : "IDK",
+        "long" : "I don't know"
+      }
+    }
+  }
+}

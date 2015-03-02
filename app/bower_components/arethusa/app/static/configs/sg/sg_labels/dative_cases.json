@@ -1,0 +1,187 @@
+{
+  "nested" : {
+    "PRP" : {
+      "short" : "PRP",
+      "long" : "proper",
+      "sections" : "1457-1502",
+      "nested" : {
+        "DRC" : {
+          "short" : "DRC",
+          "long" : "as direct complement of verbs",
+          "sections" : "1460-1468"
+        },
+        "INR" : {
+          "short" : "INR",
+          "long" : "as indirect complement of verbs",
+          "sections" : "1469-1470"
+        },
+        "INT" : {
+          "short" : "INT",
+          "long" : "of interest",
+          "sections" : "1474-1494",
+          "nested" : {
+            "POS" : {
+              "short" : "POS",
+              "long" : "of possessor",
+              "sections" : "1476-1480"
+            },
+            "ADG" : {
+              "short" : "ADG",
+              "long" : "of advantage and disadvantage",
+              "sections" : "1481-1485"
+            },
+            "FLN" : {
+              "short" : "FLN",
+              "long" : "of feeling",
+              "sections" : "1486"
+            },
+            "INC" : {
+              "short" : "INC",
+              "long" : "with participle of inclination or aversion",
+              "sections" : "1487"
+            },
+            "AGN" : {
+              "short" : "AGN",
+              "long" : "of agent",
+              "sections" : "1488-1494"
+            },
+            "IDK" : {
+              "short" : "IDK",
+              "long" : "I don't know"
+            }
+          }
+        },
+        "RLT" : {
+          "short" : "RLT",
+          "long" : "of relation",
+          "sections" : "1495-1498",
+          "nested" : {
+            "RFR" : {
+              "short" : "RFR",
+              "long" : "of reference",
+              "sections" : "1496-1497"
+            },
+            "TMP" : {
+              "short" : "TMP",
+              "long" : "with a participle of expressing time",
+              "sections" : "1498"
+            },
+            "IDK" : {
+              "short" : "IDK",
+              "long" : "I don't know"
+            }
+          }
+        },
+        "IDK" : {
+          "short" : "IDK",
+          "long" : "I don't know"
+        }
+      }
+    },
+    "INS" : {
+      "short" : "INS",
+      "long" : "instrumental",
+      "sections" : "1503-1529",
+      "nested" : {
+        "MNS" : {
+          "short" : "MNS",
+          "long" : "of means or instruments",
+          "sections" : "1507-1511"
+        },
+        "STN" : {
+          "short" : "STN",
+          "long" : "of standard of judgement",
+          "sections" : "1512"
+        },
+        "MNN" : {
+          "short" : "MNN",
+          "long" : "of manner",
+          "sections" : "1527"
+        },
+        "RSP" : {
+          "short" : "RSP",
+          "long" : "of respect",
+          "sections" : "1516"
+        },
+        "MEA" : {
+          "short" : "MEA",
+          "long" : "of measure of difference",
+          "sections" : "1513-1515"
+        },
+        "CAU" : {
+          "short" : "CAU",
+          "long" : "of cause",
+          "sections" : "1520"
+        },
+        "CMT" : {
+          "short" : "CMT",
+          "long" : "as comitative",
+          "sections" : "1521-1528",
+          "nested" : {
+            "ASS" : {
+              "short" : "ASS",
+              "long" : "of association",
+              "sections" : "1523"
+            },
+            "ACM" : {
+              "short" : "ACM",
+              "long" : "of accompaniment",
+              "sections" : "1524-1525"
+            },
+            "MLT" : {
+              "short" : "MLT",
+              "long" : "of military accompaniment",
+              "sections" : "1526"
+            },
+            "ACR" : {
+              "short" : "ACR",
+              "long" : "of accompanying circumstance",
+              "sections" : "1524-1527"
+            },
+            "IDK" : {
+              "short" : "IDK",
+              "long" : "I don't know"
+            }
+          }
+        }
+      },
+      "IDK" : {
+        "short" : "IDK",
+        "long" : "I don't know"
+      }
+    },
+    "LCT" : {
+      "short" : "LCT",
+      "long" : "locative",
+      "sections" : "1530-1550",
+      "nested" : {
+        "TME" : {
+          "short" : "TME",
+          "long" : "of time",
+          "sections" : "1539-1543"
+        },
+        "PLC" : {
+          "short" : "PLC",
+          "long" : "of place",
+          "sections" : "1531-1538"
+        },
+        "IDK" : {
+          "short" : "IDK",
+          "long" : "I don't know"
+        }
+      }
+    },
+    "PUR" : {
+      "short" : "PUR",
+      "long" : "of purpose (with ἐπί)"
+    },
+    "UNS" : {
+      "short" : "UNS",
+      "long" : "unspecified (only if depending on adj., adv., or adp.)"
+    },
+    "IDK" : {
+      "short" : "IDK",
+      "long" : "I don't know"
+    }
+  }
+}

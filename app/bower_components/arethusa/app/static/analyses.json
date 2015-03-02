@@ -1,0 +1,58 @@
+{
+  "Homo" : [
+    {
+      "origin": "fakeMorph",
+      "lemma": "homo",
+      "attributes": {
+        "pos": "noun",
+        "casus": "nom"
+      }
+    },
+    {
+      "origin": "fakeMorph",
+      "lemma": "homo",
+      "attributes": {
+        "pos": "noun",
+        "casus": "voc"
+      }
+    }
+  ],
+
+  "rosam" : [
+    {
+      "origin": "fakeMorph",
+      "lemma": "rosa",
+      "attributes": {
+        "pos": "noun",
+        "casus": "acc"
+      }
+    }
+  ],
+
+  "videt" : [
+    {
+      "origin": "fakeMorph",
+      "lemma": "video",
+      "attributes": { "pos": "verb" }
+    }
+  ],
+
+  "Caesar" : [
+    {
+      "origin": "fakeMorph",
+      "lemma": "Caesar",
+      "attributes": {
+        "pos": "noun",
+        "casus": "nom"
+      }
+    }
+  ],
+
+  "." : [
+    {
+      "origin": "fakeMorph",
+      "lemma": ".",
+      "attributes": { "pos": "punct" }
+    }
+  ]
+}

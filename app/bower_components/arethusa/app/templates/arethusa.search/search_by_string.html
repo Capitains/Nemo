@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="small-12 columns">
+    <label>
+      <span translate="search.searchByToken"/>
+      <div class="row collapse">
+        <div class="small-10 columns">
+          <input type="search"
+            foreign-keys
+            ng-change="search.queryTokens()"
+            ng-model="search.tokenQuery" />
+        </div>
+        <div class="small-2 columns">
+          <label class="postfix">
+            regex
+            <input
+              id="regex-checkbox"
+              type="checkbox"
+              ng-change="search.queryTokens()"
+              ng-model="search.queryByRegex"/>
+          </label>
+        </div>
+      </div>
+    </label>
+  </div>
+</div>
