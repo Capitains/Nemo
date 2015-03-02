@@ -1,5 +1,5 @@
 angular.module('capitainsSparrow.models', [])
-  .factory('Repository', ['$q', function($q) {
+  .factory('Repository', ['$q', '$route', function($q, $route) {
     //We create a repo
     var CTSrepo =  function(endpoint, version) { 
       this.load = function() {
@@ -72,7 +72,7 @@ angular.module('capitainsSparrow.models', [])
     }
     return CTSrepo;
   }])
-  .factory('Passage', ['$q', function($q) {
+  .factory('Passage', ['$q', '$location', function($q, $location) {
     return function(urn, endpoint, inventory, text) {
       this.text = text;
       this.urn = urn;
@@ -88,7 +88,6 @@ angular.module('capitainsSparrow.models', [])
       }
 
       this.splitURN(urn)
-      console.log(this.text)
 
       if(typeof window.texts === "undefined") {
         window.texts = {};
@@ -120,9 +119,10 @@ angular.module('capitainsSparrow.models', [])
       } else {
         this.Passage = window.texts[this.urn].passages[this.passage]
       }
-
+      
       this.updatePassage = function() {
         var self = this;
+        $location.search("urn", window.texts[self.urn].passages[self.passage].urn);
         window.texts[self.urn].passages[self.passage].body = window.texts[self.urn].passages[self.passage].getXml("body", "string");
         window.texts[self.urn].passages[self.passage].next = (function() { 
           var next = window.texts[self.urn].passages[self.passage].getXml("next");
