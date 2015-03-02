@@ -42,7 +42,6 @@ angular
               indexing().then(function() {
                 $scope.search = search;
                 $scope.loading = false;
-                console.log($scope.engine)
                 $scope.search();
               });
             }
