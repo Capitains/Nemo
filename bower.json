@@ -2,7 +2,7 @@
   "name": "capitains-nemo",
   "version": "0.0.0",
   "description": "A simple CTS API browser app",
-  "repository": "https://github.com/PerseusDL/Capitains-Nemo",
+  "repository": "https://github.com/Capitains/Nemo",
   "license": "MIT",
   "private": true,
   "dependencies": {

@@ -108,6 +108,7 @@ angular.module('capitainsSparrow.models', [])
         );
       }
 
+      this.container = window.texts[this.urn]; // Problem with text naming here...
       var passage = window.texts[this.urn].makePassageUrn(text.start, text.end);
       this.passage = passage;
 
@@ -195,6 +196,22 @@ angular.module('capitainsSparrow.models', [])
             }
           }
         );
+        return deferred.promise;
+      }
+
+      this.validReffs = function(level) {
+        var deferred = $q.defer(),
+            self = this,
+            level = (typeof level === "undefined") ? 1 : level;
+        window.texts[this.urn].getValidReff({
+          success : function(dict) {
+            deferred.resolve();
+          },
+          error : function(error) {
+            deferred.reject("An error occured while fetching items");
+          },
+          level : level
+        });
         return deferred.promise;
       }
     }

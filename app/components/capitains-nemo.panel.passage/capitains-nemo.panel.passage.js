@@ -13,33 +13,39 @@ angular
         },
         controller: function ($scope, $injector) {
           var Passage = $injector.get($scope.injector);
-
+          $scope.watch($scope.text, function(text, text2) {
+            if(typeof text === "undefined") { 
+              return true; 
+            } else {
+              $scope.entity = new Passage(
+                text.urn,
+                window.CTSAPI,
+                text.inventory,
+                text
+              );
+            }
+          });
+          $scope.refs = {}
+          
           $scope.first = function () {
-            
-            var passage = new Passage(
-              $scope.text.urn,
-              window.CTSAPI,
-              $scope.text.inventory,
-              $scope.text
-            );
 
-            passage.firstPassage().then.call(this, function() {
-              $scope.passage = passage.Passage;
+            $scope.entity.firstPassage().then.call(this, function() {
+              $scope.passage = $scope.entity.Passage;
             });
           };
 
+          $scope.level = function() {
+            $scope.entity.validReffs().then(function() {
+              $scope.refs = $scope.entity.container.validReffs;
+            })
+          }
+
           $scope.retrieve = function () {
 
-            var passage = new Passage(
-              $scope.text.urn,
-              window.CTSAPI,
-              $scope.text.inventory,
-              $scope.text
-            );
-
-            passage.load().then.call(this, function() {
-              $scope.passage = passage.Passage;
+            $scope.entity.load().then.call(this, function() {
+              $scope.passage = $scope.entity.Passage;
             });
+
           };
 
           $scope.select = function() {
