@@ -13,7 +13,8 @@ angular
         },
         controller: function ($scope, $injector) {
           var Passage = $injector.get($scope.injector);
-          $scope.watch($scope.text, function(text, text2) {
+
+          $scope.$watch('text', function(text, text2) {
             if(typeof text === "undefined") { 
               return true; 
             } else {
@@ -25,6 +26,7 @@ angular
               );
             }
           });
+
           $scope.refs = {}
           
           $scope.first = function () {
