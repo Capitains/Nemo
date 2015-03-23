@@ -25,23 +25,23 @@
       </ul>
     </p>-->
     <form class="form-horizontal" ng-submit="select()">
-    <!-- Start -->
-    <h5>Start of the passage</h5>
-    <div class="form-group" ng-repeat="(value, key) in text.citations" >
-      <label class="col-xs-6 control-label">{{key}}</label>
-      <div class="col-xs-6">
-        <input ng-model="text.start[value]" type="text" class="form-control" />
+      <!-- Start -->
+      <h5>Start of the passage</h5>
+      <div class="form-group" ng-repeat="(value, key) in text.citations" >
+        <label class="col-xs-6 control-label">{{key}}</label>
+        <div class="col-xs-6">
+          <input ng-model="entity.text.start[value]" type="text" class="form-control" />
+        </div>
       </div>
-    </div>
-    <!-- End -->
-    <h5>End of the passage</h5>
-    <div class="form-group" ng-repeat="(value, key) in text.citations">
-      <label class="col-xs-6 control-label">{{key}}</label>
-      <div class="col-xs-6">
-        <input ng-model="text.end[value]" type="text" class="form-control" />
+      <!-- End -->
+      <h5>End of the passage</h5>
+      <div class="form-group" ng-repeat="(value, key) in text.citations">
+        <label class="col-xs-6 control-label">{{key}}</label>
+        <div class="col-xs-6">
+          <input ng-model="entity.text.end[value]" type="text" class="form-control" />
+        </div>
       </div>
-    </div>
-    <button class="btn btn-default" type="submit">Retrieve</button>
+      <button class="btn btn-default" type="submit">Retrieve</button>
     </form>
   </div>
 </div>

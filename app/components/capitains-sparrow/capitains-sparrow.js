@@ -94,6 +94,15 @@ angular.module('capitainsSparrow.models', [])
           this.text.end   = (refs.length === 2) ? refs[1].split(".") : [];
         }
       }
+      this.passageUrnUpdater = function() {
+        var self = this;
+        var passage = window.texts[this.urn].makePassageUrn(self.text.start, self.text.end);
+        self.passage = passage;
+
+        if(typeof window.texts[self.urn].passages[self.passage] === "undefined" && self.text.start && self.text.end) {
+          window.texts[self.urn].getPassage(self.text.start, self.text.end);
+        }
+      }
 
       this.splitURN(urn)
 
@@ -109,12 +118,7 @@ angular.module('capitainsSparrow.models', [])
       }
 
       this.container = window.texts[this.urn]; // Problem with text naming here...
-      var passage = window.texts[this.urn].makePassageUrn(text.start, text.end);
-      this.passage = passage;
-
-      if(typeof window.texts[this.urn].passages[this.passage] === "undefined" && text.start && text.end) {
-        window.texts[this.urn].getPassage(text.start, text.end);
-      }
+      this.passageUrnUpdater();
 
       var createPassage = function() {
         window.texts[this.urn].passages[this.passage].source = this.text;
@@ -161,14 +165,17 @@ angular.module('capitainsSparrow.models', [])
       this.load = function() {
         var deferred = $q.defer(),
             self = this;
-        if(window.texts[this.urn].passages[this.passage].body) {
+
+        self.passageUrnUpdater();
+        
+        if(window.texts[self.urn].passages[self.passage].body) {
           (function () {
             self.Passage = window.texts[self.urn].passages[self.passage];
             deferred.resolve();
           })()
           return deferred.promise;
         }
-        window.texts[this.urn].passages[this.passage].retrieve({
+        window.texts[self.urn].passages[self.passage].retrieve({
           success : function() {
               self.updatePassage.call(self);
               deferred.resolve();

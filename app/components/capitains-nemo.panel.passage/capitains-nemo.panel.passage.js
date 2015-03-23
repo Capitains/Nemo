@@ -43,7 +43,6 @@ angular
           }
 
           $scope.retrieve = function () {
-
             $scope.entity.load().then.call(this, function() {
               $scope.passage = $scope.entity.Passage;
             });
