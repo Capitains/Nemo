@@ -15,6 +15,7 @@
     "arethusa": "latin-language-toolkit/arethusa#050def80138a00ebe06ca53a9e4341ae2da9ccd1",
     "capitains-sparrow": "git@github.com:PerseusDL/Capitains-Sparrow.git",
     "angular-cookies": "1.2.x",
-    "angular-resource": "1.2.x"
+    "angular-resource": "1.2.x",
+    "URIjs": "1.15.1"
   }
 }

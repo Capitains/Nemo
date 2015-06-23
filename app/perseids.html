@@ -11,8 +11,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="app.css">
+  <script src="bower_components/URIjs/src/URI.min.js"></script>
   <script type="text/javascript">
-    window.CTSAPI = "http://sosol.perseids.org/exist/rest/db/xq/CTS.xq?";
+    var URI = new URI();
+    window.URI = window.URI.search(true);
+    window.CTSAPI = window.URI.api || "http://sosol.perseids.org/exist/rest/db/xq/CTS.xq";
+    window.CTSinventories = window.URI["inv[]"] || ["annotsrc"];
   </script>
 </head>
 <body>
@@ -77,7 +81,6 @@
   <script src="components/capitains-nemo.square.nav/capitains-nemo.square.nav.js"></script>
   <script src="components/capitains-nemo.square.info/capitains-nemo.square.info.js"></script>
   <script src="components/capitains-nemo.square.layout/capitains-nemo.square.layout.js"></script>
-
   <script src="components/capitains-nemo.reading.notes/capitains-nemo.reading.notes.js"></script>
 
   <script src="components/arethusa.tei/tei.js"></script>

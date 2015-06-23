@@ -46,7 +46,9 @@ angular.module('capitainsNemo.home', ['ngRoute'])
   }
 
   $scope.repository = new Repository(window.CTSAPI, 3);
-  $scope.repository.Repository.addInventory("annotsrc", "Perseids Text");
+  for (var i = window.CTSinventories.length - 1; i >= 0; i--) {
+    $scope.repository.Repository.addInventory(window.CTSinventories[i], window.CTSinventories[i]);
+  };
   /* 
     Loading the data
   */
