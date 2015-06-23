@@ -13,10 +13,18 @@
   <link rel="stylesheet" href="app.css">
   <script src="bower_components/URIjs/src/URI.min.js"></script>
   <script type="text/javascript">
-    var URI = new URI();
-    window.URI = window.URI.search(true);
-    window.CTSAPI = window.URI.api || "http://sosol.perseids.org/exist/rest/db/xq/CTS.xq";
-    window.CTSinventories = window.URI["inv[]"] || ["annotsrc"];
+    var WURI = new URI();
+    var WURI = WURI.search(true);
+    window.CTSAPI = WURI.api || "http://sosol.perseids.org/exist/rest/db/xq/CTS.xq";
+    window.CTSinventories = ["latin"]|| ["annotsrc"];
+    if(typeof window.CTSinventories === "string") {
+      window.CTSinventories = [window.CTSinventories];
+    }
+    if(WURI.version) {
+      window.CTSVersion = parseInt(WURI.version);
+    } else {
+      window.CTSVersion = 3;
+    }
   </script>
 </head>
 <body>
