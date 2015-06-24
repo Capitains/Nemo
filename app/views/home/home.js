@@ -17,9 +17,16 @@ angular.module('capitainsNemo.home', ['ngRoute'])
     'Repository',
     'Passage', 
     'Layout', 
-  function($scope, $route, Repository, Passage, Layout) {
+    'localStorageService',
+  function($scope, $route, Repository, Passage, Layout, localStorageService) {
   $scope.layout = new Layout();
   $scope.sidebar = new Layout(['notes']);
+
+  $scope.clearCache = function() {
+    if(localStorageService.clearAll()) {
+      location.reload()
+    }
+  };
 
   $scope.items = {
     parents : {
