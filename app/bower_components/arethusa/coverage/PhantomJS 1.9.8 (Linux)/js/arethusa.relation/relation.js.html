@@ -1,0 +1,1372 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for js/arethusa.relation/relation.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../prettify.css">
+
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Helvetica Neue, Helvetica,Arial;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 10em;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Consolas, Menlo, Monaco, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 14px;
+            font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { text-decoration: none; color: #000; }
+        div.coverage-summary a:visited { text-decoration: none; color: #333; }
+        div.coverage-summary a:hover { text-decoration: underline; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: url("https://yui-s.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header medium">
+    <h1>Code coverage report for <span class="entity">js/arethusa.relation/relation.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">73.6% <small>(131 / 178)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">40.63% <small>(26 / 64)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">64.58% <small>(31 / 48)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">75.72% <small>(131 / 173)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../index.html">All files</a> &#187; <a href="index.html">js/arethusa.relation/</a> &#187; relation.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">42</span>
+<span class="cline-any cline-yes">42</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">66</span>
+<span class="cline-any cline-yes">66</span>
+<span class="cline-any cline-yes">66</span>
+<span class="cline-any cline-yes">66</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-yes">122</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">60</span>
+<span class="cline-any cline-yes">60</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">18</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">60</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">60</span>
+<span class="cline-any cline-yes">60</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+angular.module('arethusa.relation').service('relation', [
+  'state',
+  'configurator',
+  'globalSettings',
+  'commons',
+  '_',
+  function (state, configurator, globalSettings, commons, _) {
+    var self = this;
+    this.name = "relation";
+&nbsp;
+    this.canSearch = true;
+&nbsp;
+    globalSettings.addColorizer('relation');
+&nbsp;
+    var props = [
+      'advancedMode',
+      'syntaxDescriptions'
+    ];
+&nbsp;
+    function configure() {
+      configurator.getConfAndDelegate(self);
+      configurator.getStickyConf(self, props);
+      self.relationValues = self.conf.relations;
+      addParentsToRelationConf();
+      self.relations = {};
+      colorMap = undefined;
+    }
+&nbsp;
+    function addParentsToRelationConf() {
+      angular.forEach(self.relationValues.labels, addParentsToNested);
+    }
+&nbsp;
+    function addParentsToNested(obj) {
+      var nested = obj.nested;
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (nested) {
+<span class="cstat-no" title="statement not covered" >        angular.forEach(nested, <span class="fstat-no" title="function not covered" >function(rel, key) {</span></span>
+<span class="cstat-no" title="statement not covered" >          rel.parent = obj;</span>
+<span class="cstat-no" title="statement not covered" >          addParentsToNested(rel);</span>
+        });
+      }
+    }
+&nbsp;
+    // Currently selected labels
+    this.currentLabels = function () {
+      return arethusaUtil.inject({}, state.selectedTokens, function (memo, id, event) {
+        memo[id] = self.relations[id];
+      });
+    };
+&nbsp;
+    // Label handling
+    function splitLabel(relation, label) {
+      label = angular.isDefined(label) ? label : relation.label;
+      var split = label.split('_');
+      relation.prefix = split.shift() || <span class="branch-1 cbranch-no" title="branch not covered" >'';</span>
+      relation.suffix = split.join('_');
+    }
+&nbsp;
+    this.buildLabel = function (relation, doNotSet) {
+      var elements = [
+          relation.prefix,
+          relation.suffix
+        ];
+      var clean = arethusaUtil.inject([], elements, function (memo, el) {
+          if (el) {
+            memo.push(el);
+          }
+        });
+&nbsp;
+      var label = clean.join('_');
+      if (!doNotSet) {
+        relation.label = label;
+      }
+      return label;
+    };
+&nbsp;
+    this.prefixWithAncestors = <span class="fstat-no" title="function not covered" >function(relation) {</span>
+<span class="cstat-no" title="statement not covered" >      return arethusaUtil.inject([], relation.ancestors, <span class="fstat-no" title="function not covered" >function(memo, ancestor) {</span></span>
+<span class="cstat-no" title="statement not covered" >        memo.push(ancestor.short);</span>
+      }).join(' &gt; ') || '---';
+    };
+&nbsp;
+    this.suffixOrPlaceholder = <span class="fstat-no" title="function not covered" >function(relation) {</span>
+<span class="cstat-no" title="statement not covered" >      return relation.suffix || '---';</span>
+    };
+&nbsp;
+    this.usePrefix = 'prefix';
+    this.useSuffix = 'suffix';
+    this.defineAncestors = true;
+&nbsp;
+    function findLabel(key, container) {
+      var k, v, res;
+      for (k in container) {
+        if (key === k) {
+          return container[k];
+        } else {
+          v = container[k];
+          <span class="missing-if-branch" title="if path not taken" >I</span>if (v.nested) {
+<span class="cstat-no" title="statement not covered" >            res = findLabel(key, v.nested);</span>
+<span class="cstat-no" title="statement not covered" >            if (res) {</span>
+<span class="cstat-no" title="statement not covered" >              return res;</span>
+            }
+          }
+        }
+      }
+    }
+&nbsp;
+    function addParents(parents, obj) {
+      var parent = obj.parent;
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (parent) {
+<span class="cstat-no" title="statement not covered" >        addParents(parents, parent);</span>
+<span class="cstat-no" title="statement not covered" >        parents.unshift(parent);</span>
+      }
+      return parents;
+    }
+&nbsp;
+    this.initAncestors = function(relation) {
+      // calculate a real ancestor chain here if need be
+      var prefix = relation.prefix;
+      var ancestors = [];
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (prefix) {
+        var obj = findLabel(prefix, self.relationValues.labels);
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (obj) {
+          ancestors = addParents([], obj);
+          ancestors.push(obj);
+        }
+      }
+      relation.ancestors = ancestors;
+    };
+&nbsp;
+    this.expandRelation = function (relation) {
+      splitLabel(relation);
+      self.initAncestors(relation);
+      return relation;
+    };
+&nbsp;
+    // Empty template for relation objects
+    this.relationTemplate = function () {
+      return {
+        prefix: '',
+        suffix: '',
+        label: '',
+        ancestors: []
+      };
+    };
+&nbsp;
+    // Search/Selector
+    this.resetSearchedLabel = function () {
+      self.searchedLabel = self.relationTemplate();
+    };
+&nbsp;
+    // TODO
+    // This should be more flexible and take pre/suffixing into account,
+    // at least as optional feature
+    this.selectByLabel = function (label) {
+      var ids = arethusaUtil.inject([], self.relations, function (memo, id, rel) {
+        if (rel.relation.label === label) {
+          memo.push(id);
+        }
+      });
+      state.multiSelect(ids);
+    };
+&nbsp;
+    this.buildLabelAndSearch = function(rel) {
+      rel = rel ? rel : self.searchedLabel;
+      self.buildLabel(rel);
+      self.selectByLabel(rel.label);
+    };
+&nbsp;
+    // Multi-changer
+    this.resetMultiChanger = function () {
+      this.multiChanger = self.relationTemplate();
+    };
+&nbsp;
+    this.multiChangePossible = function () {
+      // We check for the prefix, as only a suffix, which would
+      // fill the label already would not be allowed.
+      //
+      // Tokens need to be selected to of course.
+      return self.multiChanger.prefix !== '' &amp;&amp;
+        state.hasSelections();
+    };
+&nbsp;
+    // Pretty ridiculous changes to gain compatibility with the
+    // new state eventing.
+    //
+    // There is some duplicate stuff happening, to blame is the
+    // whole nestedMenu directive logic, which has to be redone
+    // for other reasons as well.
+    //
+    // Prefix/Suffix and Ancestors have already been built by
+    // the directive when we enter relation.stateChange, only
+    // the label has to be built.
+    //
+    // Because we need to define proper values for prefix/suffix
+    // and ancestors when we want to undo/redo our changes, we
+    // have to recreate them during during stateChange, which
+    // leads to a redefinition on the initial event. It's not
+    // really a problem, it's just not very pretty...
+    //
+    this.applyMultiChanger = function () {
+      // We have to copy the multiChanger, so that its model
+      // stays intact, when we remove the label. We need to do
+      // this because we will rebuild it through changeState.
+      var cleanChanger = angular.copy(self.multiChanger);
+      delete cleanChanger.label;
+&nbsp;
+      state.doBatched(function() {
+        angular.forEach(self.currentLabels(), function (obj, id) {
+          var oldAncestors = obj.relation.ancestors;
+          angular.extend(obj.relation, cleanChanger);
+          self.changeState(obj.relation, oldAncestors);
+        });
+      });
+    };
+&nbsp;
+    function undoFn(id, obj, val, oldAncestors) {
+      oldAncestors = oldAncestors || <span class="branch-1 cbranch-no" title="branch not covered" >angular.copy(obj.ancestors);</span>
+      return <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >        splitLabel(obj, val);</span>
+<span class="cstat-no" title="statement not covered" >        obj.ancestors = oldAncestors;</span>
+<span class="cstat-no" title="statement not covered" >        if (isColorizer()) <span class="cstat-no" title="statement not covered" >setStyle(id, oldAncestors);</span></span>
+<span class="cstat-no" title="statement not covered" >        state.change(obj.id, 'relation.label', val);</span>
+      };
+    }
+&nbsp;
+    function preExecFn(id, obj, val) {
+      var newAncestors = angular.copy(obj.ancestors);
+      return function() {
+        obj.ancestors = newAncestors;
+        splitLabel(obj, val);
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (isColorizer()) <span class="cstat-no" title="statement not covered" >setStyle(id, newAncestors);</span>
+      };
+    }
+&nbsp;
+    function isColorizer() {
+      return globalSettings.isColorizer('relation');
+    }
+&nbsp;
+    this.changeState = function(relObj, oldAncestors) {
+      var id = relObj.id;
+      var oldVal = relObj.label;
+      var newVal = self.buildLabel(relObj, !!id);
+&nbsp;
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (id) {
+        state.change(id, 'relation.label', newVal,
+                    undoFn(id, relObj, oldVal, oldAncestors),
+                    preExecFn(id, relObj, newVal));
+      }
+    };
+&nbsp;
+    // Init
+    function addToInternalState(container, id, token) {
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (!token.relation) <span class="cstat-no" title="statement not covered" >token.relation = self.relationTemplate();</span>
+      // Passing the id is a hacky shortcut to allow access to
+      // state.change. If we ever have to change ids on the fly,
+      // this will call for trouble. Watch out.
+      token.relation.id = id;
+      container[id] = {
+        string: token.string,
+        relation: self.expandRelation(token.relation || <span class="branch-1 cbranch-no" title="branch not covered" >'')</span>
+      };
+    }
+&nbsp;
+    this.createInternalState = function () {
+      return arethusaUtil.inject({}, state.tokens, addToInternalState);
+    };
+&nbsp;
+    this.canEdit = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >      return self.mode === "editor";</span>
+    };
+&nbsp;
+    state.on('tokenAdded', <span class="fstat-no" title="function not covered" >function(event, token) {</span>
+<span class="cstat-no" title="statement not covered" >      addToInternalState(self.relations, token.id, token);</span>
+    });
+&nbsp;
+    state.on('tokenRemoved', <span class="fstat-no" title="function not covered" >function(event, token) {</span>
+<span class="cstat-no" title="statement not covered" >      delete self.relations[token.id];</span>
+    });
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function extractColor(obj, target, keys) {</span>
+<span class="cstat-no" title="statement not covered" >      angular.forEach(obj, <span class="fstat-no" title="function not covered" >function(rel, name) {</span></span>
+<span class="cstat-no" title="statement not covered" >        var style  = rel.style;</span>
+<span class="cstat-no" title="statement not covered" >        var nested = rel.nested;</span>
+<span class="cstat-no" title="statement not covered" >        if (style) {</span>
+<span class="cstat-no" title="statement not covered" >          var key = aU.flatten(aU.map(keys, rel)).join(' || ');</span>
+<span class="cstat-no" title="statement not covered" >          target[key] = style;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (nested) {</span>
+<span class="cstat-no" title="statement not covered" >          extractColor(nested, target, keys);</span>
+        }
+      });
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function createColorMap() {</span>
+<span class="cstat-no" title="statement not covered" >      var keys = ['short', 'long'];</span>
+<span class="cstat-no" title="statement not covered" >      var colors = {};</span>
+<span class="cstat-no" title="statement not covered" >      var map = { header: keys, maps: [{ label: 'Label', colors: colors }] };</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      extractColor(self.relationValues.labels, colors, keys);</span>
+<span class="cstat-no" title="statement not covered" >      return map;</span>
+    }
+&nbsp;
+    var colorMap;
+    this.colorMap = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >      if (!colorMap) <span class="cstat-no" title="statement not covered" >colorMap = createColorMap();</span></span>
+<span class="cstat-no" title="statement not covered" >      return colorMap;</span>
+    };
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function setStyle(id, ancestors) {</span>
+<span class="cstat-no" title="statement not covered" >      var anc = aU.last(ancestors || self.relations[id].relation.ancestors) || {};</span>
+<span class="cstat-no" title="statement not covered" >      var style = anc.style || {};</span>
+<span class="cstat-no" title="statement not covered" >      state.addStyle(id, style);</span>
+    }
+&nbsp;
+    this.applyStyling = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >      angular.forEach(state.tokens, <span class="fstat-no" title="function not covered" >function(token, id) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (token.relation.label) {</span>
+<span class="cstat-no" title="statement not covered" >          setStyle(id);</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          state.unsetStyle(id);</span>
+        }
+      });
+    };
+&nbsp;
+    this.settings = [
+      commons.setting('Advanced Mode', 'advancedMode'),
+      commons.setting('Show Syntax Descriptions', 'syntaxDescriptions')
+    ];
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function getLabelObj(token) {</span>
+<span class="cstat-no" title="statement not covered" >      return _.last(getAncestors(token));</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function getAncestors(token) {</span>
+<span class="cstat-no" title="statement not covered" >      return (token.relation || {}).ancestors || [];</span>
+    }
+&nbsp;
+    this.getLabelObj = getLabelObj;
+&nbsp;
+    this.init = function () {
+      configure();
+      self.relations = self.createInternalState();
+      self.resetSearchedLabel();
+      self.resetMultiChanger();
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (isColorizer()) <span class="cstat-no" title="statement not covered" >self.applyStyling();</span>
+    };
+  }
+]);
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue May 12 2015 11:20:41 GMT+0200 (CEST)</div>
+</div>
+
+<script src="../../prettify.js"></script>
+
+<script src="https://yui-s.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script>
+
+    YUI().use('datatable', function (Y) {
+
+        var formatters = {
+          pct: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              try {
+                  return o.value.toFixed(2) + '%';
+              } catch (ex) { return o.value + '%'; }
+          },
+          html: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.record.get(o.column.key + '_html');
+          }
+        },
+          defaultFormatter = function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.value;
+          };
+
+        function getColumns(theadNode) {
+            var colNodes = theadNode.all('tr th'),
+                cols = [],
+                col;
+            colNodes.each(function (colNode) {
+                col = {
+                    key: colNode.getAttribute('data-col'),
+                    label: colNode.get('innerHTML') || ' ',
+                    sortable: !colNode.getAttribute('data-nosort'),
+                    className: colNode.getAttribute('class'),
+                    type: colNode.getAttribute('data-type'),
+                    allowHTML: colNode.getAttribute('data-html') === 'true' || colNode.getAttribute('data-fmt') === 'html'
+                };
+                col.formatter = formatters[colNode.getAttribute('data-fmt')] || defaultFormatter;
+                cols.push(col);
+            });
+            return cols;
+        }
+
+        function getRowData(trNode, cols) {
+            var tdNodes = trNode.all('td'),
+                    i,
+                    row = { classes: {} },
+                    node,
+                    name;
+            for (i = 0; i < cols.length; i += 1) {
+                name = cols[i].key;
+                node = tdNodes.item(i);
+                row[name] = node.getAttribute('data-value') || node.get('innerHTML');
+                row[name + '_html'] = node.get('innerHTML');
+                row.classes[name] = node.getAttribute('class');
+                //Y.log('Name: ' + name + '; Value: ' + row[name]);
+                if (cols[i].type === 'number') { row[name] = row[name] * 1; }
+            }
+            //Y.log(row);
+            return row;
+        }
+
+        function getData(tbodyNode, cols) {
+            var data = [];
+            tbodyNode.all('tr').each(function (trNode) {
+                data.push(getRowData(trNode, cols));
+            });
+            return data;
+        }
+
+        function replaceTable(node) {
+            if (!node) { return; }
+            var cols = getColumns(node.one('thead')),
+                data = getData(node.one('tbody'), cols),
+                table,
+                parent = node.get('parentNode');
+
+            table = new Y.DataTable({
+                columns: cols,
+                data: data,
+                sortBy: 'file'
+            });
+            parent.set('innerHTML', '');
+            table.render(parent);
+        }
+
+        Y.on('domready', function () {
+            replaceTable(Y.one('div.coverage-summary table'));
+            if (typeof prettyPrint === 'function') {
+                prettyPrint();
+            }
+        });
+    });
+</script>
+</body>
+</html>

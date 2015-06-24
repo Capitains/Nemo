@@ -1,0 +1,29 @@
+{
+  "layouts" : [
+
+    {
+      "name" : "Sidepanel",
+      "template" : "templates/main_with_sidepanel.html",
+      "sidepanel" : false
+    },
+
+    {
+      "name" : "Grid",
+      "template" : "templates/main_grid.html",
+      "grid" : [
+        {
+          "plugin" : "text",
+          "size" : [35, 3],
+          "position" : [0, 0]
+        },
+        {
+          "plugin" : "opendataNetwork",
+          "size" : [23, 25],
+          "position" : [4, 0],
+          "style" : { "overflow": "hidden"}
+        }
+      ]
+    }
+  ]
+}
+

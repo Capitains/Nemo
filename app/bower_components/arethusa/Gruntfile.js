@@ -19,11 +19,13 @@ var browserAppFiles = ['server/browser/js/**/*'];
 var devMode = process.env.DEV;
 
 var arethusaModules = [
+  "arethusa.opendata_network",
   "arethusa.constituents",
   'arethusa.morph',
   'arethusa.artificial_token',
   'arethusa.core',
   'arethusa.util',
+  'arethusa.tools',
   'arethusa.comments',
   'arethusa.hebrew_morph',
   'arethusa.context_menu',
@@ -77,7 +79,9 @@ function arethusaSourceFiles() {
     "./vendor/uservoice/uservoice.min.js",
     "./vendor/angularJS-toaster/toaster.min.js",
     "./bower_components/angular-highlightjs/angular-highlightjs.min.js",
+    "./bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js",
     "./vendor/highlight/highlight.pack.js",
+    "./bower_components/svg-curve-lib/src/js/svg-curve-lib.js"
   ];
 
   // Of some components there are no non-minified version available
@@ -105,6 +109,7 @@ function arethusaMainFiles() {
   var files = [
     "arethusa.util",
     "arethusa.core",
+    "arethusa.tools",
     "arethusa.context_menu",
     "arethusa.history",
     "arethusa.main"
@@ -420,6 +425,8 @@ module.exports = function(grunt) {
             "./bower_components/angular-local-storage/dist/angular-local-storage.min.js",
             "./bower_components/lodash/dist/lodash.min.js",
             "./bower_components/stacktrace-js/dist/stacktrace.min.js",
+            "./bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js",
+            './bower_components/svg-curve-lib/src/js/svg-curve-lib.js',
             // Some source files we'll need to include manually, otherwise
             // the load order is wrong
             'app/js/*.js',

@@ -1,0 +1,72 @@
+<span
+  title="Zoom Out"
+  class="settings-span-button"
+  ng-click="graphZoom(0.9)">
+  <i class="fa fa-search-minus"></i>
+</span><span
+  title="Zoom In"
+  class="settings-span-button"
+  ng-click="graphZoom(1.1)">
+  <i class="fa fa-search-plus"></i>
+</span><span
+  title="Original Zoom"
+  class="settings-span-button"
+  ng-click="graphZoom()">
+  <i class="fa fa-search"></i>
+</span><span
+  title="Move"
+  class="settings-span-button"
+  jqyoui-draggable="{onDrag:'draggingGraph()'}">
+  <i class="fa fa-arrows"></i>
+</span><span
+  title="Move to left"
+  class="settings-span-button"
+  ng-click="graphMove(-20, 0)">
+  <i class="fa fa-arrow-circle-left"></i>
+</span><span
+  title="Move to left"
+  class="settings-span-button"
+  ng-click="graphMove(20, 0)">
+  <i class="fa fa-arrow-circle-right"></i>
+</span><span
+  title="Move to left"
+  class="settings-span-button"
+  ng-click="graphMove(0, 20)">
+  <i class="fa fa-arrow-circle-up"></i>
+</span><span
+  title="Move to left"
+  class="settings-span-button"
+  ng-click="graphMove(0, -20)">
+  <i class="fa fa-arrow-circle-down"></i>
+</span>
+<span
+  title="Centrer l'arbre"
+  class="settings-span-button"
+  ng-click="graphMove()">
+  <i class="fa fa-dot-circle-o"></i>
+</span>
+<span
+  title="Pause"
+  class="settings-span-button"
+  ng-click="forceToggle()">
+  <i class="fa" ng-class="{'fa-pause':D3Params.running, 'fa-play':D3Params.running===false}"></i>
+</span>
+<span
+  title="{{ translations.focusSel() }} {{ keyHints.focusSelection}}"
+  class="settings-span-button"
+  ng-click="focusSelection()">
+  <i class="fi-target-two rotate-on-hover"></i>
+</span>
+<span
+  title="{{ translations.focusSel() }} {{ keyHints.focusSelection}}"
+  class="settings-span-button"
+  ng-click="toggleLabels()">
+  <i class="fa" ng-class="{'fa-eye':!D3Params.displayLabels,'fa-eye-slash':D3Params.displayLabels}"></i>
+</span>
+<span ng-click="advancedSettings = !advancedSettings"><i class="fa fa-gear rotate-on-hover"></i></span>
+<div ng-show="advancedSettings">
+  <div class="right" style="text-align: right;">
+    <div><span graph-setting is-int="true" value="D3Params.charge" title="Charge"></span></div>
+    <div><span graph-setting is-int="true" value="D3Params.linkDistance" title="Link Distance"></span></div>
+  </div>
+</div>

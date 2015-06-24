@@ -1,0 +1,17 @@
+{
+  "layouts" : [
+    {
+      "name" : "Grid",
+      "template" : "templates/main_grid.html",
+      "grid" : [
+        {
+          "plugin" : "opendataNetwork",
+          "size" : [48, 25],
+          "position" : [4, 0],
+          "style" : { "overflow": "hidden"}
+        }
+      ]
+    }
+  ]
+}
+

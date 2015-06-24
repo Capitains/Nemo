@@ -1,0 +1,3301 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for js/arethusa.core/state.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../prettify.css">
+
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Helvetica Neue, Helvetica,Arial;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 10em;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Consolas, Menlo, Monaco, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 14px;
+            font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { text-decoration: none; color: #000; }
+        div.coverage-summary a:visited { text-decoration: none; color: #333; }
+        div.coverage-summary a:hover { text-decoration: underline; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: url("https://yui-s.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header medium">
+    <h1>Code coverage report for <span class="entity">js/arethusa.core/state.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">74.63% <small>(203 / 272)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">63.01% <small>(46 / 73)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">68.83% <small>(53 / 77)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">75.77% <small>(197 / 260)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../index.html">All files</a> &#187; <a href="index.html">js/arethusa.core/</a> &#187; state.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+825
+826
+827
+828
+829
+830
+831
+832
+833
+834
+835
+836
+837
+838
+839
+840
+841
+842
+843
+844
+845
+846
+847
+848
+849
+850
+851
+852
+853
+854
+855
+856
+857
+858
+859
+860
+861
+862
+863
+864
+865
+866
+867
+868
+869
+870
+871
+872
+873
+874
+875
+876
+877
+878
+879
+880
+881
+882
+883
+884
+885
+886
+887
+888
+889
+890
+891
+892
+893
+894
+895
+896
+897
+898
+899
+900
+901
+902
+903
+904
+905
+906
+907
+908
+909
+910
+911
+912
+913
+914
+915
+916
+917
+918
+919
+920
+921
+922
+923
+924
+925
+926
+927
+928
+929
+930
+931
+932
+933
+934
+935
+936
+937
+938
+939
+940
+941
+942
+943
+944
+945
+946
+947
+948
+949
+950
+951
+952
+953
+954
+955
+956
+957
+958
+959
+960
+961
+962
+963
+964
+965
+966
+967
+968
+969
+970
+971
+972
+973
+974
+975
+976
+977
+978
+979
+980
+981
+982
+983
+984
+985
+986
+987
+988
+989
+990
+991
+992
+993
+994</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">155</span>
+<span class="cline-any cline-yes">155</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">78</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">192</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">76</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">20</span>
+<span class="cline-any cline-yes">20</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">20</span>
+<span class="cline-any cline-yes">26</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">77</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">77</span>
+<span class="cline-any cline-yes">22</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">77</span>
+<span class="cline-any cline-yes">77</span>
+<span class="cline-any cline-yes">77</span>
+<span class="cline-any cline-yes">71</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">77</span>
+<span class="cline-any cline-yes">22</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">77</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">82</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">122</span>
+<span class="cline-any cline-yes">122</span>
+<span class="cline-any cline-yes">27</span>
+<span class="cline-any cline-yes">27</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">64</span>
+<span class="cline-any cline-yes">64</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">20</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">38</span>
+<span class="cline-any cline-yes">38</span>
+<span class="cline-any cline-yes">38</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">18</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">39</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">39</span>
+<span class="cline-any cline-yes">39</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">38</span>
+<span class="cline-any cline-yes">38</span>
+<span class="cline-any cline-yes">38</span>
+<span class="cline-any cline-yes">38</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">38</span>
+<span class="cline-any cline-yes">38</span>
+<span class="cline-any cline-yes">38</span>
+<span class="cline-any cline-yes">38</span>
+<span class="cline-any cline-yes">38</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">191</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">57</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+&nbsp;
+/**
+ * @ngdoc service
+ * @name arethusa.core.state
+ *
+ * @description
+ * One of Arethusa's key components, typically injected by every plugin.
+ *
+ * 1. Retrieves documents
+ * 2. Holds the current annotation targets - tokens - presented to the user
+ * 3. Handles selections of tokens
+ * 4. Provides an API to make changes to tokens, while notifying listeners
+ *    (e.g. {@link arethusa.core.state#methods_change state.change} and
+ *    {@link arethusa.core.state#methods_watch state.watch})
+ *
+ * Reads its configuration from the `main` section.
+ *
+ * @requires arethusa.core.configurator
+ * @requires arethusa.core.navigator
+ * @requires $rootScope
+ * @requires arethusa.core.documentStore
+ * @requires arethusa.core.keyCapture
+ * @requires arethusa.core.locator
+ * @requires arethusa.core.StateChange
+ * @requires arethusa.core.idHandler
+ * @requires arethusa.core.globalSettings
+ * @requires arethusa.util.logger
+ */
+&nbsp;
+angular.module('arethusa.core').service('state', [
+  'configurator',
+  'navigator',
+  '$rootScope',
+  'documentStore',
+  'keyCapture',
+  'locator',
+  'StateChange',
+  'idHandler',
+  'globalSettings',
+  'confirmationDialog',
+  'notifier',
+  'logger',
+  'DocumentResolver',
+  function (configurator, navigator, $rootScope, documentStore, keyCapture,
+            locator, StateChange, idHandler, globalSettings, confirmationDialog,
+            notifier, logger, DocumentResolver) {
+    var self = this;
+    var tokenRetrievers, resolver;
+&nbsp;
+    this.documents = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >      return documentStore.store;</span>
+    };
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function configure() {</span>
+<span class="cstat-no" title="statement not covered" >      self.conf = configurator.configurationFor('main');</span>
+<span class="cstat-no" title="statement not covered" >      tokenRetrievers = configurator.getRetrievers(self.conf.retrievers);</span>
+&nbsp;
+      // We start silent - during init we don't want to track events
+<span class="cstat-no" title="statement not covered" >      self.silent = true;</span>
+&nbsp;
+      // Listeners to changes might be interested in recording several
+      // little changes as one single step. Plugins can look at this var
+      // so that they can adjust accordingly.
+<span class="cstat-no" title="statement not covered" >      self.batchChange = false;</span>
+&nbsp;
+      // Cheap way of defining a debug mode
+<span class="cstat-no" title="statement not covered" >      self.debug = self.conf.debug;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      self.initServices();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      self.activeKeys = {};</span>
+<span class="cstat-no" title="statement not covered" >      var keys = keyCapture.initCaptures(<span class="fstat-no" title="function not covered" >function(kC) {</span></span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          selections: [
+            kC.create('nextToken', <span class="fstat-no" title="function not covered" >function() {</span> <span class="cstat-no" title="statement not covered" >kC.doRepeated(self.selectNextToken); </span>}, 'w'),
+            kC.create('prevToken', <span class="fstat-no" title="function not covered" >function() {</span> <span class="cstat-no" title="statement not covered" >kC.doRepeated(self.selectPrevToken); </span>}, 'e'),
+            kC.create('deselect', self.deselectAll, 'esc'),
+            kC.create('deselect-alternative', self.deselectAll, '↵')
+          ]
+        };
+      });
+<span class="cstat-no" title="statement not covered" >      angular.extend(self.activeKeys, keys.selections);</span>
+    }
+&nbsp;
+    // Exposed for easier testing
+    this.initServices = function() {
+      navigator.init();
+      globalSettings.init();
+    };
+&nbsp;
+    // We hold tokens locally during retrieval phase.
+    // Once we are done, they will be exposed through
+    // this.replaceState, which also triggers
+    // the stateLoaded event.
+    var tokens = {};
+&nbsp;
+    // Loading a state
+    // Premature optimization - we need something like that only when we start
+    // to act on several documents at once. For now we have only one retriever
+    // anyway...
+    //
+    //var saveTokens = function (container, tokens) {
+      //angular.forEach(tokens, function (token, id) {
+        //var updatedToken;
+        //var savedToken = container[id];
+        //if (savedToken) {
+          //updatedToken = angular.extend(savedToken, token);
+        //} else {
+          //updatedToken = token;
+        //}
+        //container[id] = token;
+      //});
+    //};
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function noRetrievers() {</span>
+<span class="cstat-no" title="statement not covered" >      return Object.keys(tokenRetrievers).length === 0;</span>
+    }
+&nbsp;
+    this.retrieveDocuments = retrieveDocuments;
+    this.retrieveTokens    = retrieveTokens;
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function retrieveDocuments(resolverConf) {</span>
+<span class="cstat-no" title="statement not covered" >      if (resolverConf) {</span>
+<span class="cstat-no" title="statement not covered" >        resolver = new DocumentResolver(resolverConf);</span>
+<span class="cstat-no" title="statement not covered" >        resolver.resolve(tokenRetrievers, onSuccessfulRetrievalFn);</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        retrieveTokens();</span>
+      }
+    }
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#retrieveTokens
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Tries to iterate over all available retrievers and gets documents
+     * from them.
+     *
+     */
+<span class="fstat-no" title="function not covered" >    function retrieveTokens() {</span>
+      //var container = {};
+<span class="cstat-no" title="statement not covered" >      navigator.reset();</span>
+<span class="cstat-no" title="statement not covered" >      self.deselectAll();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (noRetrievers()) {</span>
+<span class="cstat-no" title="statement not covered" >        self.checkLoadStatus();</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      angular.forEach(tokenRetrievers, <span class="fstat-no" title="function not covered" >function (retriever, name) {</span></span>
+<span class="cstat-no" title="statement not covered" >        retriever.get(onSuccessfulRetrievalFn(retriever));</span>
+      });
+      //tokens = container;
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function onSuccessfulRetrievalFn(retriever) {</span>
+<span class="cstat-no" title="statement not covered" >      return <span class="fstat-no" title="function not covered" >function onSuccessfulRetrieval(data) {</span></span>
+<span class="cstat-no" title="statement not covered" >          navigator.addSentences(data);</span>
+<span class="cstat-no" title="statement not covered" >          moveToSentence();</span>
+          // Check comment for saveTokens
+          //saveTokens(container, navigator.currentChunk());
+<span class="cstat-no" title="statement not covered" >          tokens = navigator.currentChunk();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          declarePreselections(retriever.preselections);</span>
+<span class="cstat-no" title="statement not covered" >          declareLoaded(retriever);</span>
+      };
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function getChunkParam() {</span>
+<span class="cstat-no" title="statement not covered" >      var param = self.conf.chunkParam;</span>
+<span class="cstat-no" title="statement not covered" >      if (param) <span class="cstat-no" title="statement not covered" >return locator.get(param);</span></span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function moveToSentence() {</span>
+<span class="cstat-no" title="statement not covered" >      var id = getChunkParam();</span>
+<span class="cstat-no" title="statement not covered" >      if (id) {</span>
+<span class="cstat-no" title="statement not covered" >        if (navigator.goTo(id)) {</span>
+<span class="cstat-no" title="statement not covered" >          return;</span>
+        }
+      }
+      // If goTo failed, we just update the id with the starting value 0
+<span class="cstat-no" title="statement not covered" >      navigator.updateId();</span>
+    }
+&nbsp;
+    this.checkLoadStatus = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >      var loaded = true;</span>
+<span class="cstat-no" title="statement not covered" >      angular.forEach(tokenRetrievers, <span class="fstat-no" title="function not covered" >function (el, name) {</span></span>
+<span class="cstat-no" title="statement not covered" >        loaded = loaded &amp;&amp; el.loaded;</span>
+      });
+<span class="cstat-no" title="statement not covered" >      if (loaded) {</span>
+<span class="cstat-no" title="statement not covered" >        var launch = <span class="fstat-no" title="function not covered" >function() {</span> <span class="cstat-no" title="statement not covered" >self.launched = true; <span class="cstat-no" title="statement not covered" ></span>self.replaceState(tokens, true); </span>};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (documentStore.hasAdditionalConfs()) {</span>
+          // launch when the promise is resolved OR rejected
+<span class="cstat-no" title="statement not covered" >          configurator.loadAdditionalConf(documentStore.confs)['finally'](launch);</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          launch();</span>
+        }
+      }
+    };
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function declarePreselections(ids) {</span>
+<span class="cstat-no" title="statement not covered" >      var chunkId = getChunkParam();</span>
+<span class="cstat-no" title="statement not covered" >      if (chunkId) {</span>
+<span class="cstat-no" title="statement not covered" >        var paddedIds = arethusaUtil.map(ids, <span class="fstat-no" title="function not covered" >function(id) {</span></span>
+<span class="cstat-no" title="statement not covered" >          return idHandler.padIdWithSId(id, chunkId);</span>
+        });
+<span class="cstat-no" title="statement not covered" >        selectMultipleTokens(paddedIds);</span>
+      }
+    }
+&nbsp;
+    var declareLoaded = <span class="fstat-no" title="function not covered" >function (retriever) {</span>
+<span class="cstat-no" title="statement not covered" >      retriever.loaded = true;</span>
+<span class="cstat-no" title="statement not covered" >      self.checkLoadStatus();</span>
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#asString
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Controlled access to the string of a token.
+     *
+     * @param {String} id Id of a token
+     * @returns {String} The token string
+     */
+    this.asString = function (id) {
+      return (self.getToken(id) || <span class="branch-1 cbranch-no" title="branch not covered" >{})</span>.string;
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#getToken
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Retrieves a Token object by id. Use this instead of accessing
+     * {@link arethusa.core.state#properties_tokens state.tokens} directly.
+     *
+     * @param {String} id Id of a token
+     * @returns {Token} A Token object
+     */
+    this.getToken = function (id) {
+      return self.tokens[id] || {};
+    };
+&nbsp;
+    /**
+     * @ngdoc property
+     * @name selectedTokens
+     * @propertyOf arethusa.core.state
+     *
+     * @description
+     * Stores the currently selected tokens
+     *
+     * A dictionary of `ids` and their `selectionType`,
+     * which is either `hover`, `click` or `ctrl-click` (which
+     * indicates a multi-selection).
+     */
+    this.selectedTokens = {};
+&nbsp;
+    /**
+     * @ngdoc property
+     * @name clickedTokens
+     * @propertyOf arethusa.core.state
+     *
+     * @description
+     * Store of the currently clicked tokens
+     *
+     * Differs from {@link arethusa.core.state#properties_selectedTokens}
+     * as no `hover` selections are recorded.
+     *
+     * TODO Need to expose the tokens directly here as values. Document
+     * this behavior then.
+     */
+    this.clickedTokens  = {};
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#hasSelections
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     *
+     * @returns {Integer} Number of selected tokens - 0 is a falsy value.
+     */
+    this.hasSelections = function() {
+      return Object.keys(self.selectedTokens).length !== 0;
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#hasClickSelections
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * @returns {Integer} Number of clicked tokens - 0 is a falsy value.
+     */
+    this.hasClickSelections = function() {
+      return Object.keys(self.clickedTokens).length;
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#isSelected
+     * @methodOf arethusa.core.state
+     *
+     * @param {String} id Id of a token
+     * @returns {Boolean} Whether a token is selected or not
+     */
+    this.isSelected = function(id) {
+      return id in this.selectedTokens;
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#isClicked
+     * @methodOf arethusa.core.state
+     *
+     * @param {String} id Id of a token
+     * @returns {Boolean} Whether a token is clicked or not
+     */
+    this.isClicked = function(id) {
+      return id in this.clickedTokens;
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#multiSelect
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Function to multi-select tokens efficiently
+     *
+     * @param {Array} ids Array token ids which should be multi-selected
+     */
+    this.multiSelect = function(ids) {
+      self.deselectAll();
+      selectMultipleTokens(ids);
+    };
+&nbsp;
+    function selectMultipleTokens(ids) {
+      angular.forEach(ids, function (id, i) {
+        self.selectToken(id, 'ctrl-click');
+      });
+    }
+&nbsp;
+    function isSelectable(oldVal, newVal) {
+      // if an element was hovered, we only select it when another
+      // selection type is present (such as 'click'), if there was
+      // no selection at all (oldVal === undefined), we select too
+      return oldVal === 'hover' &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >newVal !== 'hover' </span>|| !oldVal;
+    }
+&nbsp;
+    // type should be either 'click', 'ctrl-click' or 'hover'
+    var simpleToMultiSelect;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#selectToken
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Function to select a token in a controlled way
+     *
+     * @param {String} id Id of a token
+     * @param {String} type The selection type. Either `hover`, `click` or
+     *   `ctrl-click`
+     */
+    this.selectToken = function (id, type) {
+      if (type === 'click') {
+        self.deselectAll();
+      }
+&nbsp;
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (isSelectable(self.selectionType(id), type)) {
+        self.selectedTokens[id] = type;
+        if (type !== 'hover') {
+          self.clickedTokens[id] = type;
+        }
+        // If a token is selected by a simple click and the next one is
+        // selected by a ctrl-click, we want to transform the first click
+        // type also to ctrl-click, so that deselections through holding
+        // down the ctrl-key work properly.
+        if (type === 'click') {
+          simpleToMultiSelect = function() {
+            self.selectedTokens[id] = self.clickedTokens[id] = 'ctrl-click';
+          };
+        }
+        if (type === 'ctrl-click' &amp;&amp; simpleToMultiSelect) {
+          simpleToMultiSelect();
+          simpleToMultiSelect = undefined;
+        }
+      }
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#selectionType
+     * @methodOf arethusa.core.state
+     *
+     * @param {String} id Id of a token
+     * @returns {String} The current selection type. Either `hover`, `click`
+     *   or `ctrl-click`. Returns `undefined` when the token is not selected
+     *   at atll.
+     */
+    this.selectionType = function (id) {
+      return self.selectedTokens[id];
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#deselectToken
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Function to deselect a token in a controlled way
+     *
+     * @param {String} id Id of a token
+     * @param {String} type The selection type. This is important to
+     *   determine whether a token can really be deselected at this point,
+     *   e.g. a deselect call for a `hover` selection shall not deselect a
+     *   token that was `click`ed.
+     */
+    this.deselectToken = function (id, type) {
+      // only deselect when the old selection type is the same as
+      // the argument, i.e. a hover selection can only deselect a
+      // hover selection, but not a click selection
+      if (self.selectionType(id) === type) {
+        delete self.selectedTokens[id];
+        delete self.clickedTokens[id];
+      }
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#toggleSelection
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Toggle the selection state of a token
+     *
+     * Either calls {@link arethusa.core.state#methods_selectToken} or
+     * {@link arethusa.core.state#methods_deselectToken}
+     *
+     * @param {String} id Id of a token
+     * @param {String} type The selection type to toggle
+     */
+    this.toggleSelection = function (id, type) {
+      // only deselect when the selectionType is the same.
+      // a hovered selection can still be selected by click.
+      if (this.isSelected(id) &amp;&amp; this.selectionType(id) == type) {
+        this.deselectToken(id, type);
+      } else {
+        this.selectToken(id, type);
+      }
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#deselectAll
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Function to deselct all tokens, no matter their selection type.
+     */
+    this.deselectAll = function () {
+      simpleToMultiSelect = undefined;
+      for (var el in self.selectedTokens) {
+        delete self.selectedTokens[el];
+        delete self.clickedTokens[el];
+      }
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#firstSelected
+     * @methodOf arethusa.core.state
+     *
+     * @returns {Token} The first selected token of the current chunk.
+     *   Returns `undefined` when no selection is present.
+     */
+    this.firstSelected = function() {
+      return Object.keys(self.selectedTokens)[0];
+    };
+&nbsp;
+    function selectSurroundingToken(direction) {
+      // take the first current selection
+      var firstId = self.firstSelected();
+      var allIds = Object.keys(self.tokens);
+      var index = allIds.indexOf(firstId);
+      // select newId - make a roundtrip if we reached the bounds of the array
+      var newId;
+      switch (direction) {
+      case 'next':
+        newId = allIds[index + 1] || allIds[0];
+        break;
+      case 'prev':
+        newId = allIds[index - 1] || allIds[allIds.length - 1];
+        break;
+      }
+      // deselect all previously selected tokens
+      self.deselectAll();
+      // and select the new one
+      self.selectToken(newId, 'click');
+    }
+&nbsp;
+    this.selectNextToken = function () {
+      selectSurroundingToken('next');
+    };
+    this.selectPrevToken = function () {
+      selectSurroundingToken('prev');
+    };
+&nbsp;
+    this.toTokenStrings = <span class="fstat-no" title="function not covered" >function(ids) {</span>
+<span class="cstat-no" title="statement not covered" >      var nonSequentials = idHandler.nonSequentialIds(ids);</span>
+<span class="cstat-no" title="statement not covered" >      var res = [];</span>
+<span class="cstat-no" title="statement not covered" >      angular.forEach(ids, <span class="fstat-no" title="function not covered" >function(id, i) {</span></span>
+<span class="cstat-no" title="statement not covered" >        res.push(self.asString(id));</span>
+<span class="cstat-no" title="statement not covered" >        if (nonSequentials[i]) <span class="cstat-no" title="statement not covered" >res.push('...');</span></span>
+      });
+<span class="cstat-no" title="statement not covered" >      return res.join(' ');</span>
+    };
+&nbsp;
+&nbsp;
+    // DEPRECATED
+    this.setState = function (id, category, val) {
+      logger.log('state.setState is DEPRECATED. Use state.change() instead.');
+      var token = self.tokens[id];
+      // We're covering up for diffs - review is the only plugin still using
+      // this - of artificialTokens, where ids might not match.
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (!token) <span class="cstat-no" title="statement not covered" >return;</span>
+      var oldVal = token[category];
+      token[category] = val;
+    };
+&nbsp;
+    this.unsetState = function (id, category) {
+      var token = self.tokens[id];
+      var oldVal = token[category];
+      delete token[category];
+    };
+&nbsp;
+    this.replaceState = function (tokens, keepSelections) {
+      // We have to wrap this as there might be watchers on allLoaded,
+      // such as the MainCtrl which has to reinit all plugins when the
+      // state tokens are replaced
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (!keepSelections) self.deselectAll();
+      self.tokens = tokens;
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (self.launched) <span class="cstat-no" title="statement not covered" >self.broadcast('stateLoaded');</span>
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#setStyle
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Sets the style of a token. When the token already has a styling,
+     * this function will override all former information.
+     *
+     * @param {String} id Id of a token
+     * @param {Object} style Dictionary of CSS styles, e.g.
+     *   `{ color: 'red' }`
+     */
+    this.setStyle = function (id, style) {
+      self.getToken(id).style = style;
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#unsetStyle
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Removes all styling information of a token
+     *
+     * @param {String} id Id of a token
+     */
+    this.unsetStyle = function (id) {
+      self.getToken(id).style = {};
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#addStyle
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Adds style information to a token. Already set stylings are not
+     * overriden, but merging rules apply.
+     *
+     * Given a current token style of
+     *
+     * ```
+     * {
+     *   'color': 'blue',
+     *   'font-style': 'italic'
+     * }
+     * ```
+     *
+     * calling
+     *
+     * ```
+     * state.addStyle(id, {
+     *   'color': 'red',
+     *   'text-decoration': 'underline'
+     * });
+     * ```
+     *
+     * will result in a token style of
+     *
+     * ```
+     * {
+     *   'color': 'red',
+     *   'font-style': 'italic'
+     *   'text-decoration': 'underline'
+     * }
+     *
+     * @param {String} id Id of a token
+     * @param {Object} style Dictionary of CSS styles, e.g.
+     *   `{ color: 'red' }`
+     */
+    this.addStyle = function(id, style) {
+      var token = self.getToken(id);
+      if (!token.style) {
+        token.style = {};
+      }
+      angular.extend(token.style, style);
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#removeStyle
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Removes one or several stylings of a token
+     *
+     * @param {String} id Id of a token
+     * @param {String|Array} style Either a single CSS property or an
+     *   Array of CSS properties to remove from the token's styling
+     */
+    this.removeStyle = function(id, style) {
+      var tokenStyle = self.getToken(id).style;
+      if (! tokenStyle) return;
+&nbsp;
+      var styles = arethusaUtil.toAry(style);
+      angular.forEach(styles, function(style, i) {
+        delete tokenStyle[style];
+      });
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#unapplyStylings
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Remove stylings of all current
+     * {@link arethusa.core.state#properties_tokens tokens}
+     */
+    this.unapplyStylings = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >      angular.forEach(self.tokens, <span class="fstat-no" title="function not covered" >function(token, id) {</span></span>
+<span class="cstat-no" title="statement not covered" >        self.unsetStyle(id);</span>
+      });
+    };
+&nbsp;
+&nbsp;
+    this.addStatusObjects = function () {
+      angular.forEach(self.tokens, addStatus);
+    };
+&nbsp;
+    function addStatus(token) {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (! token.status) {
+        token.status = {};
+      }
+    }
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#countTotalTokens
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Counts the total number of currently present tokens
+     *
+     * @returns {Integer} Number of tokens
+     */
+    this.countTotalTokens = function () {
+      self.totalTokens = Object.keys(self.tokens).length;
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#countTokens
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Counts the number of currently present tokens, for which
+     * a given function returns a truthy value.
+     *
+     * @param {Function} condition A function that takes a token. Has to
+     *   return a truthy or falsy value
+     * @returns {Integer} Number of tokens for which the condition is truthy
+     */
+    this.countTokens = function (conditionFn) {
+      var count = 0;
+      angular.forEach(self.tokens, function (token, id) {
+        if (conditionFn(token)) {
+          count++;
+        }
+      });
+      return count;
+    };
+&nbsp;
+    this.addToken = function(token, id) {
+      self.tokens[id] = token;
+      addStatus(token);
+      navigator.addToken(token);
+      self.countTotalTokens();
+      self.broadcast('tokenAdded', token);
+    };
+&nbsp;
+    this.removeToken = function(id) {
+      var token = self.getToken(id);
+      // We translate this a little later - waiting for a pending
+      // change in the translator which allows to give context.
+      var msg = 'Do you really want to remove ' + token.string + '?';
+      confirmationDialog.ask(msg).then((function() {
+        // broadcast before we actually delete, in case a plugin needs access
+        // during the cleanup process
+        self.doBatched(function() {
+          self.broadcast('tokenRemoved', token);
+          delete self.tokens[id];
+        });
+        navigator.removeToken(token);
+        idHandler.unassignSourceId(token);
+        notifier.success(token.string + ' removed!');
+        self.deselectAll();
+        self.countTotalTokens();
+      }));
+    };
+&nbsp;
+    this.lazyChange = function(tokenOrId, property, newVal, undoFn, preExecFn) {
+      return new StateChange(self, tokenOrId, property, newVal, undoFn, preExecFn);
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#change
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Sets the property of a token to a new value.
+     *
+     * **ALWAYS** use this function when you want to make changes to a `token`.
+     * While it is possible to access all properties of a `token` - and therefore
+     * also the assign them to a new value - you should **NEVER** do this manually.
+     *
+     * By using this function you guarantee a proper event flow. The change itself
+     * is done through an {@link arethusa.core.StateChange StateChange} object,
+     * which notifies all listeners registered through {@link arethusa.core.state#methods_watch state.watch}
+     * and also broadcasts a `tokenChange` event.
+     *
+     * Communicates with {@link arethusa.core.globalSettings#method_shouldDeselect globalSettings.shouldDeselect}
+     * to determine whether all selections should be negated or not.
+     *
+     * @param {Token|String} tokenOrId Token or the id of a token to execute a
+     *   change on
+     * @param {String} property Path to the property which needs to be changed,
+     *   e.g. `'head.id'`
+     * @param {*} newVal The new value set during this change
+     * @param {Function} [undoFn] Optional custom function to undo the change.
+     *   Defaults to a simple inversion - i.e. setting the `property` back to
+     *   the old value.
+     * @param {Function} [preExecFn] Optional function to be executed right
+     *   before a change is happening, i.e. the `property` is set to the `newVal`
+     *   during the execution of {@link arethusa.core.StateChange StateChange}.exec
+     *
+     * @returns {StateChange} Returns a {@link arethusa.core.StateChange StateChange}
+     *   event object
+     *
+     */
+    this.change = function(tokenOrId, property, newVal, undoFn, preExecFn) {
+      var event = self.lazyChange(tokenOrId, property, newVal, undoFn, preExecFn);
+      if (globalSettings.shouldDeselect(property)) self.deselectAll();
+      return event.exec();
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#notifyWatchers
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Triggers all callbacks of listeners registerd through
+     * {@link arethusa.core.state#methods_watch state.watch}.
+     *
+     * Which listeners are triggered is determined by the given event.
+     *
+     * This function is usually not meant to be triggered manually - a
+     * {@link arethusa.core.StateChange StateChange}'s `exec` function
+     * will do this automatically.
+     *
+     * @param {StateChange} event A {@link arethusa.core.StateChange StateChange}
+     *   event object
+     */
+    this.notifyWatchers = function(event) {
+      function execWatch(watch) { watch.exec(event.newVal, event.oldVal, event); }
+&nbsp;
+      var watchers = changeWatchers[event.property] || [];
+&nbsp;
+      angular.forEach(watchers, execWatch);
+      angular.forEach(changeWatchers['*'], execWatch);
+    };
+&nbsp;
+&nbsp;
+    var changeWatchers = { '*' : [] };
+&nbsp;
+    function EventWatch(event, fn, destroyFn, watchers) {
+      var self = this;
+      this.event = event;
+      this.exec = fn;
+      this.destroy = function() {
+        if (destroyFn) destroyFn();
+        watchers.splice(watchers.indexOf(self), 1);
+      };
+    }
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#watch
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Registers a `listener` callback executed whenever a
+     * {@link arethusa.core.state#methods_change state.change} with a matching
+     * event is called.
+     *
+     * @param {String} event Name of the change event to listen to - meant to
+     *   be the path of a property on a token object (e.g. `'head.id'`).
+     *
+     *   The special param `'*'` can be passed to listen to all change events.
+     *
+     * @param {Function} fn Callback to be executed when a change has happened.
+     *
+     *   Three arguments are passed to this function
+     *
+     *   1. the new value
+     *   2. the old value
+     *   3. a {@link arethusa.core.StateChange StateChange} event object
+     *
+     * @param {Function} [destroyFn] Optional callback executed when the
+     *   listener is deregistered.
+     *
+     * @returns {Function} Deregisters the listener when executed.
+     *
+     */
+    this.watch = function(event, fn, destroyFn) {
+      var watchers = changeWatchers[event];
+      if (!watchers) watchers = changeWatchers[event] = [];
+      var watch = new EventWatch(event, fn, destroyFn, watchers);
+      watchers.push(watch);
+      return watch.destroy;
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#on
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Delegates to `$rootScope.$on`. This is convenient when a plugin
+     * needs to send such an event, without a having to inject `$rootScope`
+     * directly.
+     *
+     * @param {String} event The eventname
+     * @param {Function} fn Callback function
+     *
+     */
+    this.on = function(event, fn) {
+      $rootScope.$on(event, fn);
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#broadcast
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Delegates to `$rootScope.$broadcast`. This is convenient when a plugin
+     * needs to send such an event, without a having to inject `$rootScope`
+     * directly.
+     *
+     * @param {String} event The eventname
+     * @param {*} [arg] Optional argument transmitted alongside the event
+     */
+    this.broadcast = function(event, arg) {
+      $rootScope.$broadcast(event, arg);
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#doSilent
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Calls a function in `silent` mode. No events are broadcasted and no
+     * listeners notified upon changes (typically firing through a call of
+     * {@link arethusa.core.state#methods_change state.change}) made during it.
+     *
+     * @param {Function} fn Function to call during `silent` mode
+     *
+     */
+    this.doSilent = function(fn) {
+      self.silent = true;
+      fn();
+      self.silent = false;
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#doBatched
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Calls a function in `batchChange` mode. All change events (typically
+     * done through {@link arethusa.core.state#methods_change state.change}) firing
+     * during this mode will be collected and broadcasted as a single event.
+     *
+     * This is especially helpful when we want to undo a multi-change action in
+     * a single step.
+     *
+     * @param {Function} fn Function to call during `batchChange` mode
+     *
+     */
+    this.doBatched = function(fn) {
+      self.batchChangeStart();
+      fn();
+      self.batchChangeStop();
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#batchChangeStart
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Activates `batchChange` mode.
+     *
+     * Typically called during the execution of {@link arethusa.core.state#methods_doBatched state.doBatched}.
+     *
+     */
+    this.batchChangeStart = function() {
+      self.batchChange = true;
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#batchChangeStop
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Deactivates `batchChange` mode and broadcasts the `batchChangeStop` event.
+     *
+     * Typically called during the execution of {@link arethusa.core.state#methods_doBatched state.doBatched}.
+     *
+     */
+    this.batchChangeStop = function() {
+      self.batchChange = false;
+      self.broadcast('batchChangeStop');
+    };
+&nbsp;
+    this.postInit = function () {
+      self.addStatusObjects();
+      self.countTotalTokens();
+    };
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name arethusa.core.state#init
+     * @methodOf arethusa.core.state
+     *
+     * @description
+     * Configures the service and starts the document retrieval process.
+     *
+     */
+    this.init = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >      configure();</span>
+<span class="cstat-no" title="statement not covered" >      retrieveDocuments(self.conf.resolver);</span>
+    };
+  }
+]);
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue May 12 2015 11:20:41 GMT+0200 (CEST)</div>
+</div>
+
+<script src="../../prettify.js"></script>
+
+<script src="https://yui-s.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script>
+
+    YUI().use('datatable', function (Y) {
+
+        var formatters = {
+          pct: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              try {
+                  return o.value.toFixed(2) + '%';
+              } catch (ex) { return o.value + '%'; }
+          },
+          html: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.record.get(o.column.key + '_html');
+          }
+        },
+          defaultFormatter = function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.value;
+          };
+
+        function getColumns(theadNode) {
+            var colNodes = theadNode.all('tr th'),
+                cols = [],
+                col;
+            colNodes.each(function (colNode) {
+                col = {
+                    key: colNode.getAttribute('data-col'),
+                    label: colNode.get('innerHTML') || ' ',
+                    sortable: !colNode.getAttribute('data-nosort'),
+                    className: colNode.getAttribute('class'),
+                    type: colNode.getAttribute('data-type'),
+                    allowHTML: colNode.getAttribute('data-html') === 'true' || colNode.getAttribute('data-fmt') === 'html'
+                };
+                col.formatter = formatters[colNode.getAttribute('data-fmt')] || defaultFormatter;
+                cols.push(col);
+            });
+            return cols;
+        }
+
+        function getRowData(trNode, cols) {
+            var tdNodes = trNode.all('td'),
+                    i,
+                    row = { classes: {} },
+                    node,
+                    name;
+            for (i = 0; i < cols.length; i += 1) {
+                name = cols[i].key;
+                node = tdNodes.item(i);
+                row[name] = node.getAttribute('data-value') || node.get('innerHTML');
+                row[name + '_html'] = node.get('innerHTML');
+                row.classes[name] = node.getAttribute('class');
+                //Y.log('Name: ' + name + '; Value: ' + row[name]);
+                if (cols[i].type === 'number') { row[name] = row[name] * 1; }
+            }
+            //Y.log(row);
+            return row;
+        }
+
+        function getData(tbodyNode, cols) {
+            var data = [];
+            tbodyNode.all('tr').each(function (trNode) {
+                data.push(getRowData(trNode, cols));
+            });
+            return data;
+        }
+
+        function replaceTable(node) {
+            if (!node) { return; }
+            var cols = getColumns(node.one('thead')),
+                data = getData(node.one('tbody'), cols),
+                table,
+                parent = node.get('parentNode');
+
+            table = new Y.DataTable({
+                columns: cols,
+                data: data,
+                sortBy: 'file'
+            });
+            parent.set('innerHTML', '');
+            table.render(parent);
+        }
+
+        Y.on('domready', function () {
+            replaceTable(Y.one('div.coverage-summary table'));
+            if (typeof prettyPrint === 'function') {
+                prettyPrint();
+            }
+        });
+    });
+</script>
+</body>
+</html>

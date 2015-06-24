@@ -40,7 +40,7 @@ function writeFile(req, res, addPath, ending) {
   req.on('end', function() {
     var p = docPath(req, addPath, ending);
     mkdirp(path.basename(p), function() {
-      fs.writeFile(path, prettify(doc, req), function() { res.end(); });
+      fs.writeFile(p, prettify(doc, req), function() { res.end(); });
     });
   });
 }
@@ -62,6 +62,7 @@ var exampleFileRoutes = {
   'translations': 'json',
   'tei' : 'xml',
   'oa' : 'json',
+  'snapdrgn' : 'json',
 
   'treebanks/phaidra': 'json',
   'translations/phaidra': 'json'

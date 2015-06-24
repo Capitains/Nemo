@@ -1,0 +1,2881 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for js/arethusa.core/tree.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../prettify.css">
+
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Helvetica Neue, Helvetica,Arial;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 10em;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Consolas, Menlo, Monaco, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 14px;
+            font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { text-decoration: none; color: #000; }
+        div.coverage-summary a:visited { text-decoration: none; color: #333; }
+        div.coverage-summary a:hover { text-decoration: underline; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: url("https://yui-s.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">js/arethusa.core/tree.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">18.07% <small>(75 / 415)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 96)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 119)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">18.84% <small>(75 / 398)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../index.html">All files</a> &#187; <a href="index.html">js/arethusa.core/</a> &#187; tree.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+825
+826
+827
+828
+829
+830
+831
+832
+833
+834
+835
+836
+837
+838
+839
+840
+841
+842
+843
+844
+845
+846
+847
+848
+849
+850
+851
+852
+853
+854</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+&nbsp;
+/* global dagreD3 */
+angular.module('arethusa.core').factory('Tree', [
+  '$compile',
+  'languageSettings',
+  'keyCapture',
+  'idHandler',
+  '$window',
+  'state',
+  '$timeout',
+  'translator',
+  'plugins',
+  'navigator',
+<span class="fstat-no" title="function not covered" >  function ($compile, languageSettings, keyCapture, idHandler, $window,</span>
+            state, $timeout, translator, plugins, navigator) {
+<span class="cstat-no" title="statement not covered" >    return <span class="fstat-no" title="function not covered" >function(scope, element, conf) {</span></span>
+<span class="cstat-no" title="statement not covered" >      var self = this;</span>
+&nbsp;
+      // General margin value so that trees don't touch the canvas border.
+<span class="cstat-no" title="statement not covered" >      var treeMargin = 15;</span>
+&nbsp;
+      // We don't use a template in this directive on purpose and
+      // append our tree to the element. This way a view can create
+      // wrapping elements around the tree, where information about
+      // the tree can be displayed. This space is also the place
+      // where the tree settings can be triggered.
+      //
+      // It's imperative that appending the svg is the first action
+      // inside this directive, otherwise it would fail: The link
+      // function already works with this element - so it needs to be
+      // there before any other computations can be made.
+      //
+      // The svg element is held in a variable. This is one step closer
+      // to create independent subtrees (as individual g elements)!
+<span class="cstat-no" title="statement not covered" >      var treeTemplate = '\</span>
+        &lt;svg class="full-height full-width"&gt;\
+          &lt;g transform="translate(' + treeMargin + ',' + treeMargin + ')"/&gt;\
+        &lt;/svg&gt;\
+      ';
+<span class="cstat-no" title="statement not covered" >      var tree = angular.element(treeTemplate);</span>
+&nbsp;
+      // Common duration for all transitions of the graph
+<span class="cstat-no" title="statement not covered" >      var transitionDuration = 700;</span>
+&nbsp;
+&nbsp;
+      // Values for the synthetic root node on top of the dependency tree
+<span class="cstat-no" title="statement not covered" >      var rootText = "[ROOT]";</span>
+<span class="cstat-no" title="statement not covered" >      var rootId;</span>
+&nbsp;
+      // This function will be used to store special function that can move
+      // and resize the tree, such as a perfectWidth mode. If this function
+      // is set resize events of the window or direction changes of the tree
+      // will trigger it.
+<span class="cstat-no" title="statement not covered" >      var viewModeFn;</span>
+&nbsp;
+      // Will contain the dagreD3 graph, including all nodes, edges and label.
+<span class="cstat-no" title="statement not covered" >      this.g = undefined;</span>
+&nbsp;
+      // The g element contained in the svg canvas.
+<span class="cstat-no" title="statement not covered" >      this.vis = undefined;</span>
+&nbsp;
+      // The svg itself.
+<span class="cstat-no" title="statement not covered" >      var svg = d3.select(element[0]);</span>
+&nbsp;
+      // Introspective variables about the tree canvas
+<span class="cstat-no" title="statement not covered" >      var height, width, xCenter, yCenter;</span>
+&nbsp;
+      // d3 object responsible for zooming and dragging
+<span class="cstat-no" title="statement not covered" >      var zoomer = d3.behavior.zoom();</span>
+&nbsp;
+      // Register listener for zooming and dragging.
+      //
+      // Add scale boundaries so that a user cannot go to unreasonable
+      // zoom levels.
+<span class="cstat-no" title="statement not covered" >      svg.call(zoomer.on('zoom', zoomAndDrag).scaleExtent([0.3, 2.5]));</span>
+&nbsp;
+      // Zoom and Drag function
+      //
+      // Unsets viewModeFn: When a user wants to a focus on a particular area
+      // we don't want to use automatic resizings and movements.
+<span class="fstat-no" title="function not covered" >      function zoomAndDrag() {</span>
+<span class="cstat-no" title="statement not covered" >        unsetViewModeFn();</span>
+<span class="cstat-no" title="statement not covered" >        var ev, val;</span>
+<span class="cstat-no" title="statement not covered" >        ev  = d3.event;</span>
+<span class="cstat-no" title="statement not covered" >        val = 'translate(' + ev.translate + ') scale(' + ev.scale + ')';</span>
+<span class="cstat-no" title="statement not covered" >        self.vis.attr('transform', val);</span>
+      }
+&nbsp;
+      // dagre renderer
+<span class="cstat-no" title="statement not covered" >      var renderer = new dagreD3.Renderer();</span>
+&nbsp;
+      // Use transitions for all movements inside the graph
+<span class="cstat-no" title="statement not covered" >      renderer.transition(<span class="fstat-no" title="function not covered" >function(selection) {</span></span>
+<span class="cstat-no" title="statement not covered" >        return selection.transition().duration(transitionDuration);</span>
+      });
+&nbsp;
+      // control variable for show/hide status of the tree's settings panel
+<span class="cstat-no" title="statement not covered" >      scope.settingsOn = false;</span>
+&nbsp;
+&nbsp;
+      // Templates to be compiled in the course of this directive
+<span class="fstat-no" title="function not covered" >      function rootTokenHtml() {</span>
+<span class="cstat-no" title="statement not covered" >        return '&lt;span root-token root-id="' + rootId + '" sentence-id="' + inferSentenceId() + '"&gt;' +</span>
+          rootText +
+        '&lt;/span&gt;';
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var tokenHtml = '\</span>
+        &lt;span token="token"\
+          style="white-space: nowrap"\
+          class="no-transition"\
+          colorize="STYLE"\
+          click="true"\
+          hover="true"/&gt;\
+      ';
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var edgeLabelTemplate = '\</span>
+        &lt;span\
+         value-watch\
+         target="obj"\
+         property="label"\
+         empty-val="NIL"/&gt;\
+      ';
+&nbsp;
+      // Templates driven out to their own files
+<span class="fstat-no" title="function not covered" >      function templatePath(name) {</span>
+<span class="cstat-no" title="statement not covered" >        return "templates/arethusa.dep_tree/" + name + ".html";</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function prependTemplate(template) {</span>
+<span class="cstat-no" title="statement not covered" >        var el = '&lt;span class="right" ng-include="' + template + '"/&gt;';</span>
+<span class="cstat-no" title="statement not covered" >        angular.element(element[0].previousElementSibling).append($compile(el)(scope));</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      scope.panelTemplate = templatePath('settings');</span>
+&nbsp;
+&nbsp;
+      // Placeholder values during the intial drawing phase of the tree.
+      // They will get replaced by fully functional directives afterwards.
+      //
+      // Needed so that properly sized boxed inside the graph are accessible.
+<span class="fstat-no" title="function not covered" >      function rootPlaceholder() {</span>
+<span class="cstat-no" title="statement not covered" >        return '&lt;div id="tph' + rootId + '"&gt;' + rootText + '&lt;/div&gt;';</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function tokenPlaceholder(token) {</span>
+<span class="cstat-no" title="statement not covered" >        return '&lt;div class="node token-node" id="tph' + token.id + '"&gt;' + token.string + '&lt;/div&gt;';</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function labelPlaceholder(token) {</span>
+<span class="cstat-no" title="statement not covered" >        var label = 'xxxxxxxxxxx';</span>
+<span class="cstat-no" title="statement not covered" >        var id = token.id;</span>
+<span class="cstat-no" title="statement not covered" >        var classes = 'text-center tree-label';</span>
+<span class="cstat-no" title="statement not covered" >        return '&lt;div id="' + labelId(id) + '" class="' + classes + '"&gt;' + label + '&lt;/div&gt;';</span>
+      }
+&nbsp;
+      // Compile functions
+      //
+      // Their return values will be inserted into
+      // the tree and replace the placeholders.
+<span class="fstat-no" title="function not covered" >      function compiledEdgeLabel(token) {</span>
+<span class="cstat-no" title="statement not covered" >        var childScope = scope.$new();</span>
+<span class="cstat-no" title="statement not covered" >        self.childScopes.push(childScope);</span>
+<span class="cstat-no" title="statement not covered" >        childScope.obj = token.relation;</span>
+<span class="cstat-no" title="statement not covered" >        return $compile(edgeLabelTemplate)(childScope)[0];</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function compiledToken(token) {</span>
+<span class="cstat-no" title="statement not covered" >        var childScope = scope.$new();</span>
+<span class="cstat-no" title="statement not covered" >        self.childScopes.push(childScope);</span>
+<span class="cstat-no" title="statement not covered" >        childScope.token = token;</span>
+        // Ugly but working...
+        // We replace the colorize value in our token template string.
+        // If custom styles are given, we check if one is available for
+        // this token. If yes, we use it, otherwise we just pass one
+        // undefined which leaves the token unstyled.
+        //
+        // Without custom styles we let the token itself decide what color
+        // it has.
+<span class="cstat-no" title="statement not covered" >        var style;</span>
+<span class="cstat-no" title="statement not covered" >        if (scope.styles) {</span>
+<span class="cstat-no" title="statement not covered" >          if (tokenHasCustomStyling(token)) {</span>
+<span class="cstat-no" title="statement not covered" >            applyTokenStyling(childScope, token);</span>
+          }
+          // else we just stay undefined
+<span class="cstat-no" title="statement not covered" >          style = 'style';</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          style = 'true';</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return $compile(tokenHtml.replace('STYLE', style))(childScope)[0];</span>
+      }
+&nbsp;
+      // Styling functions
+      // Responsible for formatting edges with a custom styling
+      //
+      // If an edge style is overridden, we safe the old value in the
+      // styleResets object. the resetEdgeStyling() function will now
+      // how to operate with this then.
+<span class="fstat-no" title="function not covered" >      function tokenHasCustomStyling(token) {</span>
+<span class="cstat-no" title="statement not covered" >        var t = scope.styles[token.id] || {};</span>
+<span class="cstat-no" title="statement not covered" >        return t.token;</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function applyTokenStyling(childScope, token) {</span>
+<span class="cstat-no" title="statement not covered" >        childScope.style = scope.styles[token.id].token;</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var edgeStyleResets = {};</span>
+<span class="cstat-no" title="statement not covered" >      var labelStyleResets = {};</span>
+<span class="fstat-no" title="function not covered" >      function applyCustomStyling() {</span>
+<span class="cstat-no" title="statement not covered" >        var edges = self.vis.selectAll('g.edgePath path');</span>
+<span class="cstat-no" title="statement not covered" >        angular.forEach(scope.styles, <span class="fstat-no" title="function not covered" >function (style, id) {</span></span>
+<span class="cstat-no" title="statement not covered" >          var labelStyle = style.label;</span>
+<span class="cstat-no" title="statement not covered" >          var edgeStyle = style.edge;</span>
+<span class="cstat-no" title="statement not covered" >          if (labelStyle) {</span>
+<span class="cstat-no" title="statement not covered" >            saveOldStyles(id, label(id), labelStyle, labelStyleResets);</span>
+<span class="cstat-no" title="statement not covered" >            label(id).style(labelStyle);</span>
+          }
+<span class="cstat-no" title="statement not covered" >          if (edgeStyle) {</span>
+<span class="cstat-no" title="statement not covered" >            saveOldStyles(id, edge(id), edgeStyle, edgeStyleResets);</span>
+<span class="cstat-no" title="statement not covered" >            edge(id).style(edgeStyle);</span>
+          }
+        });
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function saveOldStyles(id, el, properties, resets) {</span>
+<span class="cstat-no" title="statement not covered" >        if (properties) {</span>
+<span class="cstat-no" title="statement not covered" >          var style = {};</span>
+<span class="cstat-no" title="statement not covered" >          angular.forEach(properties, <span class="fstat-no" title="function not covered" >function (_, property) {</span></span>
+<span class="cstat-no" title="statement not covered" >            style[property] = el.style(property);</span>
+          });
+<span class="cstat-no" title="statement not covered" >          resets[id] = style;</span>
+        }
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function resetEdgeStyling() {</span>
+<span class="cstat-no" title="statement not covered" >        angular.forEach(edgeStyleResets, <span class="fstat-no" title="function not covered" >function (style, id) {</span></span>
+<span class="cstat-no" title="statement not covered" >          edge(id).style(style);</span>
+        });
+<span class="cstat-no" title="statement not covered" >        edgeStyleResets = {}; </span> // clean up, to avoid constant resetting
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function resetLabelStyling() {</span>
+<span class="cstat-no" title="statement not covered" >        angular.forEach(labelStyleResets, <span class="fstat-no" title="function not covered" >function (style, id) {</span></span>
+<span class="cstat-no" title="statement not covered" >          label(id).style(style);</span>
+        });
+<span class="cstat-no" title="statement not covered" >        labelStyleResets = {}; </span> // clean up, to avoid constant resetting
+      }
+&nbsp;
+      // Getter functions for nodes, labels, edges,  generators for
+      // properly namespaced ids and query methods for these elements.
+<span class="fstat-no" title="function not covered" >      function edges() {</span>
+<span class="cstat-no" title="statement not covered" >        return self.vis.selectAll('g.edgePath path');</span>
+      }
+<span class="fstat-no" title="function not covered" >      function edge(id) {</span>
+<span class="cstat-no" title="statement not covered" >        return self.vis.select('#' + edgeId(id));</span>
+      }
+<span class="fstat-no" title="function not covered" >      function edgePresent(id) {</span>
+<span class="cstat-no" title="statement not covered" >        return edge(id)[0][0]; </span> // yes, that's valid d3 syntax
+      }
+<span class="fstat-no" title="function not covered" >      function edgeId(id) {</span>
+<span class="cstat-no" title="statement not covered" >        return 'tep' + id;</span>
+      }
+<span class="fstat-no" title="function not covered" >      function label(id) {</span>
+<span class="cstat-no" title="statement not covered" >        return self.vis.select('#' + labelId(id));</span>
+      }
+<span class="fstat-no" title="function not covered" >      function labelId(id) {</span>
+<span class="cstat-no" title="statement not covered" >        return 'tel' + id;</span>
+      }
+<span class="fstat-no" title="function not covered" >      function nodeId(id) {</span>
+<span class="cstat-no" title="statement not covered" >        return 'tph' + id;</span>
+      }
+<span class="fstat-no" title="function not covered" >      function node(id) {</span>
+<span class="cstat-no" title="statement not covered" >        return self.vis.select('#' + nodeId(id));</span>
+      }
+<span class="fstat-no" title="function not covered" >      function nodes() {</span>
+<span class="cstat-no" title="statement not covered" >        return self.vis.selectAll('div.node');</span>
+      }
+<span class="fstat-no" title="function not covered" >      function tokenNodes() {</span>
+<span class="cstat-no" title="statement not covered" >        return self.vis.selectAll('div.node.token-node');</span>
+      }
+&nbsp;
+      // A bug in webkit makes it impossible to select camelCase tags...
+      // We work around by using a function.
+      // http://stackoverflow.com/questions/11742812/cannot-select-svg-foreignobject-element-in-d3
+<span class="fstat-no" title="function not covered" >      function foreignObjects() {</span>
+<span class="cstat-no" title="statement not covered" >        return self.vis.selectAll(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >          return this.getElementsByTagName('foreignObject');</span>
+        });
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function nodePresent(id) {</span>
+<span class="cstat-no" title="statement not covered" >        return self.g._nodes[id];</span>
+      }
+<span class="fstat-no" title="function not covered" >      function hasHead(token) {</span>
+<span class="cstat-no" title="statement not covered" >        return aU.getProperty(token, conf.mainAttribute);</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function stillSameTree(a, b) {</span>
+<span class="cstat-no" title="statement not covered" >        if (a &amp;&amp; b) {</span>
+<span class="cstat-no" title="statement not covered" >          return angular.equals(Object.keys(a), Object.keys(b));</span>
+        }
+      }
+&nbsp;
+&nbsp;
+      // Functions to create, update and render the graph
+      //
+      // They are solely called by watches.
+&nbsp;
+      // REVIEW plugin is not able to use this well right now - need to refactor
+<span class="fstat-no" title="function not covered" >      function createGraph(noRegroup) {</span>
+<span class="cstat-no" title="statement not covered" >        if (isMainTree()) {</span>
+<span class="cstat-no" title="statement not covered" >          if (!noRegroup) <span class="cstat-no" title="statement not covered" >groupTokens();</span></span>
+<span class="cstat-no" title="statement not covered" >          var oldTree = scope.current;</span>
+<span class="cstat-no" title="statement not covered" >          scope.current = scope.groupedTokens[scope.currentFocus];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          if (stillSameTree(scope.current, oldTree)) <span class="cstat-no" title="statement not covered" >return;</span></span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          scope.current = scope.tokens;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        clearOldGraph();</span>
+<span class="cstat-no" title="statement not covered" >        self.g = new dagreD3.Digraph();</span>
+<span class="cstat-no" title="statement not covered" >        if (conf.syntheticRoot) <span class="cstat-no" title="statement not covered" >createRootNode();</span></span>
+<span class="cstat-no" title="statement not covered" >        createEdges();</span>
+<span class="cstat-no" title="statement not covered" >        render();</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function groupTokens() {</span>
+<span class="cstat-no" title="statement not covered" >        scope.groupedTokens = aU.map(navigator.currentSentences, 'tokens');</span>
+<span class="cstat-no" title="statement not covered" >        scope.groupSize = scope.groupedTokens.length;</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function clearOldGraph() {</span>
+<span class="cstat-no" title="statement not covered" >        if (self.vis) <span class="cstat-no" title="statement not covered" >self.vis.selectAll('*').remove();</span></span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function inferSentenceId() {</span>
+<span class="cstat-no" title="statement not covered" >        for (var first in scope.current) <span class="cstat-no" title="statement not covered" >break;</span></span>
+<span class="cstat-no" title="statement not covered" >        return scope.current[first].sentenceId;</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function createRootNode() {</span>
+<span class="cstat-no" title="statement not covered" >        rootId = idHandler.getId('0', inferSentenceId());</span>
+<span class="cstat-no" title="statement not covered" >        self.g.addNode(rootId, { label: rootPlaceholder() });</span>
+      }
+<span class="fstat-no" title="function not covered" >      function createNode(token) {</span>
+<span class="cstat-no" title="statement not covered" >        self.g.addNode(token.id, { label: tokenPlaceholder(token) });</span>
+      }
+<span class="fstat-no" title="function not covered" >      function createEdges() {</span>
+<span class="cstat-no" title="statement not covered" >        angular.forEach(scope.current, <span class="fstat-no" title="function not covered" >function (token, index) {</span></span>
+<span class="cstat-no" title="statement not covered" >          if (hasHead(token)) <span class="cstat-no" title="statement not covered" >self.drawEdge(token);</span></span>
+        });
+      }
+&nbsp;
+      // This function serves dependencyTrees and can be overriden
+      // for other usages.
+<span class="cstat-no" title="statement not covered" >      this.drawEdge = <span class="fstat-no" title="function not covered" >function drawEdge(token) {</span></span>
+<span class="cstat-no" title="statement not covered" >        var id = token.id;</span>
+&nbsp;
+        // This is a hack - we have some troubles here on
+        // tokenRemoved events which I don't really understand -
+        // can't think of a scenario where a token without an id
+        // comes in here. It's actually a token that has just a
+        // single property (head) - really have no clue.
+        //
+        // This prevents it, but the root cause for this needs to
+        // be investigated.
+<span class="cstat-no" title="statement not covered" >        if (!angular.isDefined(id)) <span class="cstat-no" title="statement not covered" >return;</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var headId = aU.getProperty(token, conf.mainAttribute);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (!nodePresent(id)) {</span>
+<span class="cstat-no" title="statement not covered" >          createNode(token);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (!nodePresent(headId)) {</span>
+<span class="cstat-no" title="statement not covered" >          createNode(scope.current[headId]);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        self.g.addEdge(id, id, headId, { label: labelPlaceholder(token) });</span>
+      };
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function updateEdge(token) {</span>
+<span class="cstat-no" title="statement not covered" >        if (edgePresent(token.id)) {</span>
+<span class="cstat-no" title="statement not covered" >          self.g.delEdge(token.id);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        self.drawEdge(token);</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function destroy(childScope) {</span>
+<span class="cstat-no" title="statement not covered" >        childScope.$destroy();</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function clearChildScopes() {</span>
+<span class="cstat-no" title="statement not covered" >        angular.forEach(self.childScopes, destroy);</span>
+<span class="cstat-no" title="statement not covered" >        self.childScopes = [];</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function customizeGraph() {</span>
+        // Customize the graph so that it holds our directives
+<span class="cstat-no" title="statement not covered" >        clearChildScopes();</span>
+<span class="cstat-no" title="statement not covered" >        if (conf.syntheticRoot) <span class="cstat-no" title="statement not covered" >insertRootDirective();</span></span>
+<span class="cstat-no" title="statement not covered" >        self.insertNodeDirectives();</span>
+<span class="cstat-no" title="statement not covered" >        self.insertEdgeDirectives();</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function render() {</span>
+<span class="cstat-no" title="statement not covered" >        self.vis = svg.select('g');</span>
+<span class="cstat-no" title="statement not covered" >        renderer.layout(scope.layout).run(self.g, self.vis);</span>
+<span class="cstat-no" title="statement not covered" >        customizeGraph();</span>
+&nbsp;
+        // Not very elegant, but we don't want marker-end arrowheads right now
+        // We also place an token edge path (tep) id on these elements, so that
+        // we can access them more easily later on.
+<span class="cstat-no" title="statement not covered" >        edges().each(<span class="fstat-no" title="function not covered" >function (id) {</span></span>
+<span class="cstat-no" title="statement not covered" >          angular.element(this).attr('id', edgeId(id));</span>
+        }).attr('marker-end', '');
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var foreignObjs = foreignObjects();</span>
+<span class="cstat-no" title="statement not covered" >        foreignObjs.each(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >          angular.element(this.children[0]).attr('style', 'float: center;');</span>
+&nbsp;
+          // The content of the foreignObject element can overflow its bounding
+          // box, which would lead to clipped display.
+          // its SVG box.
+<span class="cstat-no" title="statement not covered" >          angular.element(this).attr('overflow', 'visible');</span>
+        });
+&nbsp;
+        // Reactivate Transitions - as we recompile the token directives during
+        // render, we deactivated the color transition temporarily to avoid
+        // color flickering.
+        // Has to be timeouted (which means running after the current $digest),
+        // as otherwise we wouldn't be able to find the freshly appended tokens
+        // through a selector.
+<span class="cstat-no" title="statement not covered" >        $timeout(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >          element.find('.token').removeClass('no-transition');</span>
+        });
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function insertRootDirective() {</span>
+<span class="cstat-no" title="statement not covered" >        node(rootId).append(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >          this.textContent = '';</span>
+<span class="cstat-no" title="statement not covered" >          return $compile(rootTokenHtml())(scope)[0];</span>
+        });
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function insertNodeDirectives() {</span>
+<span class="cstat-no" title="statement not covered" >        self.insertTokenDirectives();</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function insertTokenDirectives() {</span>
+<span class="cstat-no" title="statement not covered" >        tokenNodes().append(<span class="fstat-no" title="function not covered" >function () {</span></span>
+          // This is the element we append to and we created as a placeholder
+          // We clear out its text content so that we can display the content
+          // of our compiled token directive.
+          // The placholder has an id in the format of tphXXXX where XXXX is the id.
+<span class="cstat-no" title="statement not covered" >          this.textContent = '';</span>
+<span class="cstat-no" title="statement not covered" >          return compiledToken(scope.current[this.id.slice(3)]);</span>
+        });
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function insertEdgeDirectives() {</span>
+<span class="cstat-no" title="statement not covered" >        angular.forEach(scope.current, <span class="fstat-no" title="function not covered" >function (token, id) {</span></span>
+<span class="cstat-no" title="statement not covered" >          label(id).append(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >            this.textContent = '';</span>
+<span class="cstat-no" title="statement not covered" >            var label = compiledEdgeLabel(token);</span>
+<span class="cstat-no" title="statement not covered" >            return label;</span>
+          });
+        });
+      }
+&nbsp;
+      // Tree manipulations
+      //
+      // Change the trees layout, position and size
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function compactTree() {</span>
+<span class="cstat-no" title="statement not covered" >        scope.nodeSep = 30;</span>
+<span class="cstat-no" title="statement not covered" >        scope.edgeSep = 10;</span>
+<span class="cstat-no" title="statement not covered" >        scope.rankSep = 30;</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function wideTree () {</span>
+<span class="cstat-no" title="statement not covered" >        scope.nodeSep = 80;</span>
+<span class="cstat-no" title="statement not covered" >        scope.edgeSep = 5;</span>
+<span class="cstat-no" title="statement not covered" >        scope.rankSep = 40;</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      scope.changeDir = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        var horDir;</span>
+<span class="cstat-no" title="statement not covered" >        if (sortRankByIdAscending()) {</span>
+<span class="cstat-no" title="statement not covered" >          horDir = "RL";</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          horDir = "LR";</span>
+<span class="cstat-no" title="statement not covered" >          scope.textDirection = !scope.textDirection;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        scope.rankDir = scope.rankDir === "BT" ? horDir : "BT";</span>
+      };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      scope.centerGraph = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        setViewModeFn(scope.centerGraph);</span>
+<span class="cstat-no" title="statement not covered" >        var xPos = (width - graphSize().width) / 2;</span>
+<span class="cstat-no" title="statement not covered" >        moveGraph(xPos, treeMargin);</span>
+      };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      scope.perfectWidth = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        setViewModeFn(scope.perfectWidth);</span>
+<span class="cstat-no" title="statement not covered" >        var gWidth  = graphSize().width;</span>
+<span class="cstat-no" title="statement not covered" >        var targetW = width - treeMargin * 2;</span>
+<span class="cstat-no" title="statement not covered" >        var scale = targetW / gWidth;</span>
+<span class="cstat-no" title="statement not covered" >        moveGraph(treeMargin, treeMargin, scale);</span>
+      };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      scope.focusRoot = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        setViewModeFn(scope.focusRoot);</span>
+<span class="cstat-no" title="statement not covered" >        focusNode(rootId);</span>
+      };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      scope.focusSelection = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        setViewModeFn(scope.focusSelection);</span>
+<span class="cstat-no" title="statement not covered" >        focusNode(state.firstSelected(), height / 3);</span>
+      };
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function sortRankByIdAscending() {</span>
+<span class="cstat-no" title="statement not covered" >        var langSettings = languageSettings.getFor('treebank');</span>
+<span class="cstat-no" title="statement not covered" >        return langSettings ? langSettings.leftToRight : true;</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function moveGraph(x, y, sc) {</span>
+<span class="cstat-no" title="statement not covered" >        syncZoomAndDrag(x, y, sc);</span>
+<span class="cstat-no" title="statement not covered" >        var translate = 'translate(' + x + ',' + y +' )';</span>
+<span class="cstat-no" title="statement not covered" >        var scale = sc ? ' scale(' + sc+ ')' : '';</span>
+<span class="cstat-no" title="statement not covered" >        self.vis.transition()</span>
+          .attr('transform', translate + scale)
+          .duration(transitionDuration)
+          .ease();
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function focusNode(id, offset) {</span>
+<span class="cstat-no" title="statement not covered" >        if (id) {</span>
+<span class="cstat-no" title="statement not covered" >          offset = offset || treeMargin;</span>
+<span class="cstat-no" title="statement not covered" >          var nodePos = nodePosition(id);</span>
+<span class="cstat-no" title="statement not covered" >          var newX = xCenter - nodePos.x;</span>
+<span class="cstat-no" title="statement not covered" >          var newY = 0 - nodePos.y + offset;</span>
+<span class="cstat-no" title="statement not covered" >          moveGraph(newX, newY);</span>
+        }
+      }
+&nbsp;
+      // We have saved our d3 zoom behaviour in a variable. The offsets
+      // need to be updated manually when we do transformations by hand!
+<span class="fstat-no" title="function not covered" >      function syncZoomAndDrag(x, y, scale) {</span>
+<span class="cstat-no" title="statement not covered" >        zoomer.translate([x, y]);</span>
+<span class="cstat-no" title="statement not covered" >        zoomer.scale(scale || 1);</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function graphSize() {</span>
+<span class="cstat-no" title="statement not covered" >        return self.vis.node().getBBox();</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function calculateSvgHotspots() {</span>
+<span class="cstat-no" title="statement not covered" >        width   = tree.width();</span>
+<span class="cstat-no" title="statement not covered" >        height  = tree.height();</span>
+<span class="cstat-no" title="statement not covered" >        xCenter = width  / 2;</span>
+<span class="cstat-no" title="statement not covered" >        yCenter = height / 2;</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function Point(x, y) {</span>
+<span class="cstat-no" title="statement not covered" >        this.x = x;</span>
+<span class="cstat-no" title="statement not covered" >        this.y = y;</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function parseTransformTranslate(node) {</span>
+<span class="cstat-no" title="statement not covered" >        var translate = node.attr('transform');</span>
+<span class="cstat-no" title="statement not covered" >        var match = /translate\((.*),(.*?)\)/.exec(translate);</span>
+<span class="cstat-no" title="statement not covered" >        return new Point(match[1], match[2]);</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function nodePosition(id) {</span>
+<span class="cstat-no" title="statement not covered" >        var n = angular.element(node(id)[0]);</span>
+<span class="cstat-no" title="statement not covered" >        return parseTransformTranslate(n.parents('.node'));</span>
+      }
+&nbsp;
+&nbsp;
+&nbsp;
+      // Functions for automated tree movements
+<span class="fstat-no" title="function not covered" >      function applyViewMode() {</span>
+<span class="cstat-no" title="statement not covered" >        if (angular.isDefined(viewModeFn)) {</span>
+<span class="cstat-no" title="statement not covered" >          viewModeFn();</span>
+        }
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function setViewModeFn(fn) {</span>
+<span class="cstat-no" title="statement not covered" >        viewModeFn = fn;</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function unsetViewModeFn() {</span>
+<span class="cstat-no" title="statement not covered" >        viewModeFn = undefined;</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function moveToStart() {</span>
+<span class="cstat-no" title="statement not covered" >        if (graphSize().width &gt; width - treeMargin * 2) {</span>
+<span class="cstat-no" title="statement not covered" >          scope.perfectWidth();</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          scope.centerGraph();</span>
+        }
+      }
+&nbsp;
+&nbsp;
+      // Watches and Event listeners
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function init(noRegroup) {</span>
+<span class="cstat-no" title="statement not covered" >        createGraph(noRegroup);</span>
+<span class="cstat-no" title="statement not covered" >        moveToStart();</span>
+<span class="cstat-no" title="statement not covered" >        if (isMainTree()) <span class="cstat-no" title="statement not covered" >plugins.declareReady(conf.parentPlugin);</span></span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      scope.$watch('styles', <span class="fstat-no" title="function not covered" >function (newVal, oldVal) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (newVal !== oldVal) {</span>
+<span class="cstat-no" title="statement not covered" >          customizeGraph();</span>
+<span class="cstat-no" title="statement not covered" >          if (newVal) {</span>
+<span class="cstat-no" title="statement not covered" >            applyCustomStyling();</span>
+          } else {
+<span class="cstat-no" title="statement not covered" >            resetEdgeStyling();</span>
+<span class="cstat-no" title="statement not covered" >            resetLabelStyling();</span>
+          }
+        }
+      });
+&nbsp;
+      // Settings watches
+<span class="cstat-no" title="statement not covered" >      var watches = {</span>
+        'nodeSep': <span class="fstat-no" title="function not covered" >function(newVal) {</span> <span class="cstat-no" title="statement not covered" >scope.layout.nodeSep(newVal); </span>},
+        'edgeSep': <span class="fstat-no" title="function not covered" >function(newVal) {</span> <span class="cstat-no" title="statement not covered" >scope.layout.edgeSep(newVal); </span>},
+        'rankSep': <span class="fstat-no" title="function not covered" >function(newVal) {</span> <span class="cstat-no" title="statement not covered" >scope.layout.rankSep(newVal); </span>},
+        'rankDir': <span class="fstat-no" title="function not covered" >function(newVal) {</span> <span class="cstat-no" title="statement not covered" >scope.layout.rankDir(newVal); </span>},
+        'textDirection': <span class="fstat-no" title="function not covered" >function(newVal) {</span> <span class="cstat-no" title="statement not covered" >scope.layout.sortRankByIdAscending(newVal); </span>}
+      };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      angular.forEach(watches, <span class="fstat-no" title="function not covered" >function(fn, attr) {</span></span>
+<span class="cstat-no" title="statement not covered" >        scope.$watch(attr, <span class="fstat-no" title="function not covered" >function(newVal, oldVal) {</span></span>
+<span class="cstat-no" title="statement not covered" >          if (newVal !== oldVal) {</span>
+<span class="cstat-no" title="statement not covered" >            fn(newVal);</span>
+<span class="cstat-no" title="statement not covered" >            render();</span>
+            // We need to timeout this call. The render() function uses
+            // a transition as well. D3 transitions work with keyframes -
+            // if we call our method during the start and end frame, we
+            // will not get the values we want when we call for the size
+            // of the new graph (and all viewMode functions operate on
+            // them, because they will be built gradually against the
+            // end keyframe. We therefore wait until the end of this
+            // transition before we do the next move.
+<span class="cstat-no" title="statement not covered" >            $timeout(applyViewMode, transitionDuration);</span>
+          }
+        });
+      });
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function isMainTree() {</span>
+<span class="cstat-no" title="statement not covered" >        return scope.tokens === state.tokens;</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function inActiveTree(id) {</span>
+<span class="cstat-no" title="statement not covered" >        return scope.current[id];</span>
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function isDisconnected(val) {</span>
+        // The new head value might be undefined or set to an
+        // empty string to indicate disconnection.
+<span class="cstat-no" title="statement not covered" >        return !(angular.isDefined(val) &amp;&amp; val !== "");</span>
+      }
+&nbsp;
+      // only do this if we are the main tree!
+<span class="cstat-no" title="statement not covered" >      if (isMainTree()) {</span>
+<span class="cstat-no" title="statement not covered" >        state.on('tokenAdded', <span class="fstat-no" title="function not covered" >function(event, token) {</span></span>
+<span class="cstat-no" title="statement not covered" >          if (inActiveTree(token.id)) {</span>
+<span class="cstat-no" title="statement not covered" >            createNode(token);</span>
+<span class="cstat-no" title="statement not covered" >            customizeGraph();</span>
+<span class="cstat-no" title="statement not covered" >            render();</span>
+          }
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        state.on('tokenRemoved', <span class="fstat-no" title="function not covered" >function(event, token) {</span></span>
+<span class="cstat-no" title="statement not covered" >          var id = token.id;</span>
+<span class="cstat-no" title="statement not covered" >          if (inActiveTree(id) &amp;&amp; nodePresent(id)) {</span>
+<span class="cstat-no" title="statement not covered" >            self.g.delNode(id);</span>
+<span class="cstat-no" title="statement not covered" >            render();</span>
+          }
+        });
+&nbsp;
+        // Listen for batch changes - when one, which we are interested
+        // in, is in progress, we wait for its end to re-render the tree
+        // only once and not several times for each head change.
+<span class="cstat-no" title="statement not covered" >        var queuedChangesPresent;</span>
+<span class="cstat-no" title="statement not covered" >        state.watch(conf.mainAttribute, <span class="fstat-no" title="function not covered" >function(newVal, oldVal, event) {</span></span>
+<span class="cstat-no" title="statement not covered" >          var token = event.token;</span>
+<span class="cstat-no" title="statement not covered" >          if (inActiveTree(token.id)) {</span>
+            // Very important to do here, otherwise the tree will
+            // be render a little often on startup...
+<span class="cstat-no" title="statement not covered" >            if (newVal !== oldVal) {</span>
+              // If a disconnection has been requested, we just
+              // have to delete the edge and do nothing else
+<span class="cstat-no" title="statement not covered" >              if (isDisconnected(newVal)) {</span>
+<span class="cstat-no" title="statement not covered" >                self.g.delEdge(token.id);</span>
+              } else {
+<span class="cstat-no" title="statement not covered" >                updateEdge(token);</span>
+              }
+            }
+<span class="cstat-no" title="statement not covered" >            if (state.batchChange) {</span>
+<span class="cstat-no" title="statement not covered" >              queuedChangesPresent = true;</span>
+<span class="cstat-no" title="statement not covered" >              return;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            render();</span>
+<span class="cstat-no" title="statement not covered" >            $timeout(applyViewMode, transitionDuration);</span>
+          }
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        state.on('batchChangeStop', <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >          if (queuedChangesPresent) {</span>
+<span class="cstat-no" title="statement not covered" >            render();</span>
+<span class="cstat-no" title="statement not covered" >            $timeout(applyViewMode, transitionDuration);</span>
+<span class="cstat-no" title="statement not covered" >            queuedChangesPresent = false;</span>
+          }
+        });
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      angular.element($window).on('resize', <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        calculateSvgHotspots();</span>
+<span class="cstat-no" title="statement not covered" >        applyViewMode();</span>
+      });
+&nbsp;
+&nbsp;
+      // Keybindings for this directive
+<span class="fstat-no" title="function not covered" >      function keyBindings(kC) {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          tree: [
+            kC.create('directionChange', <span class="fstat-no" title="function not covered" >function() {</span> <span class="cstat-no" title="statement not covered" >scope.changeDir(); </span>}, 'x'),
+            kC.create('centerTree', <span class="fstat-no" title="function not covered" >function() {</span> <span class="cstat-no" title="statement not covered" >scope.centerGraph(); </span>}, 's'),
+            kC.create('focusRoot', <span class="fstat-no" title="function not covered" >function() {</span> <span class="cstat-no" title="statement not covered" >scope.focusRoot(); </span>}),
+            kC.create('focusSelection', <span class="fstat-no" title="function not covered" >function() {</span> <span class="cstat-no" title="statement not covered" >scope.focusSelection(); </span>}, 'a'),
+            kC.create('perfectWidth', <span class="fstat-no" title="function not covered" >function() {</span> <span class="cstat-no" title="statement not covered" >scope.perfectWidth(); </span>}, 'd'),
+          ]
+        };
+      }
+&nbsp;
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function setLayout() {</span>
+<span class="cstat-no" title="statement not covered" >        scope.compactTree = self.compactTree;</span>
+<span class="cstat-no" title="statement not covered" >        scope.wideTree = self.wideTree;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        scope.textDirection = sortRankByIdAscending();</span>
+<span class="cstat-no" title="statement not covered" >        scope.rankDir = 'BT';</span>
+<span class="cstat-no" title="statement not covered" >        if (conf.direction === 'vertical') <span class="cstat-no" title="statement not covered" >scope.changeDir();</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        scope.compactTree();</span>
+<span class="cstat-no" title="statement not covered" >        scope.layout = dagreD3.layout()</span>
+          .sortRankByIdAscending(scope.textDirection)
+          .rankDir(scope.rankDir)
+          .nodeSep(scope.nodeSep)
+          .edgeSep(scope.edgeSep)
+          .rankSep(scope.rankSep);
+      }
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function start() {</span>
+<span class="cstat-no" title="statement not covered" >        setLayout();</span>
+&nbsp;
+        // This watch is responsible for firing up the directive
+<span class="cstat-no" title="statement not covered" >        scope.currentFocus = 0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        scope.$watch('tokens', <span class="fstat-no" title="function not covered" >function() {</span> <span class="cstat-no" title="statement not covered" >init(); </span>} );</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        scope.$watch('currentFocus', <span class="fstat-no" title="function not covered" >function(newVal, oldVal) {</span></span>
+<span class="cstat-no" title="statement not covered" >          if (newVal !== oldVal) <span class="cstat-no" title="statement not covered" >init(true);</span></span>
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        checkBorderStyle();</span>
+&nbsp;
+        // Append and prepend all templates
+<span class="cstat-no" title="statement not covered" >        element.append(tree);</span>
+<span class="cstat-no" title="statement not covered" >        prependTemplate('panelTemplate');</span>
+<span class="cstat-no" title="statement not covered" >        element.prepend($compile('&lt;div dep-tree-navigator/&gt;')(scope));</span>
+&nbsp;
+        // Initialize some more starting values
+<span class="cstat-no" title="statement not covered" >        calculateSvgHotspots();</span>
+      }
+&nbsp;
+&nbsp;
+      // This is a dirty hack for backwards compatibility of
+      // commonly used layouts. We don't want the tree bordered
+      // all the time. Can go away once we move on to the Grid
+      // as main layout.
+<span class="cstat-no" title="statement not covered" >      var canvas = element.parents('.tree-canvas');</span>
+<span class="fstat-no" title="function not covered" >      function checkBorderStyle() {</span>
+<span class="cstat-no" title="statement not covered" >        if (isPartOfGrid() || isPartOfSidepanel()) {</span>
+<span class="cstat-no" title="statement not covered" >          canvas.addClass('no-border');</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          canvas.removeClass('no-border');</span>
+        }
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var keys = keyCapture.initCaptures(keyBindings);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      scope.keyHints = arethusaUtil.inject({}, keys.tree, <span class="fstat-no" title="function not covered" >function(memo, name, key) {</span></span>
+<span class="cstat-no" title="statement not covered" >        memo[name] = arethusaUtil.formatKeyHint(key);</span>
+      });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      scope.$on('$destroy', keys.$destroy);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      scope.translations = {};</span>
+<span class="cstat-no" title="statement not covered" >      var translateValues = [</span>
+        'changeDir', 'focusRoot', 'focusSel', 'centerTree',
+        'perfectWidth', 'compact', 'widen'
+      ];
+<span class="cstat-no" title="statement not covered" >      angular.forEach(translateValues, <span class="fstat-no" title="function not covered" >function(val, i) {</span></span>
+<span class="cstat-no" title="statement not covered" >        translator('tree.' + val, scope.translations, val);</span>
+      });
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function grid() {</span> <span class="cstat-no" title="statement not covered" >return element.parents('.gridster'); </span>}
+<span class="fstat-no" title="function not covered" >      function isPartOfGrid() {</span> <span class="cstat-no" title="statement not covered" >return grid().length; </span>}
+<span class="fstat-no" title="function not covered" >      function gridReady() {</span> <span class="cstat-no" title="statement not covered" >return grid().hasClass('gridster-loaded'); </span>}
+&nbsp;
+<span class="fstat-no" title="function not covered" >      function sidepanel() {</span> <span class="cstat-no" title="statement not covered" >return element.parents('#sidepanel'); </span>}
+<span class="fstat-no" title="function not covered" >      function isPartOfSidepanel() {</span> <span class="cstat-no" title="statement not covered" >return sidepanel().length; </span>}
+&nbsp;
+      // Special handling for an edge case:
+      // When we change the layout which uses this directive on the fly
+      // to a grid based one, we need to wait a little, so that the grid
+      // item which holds our tree has the correct size, otherwise our
+      // tree will render too little (where too little could also mean
+      // with a width of 0...)
+<span class="cstat-no" title="statement not covered" >      this.launch = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (isPartOfGrid() &amp;&amp; !gridReady()) {</span>
+<span class="cstat-no" title="statement not covered" >          $timeout(start, 130);</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          start();</span>
+        }
+      };
+&nbsp;
+      // Functions to be overridden by directives that use this
+<span class="fstat-no" title="function not covered" >      function noop() {</span>}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this.createEdges = noop;</span>
+<span class="cstat-no" title="statement not covered" >      this.nodePresent = nodePresent;</span>
+<span class="cstat-no" title="statement not covered" >      this.createNode  = createNode;</span>
+<span class="cstat-no" title="statement not covered" >      this.insertNodeDirectives  = insertNodeDirectives;</span>
+<span class="cstat-no" title="statement not covered" >      this.insertTokenDirectives = insertTokenDirectives;</span>
+<span class="cstat-no" title="statement not covered" >      this.insertEdgeDirectives  = insertEdgeDirectives;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this.compactTree = compactTree;</span>
+<span class="cstat-no" title="statement not covered" >      this.wideTree = wideTree;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this.childScopes = [];</span>
+    };
+  }
+]);
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue May 12 2015 11:20:41 GMT+0200 (CEST)</div>
+</div>
+
+<script src="../../prettify.js"></script>
+
+<script src="https://yui-s.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script>
+
+    YUI().use('datatable', function (Y) {
+
+        var formatters = {
+          pct: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              try {
+                  return o.value.toFixed(2) + '%';
+              } catch (ex) { return o.value + '%'; }
+          },
+          html: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.record.get(o.column.key + '_html');
+          }
+        },
+          defaultFormatter = function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.value;
+          };
+
+        function getColumns(theadNode) {
+            var colNodes = theadNode.all('tr th'),
+                cols = [],
+                col;
+            colNodes.each(function (colNode) {
+                col = {
+                    key: colNode.getAttribute('data-col'),
+                    label: colNode.get('innerHTML') || ' ',
+                    sortable: !colNode.getAttribute('data-nosort'),
+                    className: colNode.getAttribute('class'),
+                    type: colNode.getAttribute('data-type'),
+                    allowHTML: colNode.getAttribute('data-html') === 'true' || colNode.getAttribute('data-fmt') === 'html'
+                };
+                col.formatter = formatters[colNode.getAttribute('data-fmt')] || defaultFormatter;
+                cols.push(col);
+            });
+            return cols;
+        }
+
+        function getRowData(trNode, cols) {
+            var tdNodes = trNode.all('td'),
+                    i,
+                    row = { classes: {} },
+                    node,
+                    name;
+            for (i = 0; i < cols.length; i += 1) {
+                name = cols[i].key;
+                node = tdNodes.item(i);
+                row[name] = node.getAttribute('data-value') || node.get('innerHTML');
+                row[name + '_html'] = node.get('innerHTML');
+                row.classes[name] = node.getAttribute('class');
+                //Y.log('Name: ' + name + '; Value: ' + row[name]);
+                if (cols[i].type === 'number') { row[name] = row[name] * 1; }
+            }
+            //Y.log(row);
+            return row;
+        }
+
+        function getData(tbodyNode, cols) {
+            var data = [];
+            tbodyNode.all('tr').each(function (trNode) {
+                data.push(getRowData(trNode, cols));
+            });
+            return data;
+        }
+
+        function replaceTable(node) {
+            if (!node) { return; }
+            var cols = getColumns(node.one('thead')),
+                data = getData(node.one('tbody'), cols),
+                table,
+                parent = node.get('parentNode');
+
+            table = new Y.DataTable({
+                columns: cols,
+                data: data,
+                sortBy: 'file'
+            });
+            parent.set('innerHTML', '');
+            table.render(parent);
+        }
+
+        Y.on('domready', function () {
+            replaceTable(Y.one('div.coverage-summary table'));
+            if (typeof prettyPrint === 'function') {
+                prettyPrint();
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "plugins": {
+    "morph" : {
+      "noRetrieval" : "online",
+      "retrievers" : {
+        "BspMorphRetriever" : {
+          "resource" : "morphologyServiceLat"
+        }
+      }
+    },
+    "relation" : {
+      "@include" : "./arethusa.relation/elmlatch11.json"
+    }
+  }
+}

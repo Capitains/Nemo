@@ -1,0 +1,1081 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for js/arethusa.sg/sg.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../prettify.css">
+
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Helvetica Neue, Helvetica,Arial;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 10em;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Consolas, Menlo, Monaco, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 14px;
+            font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { text-decoration: none; color: #000; }
+        div.coverage-summary a:visited { text-decoration: none; color: #333; }
+        div.coverage-summary a:hover { text-decoration: underline; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: url("https://yui-s.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">js/arethusa.sg/sg.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">13.57% <small>(19 / 140)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 43)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 35)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">13.57% <small>(19 / 140)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../index.html">All files</a> &#187; <a href="index.html">js/arethusa.sg/</a> &#187; sg.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+&nbsp;
+angular.module('arethusa.sg').service('sg', [
+  'state',
+  'configurator',
+  '$cacheFactory',
+  'plugins',
+  'notifier',
+<span class="fstat-no" title="function not covered" >  function(state, configurator, $cacheFactory, plugins, notifier) {</span>
+<span class="cstat-no" title="statement not covered" >    var self = this;</span>
+<span class="cstat-no" title="statement not covered" >    this.name = 'sg';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var retriever;</span>
+<span class="cstat-no" title="statement not covered" >    this.labelAs = "long";</span>
+<span class="cstat-no" title="statement not covered" >    this.defineAncestors = true;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var sgCache = $cacheFactory('sg', { number:  100 });</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.defaultConf = {</span>
+      displayName: "SG"
+    };
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function configure() {</span>
+<span class="cstat-no" title="statement not covered" >      configurator.getConfAndDelegate(self, ['labels']);</span>
+<span class="cstat-no" title="statement not covered" >      retriever = configurator.getRetriever(self.conf.retriever);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function SgTemplate() {</span>
+<span class="cstat-no" title="statement not covered" >      var self = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this.morph = {};</span>
+<span class="cstat-no" title="statement not covered" >      this.ancestors = [];</span>
+<span class="cstat-no" title="statement not covered" >      this.definingAttrs = [];</span>
+<span class="cstat-no" title="statement not covered" >      this.menu = {};</span>
+<span class="cstat-no" title="statement not covered" >      this.hasChanged = true;</span>
+<span class="cstat-no" title="statement not covered" >      this.isSgTemplate = true;</span>
+<span class="cstat-no" title="statement not covered" >      this.markChange = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        self.hasChanged = true;</span>
+      };
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function grammarReset(grammar) {</span>
+<span class="cstat-no" title="statement not covered" >      arethusaUtil.empty(grammar.ancestors);</span>
+      // We have to redefine this property - it's untouchable now
+      // that it's cached!
+<span class="cstat-no" title="statement not covered" >      grammar.definingAttrs = [];</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function sgFromStateComplete(sg) {</span>
+<span class="cstat-no" title="statement not covered" >      return sg &amp;&amp; sg.isSgTemplate;</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function sgFromRetriever(sg) {</span>
+<span class="cstat-no" title="statement not covered" >      return sg &amp;&amp; sg.ancestors &amp;&amp; !sg.isTemplate;</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function createNewSgObject(token) {</span>
+<span class="cstat-no" title="statement not covered" >      var grammar = new SgTemplate();</span>
+<span class="cstat-no" title="statement not covered" >      var morph = token.morphology || {};</span>
+<span class="cstat-no" title="statement not covered" >      grammar.string = token.string;</span>
+<span class="cstat-no" title="statement not covered" >      checkAndUpdateGrammar(morph, grammar);</span>
+<span class="cstat-no" title="statement not covered" >      return grammar;</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function createInternalState() {</span>
+      // 3 possibilites here:
+      //
+      // 1 When we have seen this token set before, we don't need to do anything
+      //   and can take the info we already created earlier in time.
+      // 2 We have not seen the tokens, but they have info from the retrieved
+      //   document. In such a case we build a new SgTemplate and add the sg
+      //   ancestors from the token to it.
+      // 3 We have to start from scratch.
+<span class="cstat-no" title="statement not covered" >      return arethusaUtil.inject({}, state.tokens, <span class="fstat-no" title="function not covered" >function(memo, id, token) {</span></span>
+<span class="cstat-no" title="statement not covered" >        var grammar;</span>
+<span class="cstat-no" title="statement not covered" >        var fromState = token.sg;</span>
+<span class="cstat-no" title="statement not covered" >        if (sgFromStateComplete(fromState)) {</span>
+<span class="cstat-no" title="statement not covered" >          grammar = fromState;</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          grammar = createNewSgObject(token);</span>
+<span class="cstat-no" title="statement not covered" >          if (sgFromRetriever(fromState)) {</span>
+<span class="cstat-no" title="statement not covered" >            addAncestorsFromState(fromState, grammar);</span>
+          }
+        }
+<span class="cstat-no" title="statement not covered" >        memo[id] = grammar;</span>
+      });
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function sgParseError(str, ancs, anc) {</span>
+<span class="cstat-no" title="statement not covered" >      var ancsString = ancs.join(' ');</span>
+<span class="cstat-no" title="statement not covered" >      return "Failed to parse SG annotation (in " + ancsString+ " at " + anc + " for " + str + ")";</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var sgIncompatibilityWarning = "You might be using an incompatible version of the SG tagset";</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function addAncestorsFromState(sg, grammar) {</span>
+<span class="cstat-no" title="statement not covered" >      var ancestors = sg.ancestors;</span>
+<span class="cstat-no" title="statement not covered" >      var menu = grammar.menu;</span>
+<span class="cstat-no" title="statement not covered" >      angular.forEach(ancestors, <span class="fstat-no" title="function not covered" >function(ancestor, i) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (menu) {</span>
+          // The || menu.nested party is very hacky, but effective.
+          // It can appear in menus that show a morph preselection -
+          // I guess... Check a word with a dative proper e.g.
+<span class="cstat-no" title="statement not covered" >          var expandedAncestor = menu[ancestor] || menu.nested;</span>
+<span class="cstat-no" title="statement not covered" >          if (!expandedAncestor) {</span>
+<span class="cstat-no" title="statement not covered" >            notifier.error(sgParseError(grammar.string, ancestors, ancestor));</span>
+<span class="cstat-no" title="statement not covered" >            notifier.warning(sgIncompatibilityWarning);</span>
+<span class="cstat-no" title="statement not covered" >            menu = undefined;</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+          }
+<span class="cstat-no" title="statement not covered" >          grammar.ancestors.push(expandedAncestor);</span>
+<span class="cstat-no" title="statement not covered" >          menu = expandedAncestor.nested;</span>
+        }
+      });
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var hint = "Please select a morphological form first!";</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.currentGrammar = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >      return arethusaUtil.inject({}, state.selectedTokens, <span class="fstat-no" title="function not covered" >function(memo, id, event) {</span></span>
+<span class="cstat-no" title="statement not covered" >        var morph = state.tokens[id].morphology;</span>
+<span class="cstat-no" title="statement not covered" >        var grammar = self.grammar[id];</span>
+<span class="cstat-no" title="statement not covered" >        if (grammar) {</span>
+<span class="cstat-no" title="statement not covered" >          if (morph &amp;&amp; morph.attributes) {</span>
+<span class="cstat-no" title="statement not covered" >            delete grammar.hint;</span>
+<span class="cstat-no" title="statement not covered" >            checkAndUpdateGrammar(morph, grammar);</span>
+          } else {
+<span class="cstat-no" title="statement not covered" >            grammarReset(grammar);</span>
+<span class="cstat-no" title="statement not covered" >            grammar.morph = {};</span>
+<span class="cstat-no" title="statement not covered" >            grammar.hint = hint;</span>
+          }
+<span class="cstat-no" title="statement not covered" >          memo[id] = grammar;</span>
+        }
+      });
+    };
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function morphHasChanged(a, b) {</span>
+<span class="cstat-no" title="statement not covered" >      return !angular.equals(a, b);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function checkAndUpdateGrammar(morph, grammar) {</span>
+<span class="cstat-no" title="statement not covered" >      if (morphHasChanged(grammar.morph, morph.attributes)) {</span>
+        // Need to empty first, otherwise we might mix attributes
+        // of various part of speech types together!
+<span class="cstat-no" title="statement not covered" >        arethusaUtil.empty(grammar.morph);</span>
+<span class="cstat-no" title="statement not covered" >        angular.extend(grammar.morph, morph.attributes);</span>
+<span class="cstat-no" title="statement not covered" >        updateGrammar(self.labels, grammar);</span>
+      }
+<span class="cstat-no" title="statement not covered" >      return grammar;</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function updateGrammar(labels, grammar) {</span>
+<span class="cstat-no" title="statement not covered" >      grammarReset(grammar);</span>
+<span class="cstat-no" title="statement not covered" >      findDefiningAttributes(self.labels, grammar, grammar.definingAttrs);</span>
+<span class="cstat-no" title="statement not covered" >      extractMenu(grammar);</span>
+<span class="cstat-no" title="statement not covered" >      cacheUpdateProcess(grammar);</span>
+<span class="cstat-no" title="statement not covered" >      grammar.markChange();</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function cacheUpdateProcess(grammar) {</span>
+<span class="cstat-no" title="statement not covered" >      var key = cacheKey(grammar);</span>
+<span class="cstat-no" title="statement not covered" >      if (!sgCache.get(key)) {</span>
+<span class="cstat-no" title="statement not covered" >        sgCache.put(key, grammar.definingAttrs);</span>
+      }
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function cacheKey(grammar) {</span>
+<span class="cstat-no" title="statement not covered" >      return arethusaUtil.inject([], grammar.morph, <span class="fstat-no" title="function not covered" >function(memo, k, v) {</span></span>
+<span class="cstat-no" title="statement not covered" >        memo.push(k + '-' + v);</span>
+      }).sort().join('|');
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function findDefiningAttributes(labels, grammar, target) {</span>
+<span class="cstat-no" title="statement not covered" >      var cached = sgCache.get(cacheKey(grammar));</span>
+<span class="cstat-no" title="statement not covered" >      if (cached) {</span>
+<span class="cstat-no" title="statement not covered" >        arethusaUtil.pushAll(target, cached);</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        arethusaUtil.inject(target, labels, <span class="fstat-no" title="function not covered" >function(memo, label, val) {</span></span>
+<span class="cstat-no" title="statement not covered" >          var dep = val.dependency;</span>
+<span class="cstat-no" title="statement not covered" >          if (dep) {</span>
+<span class="cstat-no" title="statement not covered" >            var morph = grammar.morph;</span>
+<span class="cstat-no" title="statement not covered" >            var nextLevel;</span>
+<span class="cstat-no" title="statement not covered" >            angular.forEach(dep, <span class="fstat-no" title="function not covered" >function(depVal, depCat) {</span></span>
+<span class="cstat-no" title="statement not covered" >              if (dependencyMet(morph[depCat], depVal)) {</span>
+<span class="cstat-no" title="statement not covered" >                val = angular.copy(val);</span>
+<span class="cstat-no" title="statement not covered" >                memo.push(val);</span>
+<span class="cstat-no" title="statement not covered" >                nextLevel = val.nested;</span>
+<span class="cstat-no" title="statement not covered" >                if (nextLevel) {</span>
+<span class="cstat-no" title="statement not covered" >                  angular.forEach(nextLevel, <span class="fstat-no" title="function not covered" >function(nestedMenu, nestedLabel) {</span></span>
+<span class="cstat-no" title="statement not covered" >                    if (nestedMenu.nestedDependency) {</span>
+<span class="cstat-no" title="statement not covered" >                      var nextNestedLevel = [];</span>
+<span class="cstat-no" title="statement not covered" >                      findDefiningAttributes(nestedMenu.nested, grammar, nextNestedLevel);</span>
+<span class="cstat-no" title="statement not covered" >                      nestedMenu.nested = { nested: nextNestedLevel.pop() };</span>
+                    }
+                  });
+<span class="cstat-no" title="statement not covered" >                  findDefiningAttributes(nextLevel, grammar, target);</span>
+                }
+              }
+            });
+          }
+        });
+      }
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function dependencyMet(morphValue, depValue) {</span>
+<span class="cstat-no" title="statement not covered" >      if (angular.isDefined(morphValue)) {</span>
+<span class="cstat-no" title="statement not covered" >        return morphValue === depValue || depValue === "*";</span>
+      }
+    }
+&nbsp;
+    // We already captured the defining attributes at this point - they
+    // are all stored as full objects with their full nested structure.
+    // The menu we want to present to the user is therefore the last one
+    // in this array structure.
+<span class="fstat-no" title="function not covered" >    function extractMenu(grammar) {</span>
+<span class="cstat-no" title="statement not covered" >      var attrs = grammar.definingAttrs;</span>
+      // Could be that this array is empty!
+<span class="cstat-no" title="statement not covered" >      var lastAttr = attrs[attrs.length - 1] || {};</span>
+<span class="cstat-no" title="statement not covered" >      grammar.menu = lastAttr.nested;</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function propagateToState() {</span>
+<span class="cstat-no" title="statement not covered" >      angular.forEach(self.grammar, <span class="fstat-no" title="function not covered" >function(val, id) {</span></span>
+<span class="cstat-no" title="statement not covered" >        state.tokens[id].sg = val;</span>
+      });
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.requestGrammar = <span class="fstat-no" title="function not covered" >function(sections, callback) {</span></span>
+<span class="cstat-no" title="statement not covered" >      retriever.getData(sections, callback);</span>
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.canEdit = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >      return self.mode === "editor";</span>
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    state.on('tokenAdded', <span class="fstat-no" title="function not covered" >function(event, token) {</span></span>
+<span class="cstat-no" title="statement not covered" >      self.grammar[token.id] = createNewSgObject(token);</span>
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    state.on('tokenRemoved', <span class="fstat-no" title="function not covered" >function(event, token) {</span></span>
+<span class="cstat-no" title="statement not covered" >      delete self.grammar[token.id];</span>
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.init = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >      plugins.doAfter('morph', <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        configure();</span>
+<span class="cstat-no" title="statement not covered" >        self.grammar = createInternalState();</span>
+<span class="cstat-no" title="statement not covered" >        self.readerRequested = false;</span>
+<span class="cstat-no" title="statement not covered" >        propagateToState();</span>
+      });
+    };
+  }
+]);
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue May 12 2015 11:20:41 GMT+0200 (CEST)</div>
+</div>
+
+<script src="../../prettify.js"></script>
+
+<script src="https://yui-s.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script>
+
+    YUI().use('datatable', function (Y) {
+
+        var formatters = {
+          pct: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              try {
+                  return o.value.toFixed(2) + '%';
+              } catch (ex) { return o.value + '%'; }
+          },
+          html: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.record.get(o.column.key + '_html');
+          }
+        },
+          defaultFormatter = function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.value;
+          };
+
+        function getColumns(theadNode) {
+            var colNodes = theadNode.all('tr th'),
+                cols = [],
+                col;
+            colNodes.each(function (colNode) {
+                col = {
+                    key: colNode.getAttribute('data-col'),
+                    label: colNode.get('innerHTML') || ' ',
+                    sortable: !colNode.getAttribute('data-nosort'),
+                    className: colNode.getAttribute('class'),
+                    type: colNode.getAttribute('data-type'),
+                    allowHTML: colNode.getAttribute('data-html') === 'true' || colNode.getAttribute('data-fmt') === 'html'
+                };
+                col.formatter = formatters[colNode.getAttribute('data-fmt')] || defaultFormatter;
+                cols.push(col);
+            });
+            return cols;
+        }
+
+        function getRowData(trNode, cols) {
+            var tdNodes = trNode.all('td'),
+                    i,
+                    row = { classes: {} },
+                    node,
+                    name;
+            for (i = 0; i < cols.length; i += 1) {
+                name = cols[i].key;
+                node = tdNodes.item(i);
+                row[name] = node.getAttribute('data-value') || node.get('innerHTML');
+                row[name + '_html'] = node.get('innerHTML');
+                row.classes[name] = node.getAttribute('class');
+                //Y.log('Name: ' + name + '; Value: ' + row[name]);
+                if (cols[i].type === 'number') { row[name] = row[name] * 1; }
+            }
+            //Y.log(row);
+            return row;
+        }
+
+        function getData(tbodyNode, cols) {
+            var data = [];
+            tbodyNode.all('tr').each(function (trNode) {
+                data.push(getRowData(trNode, cols));
+            });
+            return data;
+        }
+
+        function replaceTable(node) {
+            if (!node) { return; }
+            var cols = getColumns(node.one('thead')),
+                data = getData(node.one('tbody'), cols),
+                table,
+                parent = node.get('parentNode');
+
+            table = new Y.DataTable({
+                columns: cols,
+                data: data,
+                sortBy: 'file'
+            });
+            parent.set('innerHTML', '');
+            table.render(parent);
+        }
+
+        Y.on('domready', function () {
+            replaceTable(Y.one('div.coverage-summary table'));
+            if (typeof prettyPrint === 'function') {
+                prettyPrint();
+            }
+        });
+    });
+</script>
+</body>
+</html>

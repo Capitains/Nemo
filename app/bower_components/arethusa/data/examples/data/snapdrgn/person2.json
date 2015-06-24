@@ -1,0 +1,456 @@
+{
+  "persons": [
+    {
+      "@context": "http://www.w3.org/ns/oa-context-20130208.json",
+      "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.4295dd41c841013210ea0ada42b1fd09",
+      "@type": "oa:Annotation",
+      "annotatedAt": "2015-02-20T03:44:23.933515+00:00",
+      "annotatedBy": {
+        "@id": "http://data.perseus.org/sosol/users/John%20Shepard,%20Joseph%20Caplan,%20Luke%20O'Connor",
+        "@type": "foaf:Group",
+        "foaf:member": [
+          {
+            "@type": "foaf:Person",
+            "foaf:name": "Luke O'Connor"
+          },
+          {
+            "@type": "foaf:Person",
+            "foaf:name": "Veer Bhalla"
+          }
+        ]
+      },
+      "dcterms:source": "https://hypothes.is/api/annotations/j3Sq6N8ZS5iqEx5EEvVJfQ",
+      "dcterms:title": "http://data.perseus.org/people/smith:zeus-1#this identifies Zeus as snap:FatherOf in urn:cts:pdlrefwk:viaf88890045.003.perseus-eng1:E.endymion_1",
+      "hasBody": {
+        "@context": {
+          "lawd": "http://lawd.info/ontology/",
+          "perseusrdf": "http://data.perseus.org/rdfvocab/addons/",
+          "snap": "http://onto.snapdrgn.net/snap#"
+        },
+        "@graph": [
+          {
+            "@id": "http://data.perseus.org/people/smith:endymion-1#this",
+            "snap:has-bond": {
+              "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.4295dd41c841013210ea0ada42b1fd09#bond-1"
+            }
+          },
+          {
+            "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.4295dd41c841013210ea0ada42b1fd09#bond-1",
+            "@type": "snap:FatherOf",
+            "snap:bond-with": {
+              "@id": "http://data.perseus.org/people/smith:zeus-1#this"
+            }
+          }
+        ]
+      },
+      "hasTarget": {
+        "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.4295dd41c841013210ea0ada42b1fd09#target-1",
+        "@type": "oa:SpecificResource",
+        "hasSelector": {
+          "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.4295dd41c841013210ea0ada42b1fd09#target-1-sel-1",
+          "@type": "oa:TextQuoteSelector",
+          "exact": "Zeus",
+          "prefix": "e there fell in love with Hera,",
+          "suffix": ", in his anger, punished him by"
+        },
+        "hasSource": {
+          "@id": "urn:cts:pdlrefwk:viaf88890045.003.perseus-eng1:E.endymion_1"
+        }
+      },
+      "motivatedBy": "oa:identifying",
+      "serializedBy": {
+        "@id": "https://hypothes.is",
+        "@type": "prov:SoftwareAgent"
+      }
+    },
+    {
+      "@context": "http://www.w3.org/ns/oa-context-20130208.json",
+      "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.99ad8b61c827013226fd0ada42b1fd09",
+      "@type": "oa:Annotation",
+      "annotatedAt": "2015-04-07T22:32:23.287701+00:00",
+      "annotatedBy": {
+        "@id": "http://data.perseus.org/sosol/users/Nathalie%20Dumornay,%20Ian%20Lam,%20Miguel%20Carralon",
+        "@type": "foaf:Group",
+        "foaf:member": [
+          {
+            "@type": "foaf:Person",
+            "foaf:name": "Nathalie Dumornay"
+          },
+          {
+            "@type": "foaf:Person",
+            "foaf:name": "William Ferguson"
+          },
+          {
+            "@type": "foaf:Person",
+            "foaf:name": "Nicole Allora"
+          }
+        ]
+      },
+      "dcterms:source": "https://hypothes.is/api/annotations/kk8ZkBPpSeKtd2Cs3HTP2A",
+      "dcterms:title": "http://data.perseus.org/people/smith:zeus-1#this identifies Zeus as snap:UncleOf in urn:cts:pdlrefwk:viaf88890045.003.perseus-eng1:S.scylla_1",
+      "hasBody": {
+        "@context": {
+          "lawd": "http://lawd.info/ontology/",
+          "perseusrdf": "http://data.perseus.org/rdfvocab/addons/",
+          "snap": "http://onto.snapdrgn.net/snap#"
+        },
+        "@graph": [
+          {
+            "@id": "http://data.perseus.org/people/smith:scylla-1#this",
+            "snap:has-bond": {
+              "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.99ad8b61c827013226fd0ada42b1fd09#bond-1"
+            }
+          },
+          {
+            "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.99ad8b61c827013226fd0ada42b1fd09#bond-1",
+            "@type": "snap:UncleOf",
+            "snap:bond-with": {
+              "@id": "http://data.perseus.org/people/smith:zeus-1#this"
+            }
+          }
+        ]
+      },
+      "hasTarget": {
+        "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.99ad8b61c827013226fd0ada42b1fd09#target-1",
+        "@type": "oa:SpecificResource",
+        "hasSelector": {
+          "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.99ad8b61c827013226fd0ada42b1fd09#target-1-sel-1",
+          "@type": "oa:TextQuoteSelector",
+          "exact": "Zeus",
+          "prefix": "as hurled by the thunderbolt of",
+          "suffix": "into the sea, where she retaine"
+        },
+        "hasSource": {
+          "@id": "urn:cts:pdlrefwk:viaf88890045.003.perseus-eng1:S.scylla_1"
+        }
+      },
+      "motivatedBy": "oa:identifying",
+      "serializedBy": {
+        "@id": "https://hypothes.is",
+        "@type": "prov:SoftwareAgent"
+      }
+    },
+    {
+      "@context": "http://www.w3.org/ns/oa-context-20130208.json",
+      "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.67148b61c83e01322faa0ada42b1fd09",
+      "@type": "oa:Annotation",
+      "annotatedAt": "2015-03-13T17:58:03.998767+00:00",
+      "annotatedBy": {
+        "@id": "http://data.perseus.org/sosol/users/Steve",
+        "@type": "foaf:Group",
+        "foaf:member": [
+          {
+            "@type": "foaf:Person",
+            "foaf:name": "Steven Mullahoo"
+          },
+          {
+            "@type": "foaf:Person",
+            "foaf:name": " Ben Meyerson"
+          },
+          {
+            "@type": "foaf:Person",
+            "foaf:name": " Emily Baker"
+          },
+          {
+            "@type": "foaf:Person",
+            "foaf:name": " Adina Feinstein"
+          }
+        ]
+      },
+      "dcterms:source": "https://hypothes.is/api/annotations/HmYXBGfwSnKBiaKLv8EQ0Q",
+      "dcterms:title": "http://data.perseus.org/people/smith:helenus-1#this identifies Helenus as perseusrdf:HusbandOf in urn:cts:pdlrefwk:viaf88890045.003.perseus-eng1:A.andromache_1",
+      "hasBody": {
+        "@context": {
+          "lawd": "http://lawd.info/ontology/",
+          "perseusrdf": "http://data.perseus.org/rdfvocab/addons/",
+          "snap": "http://onto.snapdrgn.net/snap#"
+        },
+        "@graph": [
+          {
+            "@id": "http://data.perseus.org/people/smith:andromache-1#this",
+            "snap:has-bond": {
+              "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.67148b61c83e01322faa0ada42b1fd09#bond-1"
+            }
+          },
+          {
+            "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.67148b61c83e01322faa0ada42b1fd09#bond-1",
+            "@type": "perseusrdf:HusbandOf",
+            "snap:bond-with": {
+              "@id": "http://data.perseus.org/people/smith:helenus-1#this"
+            }
+          }
+        ]
+      },
+      "hasTarget": {
+        "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.67148b61c83e01322faa0ada42b1fd09#target-1",
+        "@type": "oa:SpecificResource",
+        "hasSelector": {
+          "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.67148b61c83e01322faa0ada42b1fd09#target-1-sel-1",
+          "@type": "oa:TextQuoteSelector",
+          "exact": "Helenus",
+          "prefix": ", Andromache became the wife of",
+          "suffix": ", a brother of her first husband"
+        },
+        "hasSource": {
+          "@id": "urn:cts:pdlrefwk:viaf88890045.003.perseus-eng1:A.andromache_1"
+        }
+      },
+      "motivatedBy": "oa:identifying",
+      "serializedBy": {
+        "@id": "https://hypothes.is",
+        "@type": "prov:SoftwareAgent"
+      }
+    },
+    {
+      "@context": "http://www.w3.org/ns/oa-context-20130208.json",
+      "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.92fbcbd0ca8101322b0e0ada42b1fd09",
+      "@type": "oa:Annotation",
+      "annotatedAt": "2015-02-22T23:19:39.736144+00:00",
+      "annotatedBy": {
+        "@id": "http://data.perseus.org/sosol/users/Grace%20Tellado",
+        "@type": "foaf:Group",
+        "foaf:member": [
+          {
+            "@type": "foaf:Person",
+            "foaf:name": "Grace Tellado"
+          },
+          {
+            "@type": "foaf:Person",
+            "foaf:name": "Kayla Williamson"
+          }
+        ]
+      },
+      "dcterms:source": "https://hypothes.is/api/annotations/fWMlBAiETlqfBGMFfPY7mQ",
+      "dcterms:title": "http://data.perseus.org/people/smith:achilles-1#this identifies Achilles as perseusrdf:EnemyOf in urn:cts:pdlrefwk:viaf88890045.003.perseus-eng1:H.hector_1",
+      "hasBody": {
+        "@context": {
+          "lawd": "http://lawd.info/ontology/",
+          "perseusrdf": "http://data.perseus.org/rdfvocab/addons/",
+          "snap": "http://onto.snapdrgn.net/snap#"
+        },
+        "@graph": [
+          {
+            "@id": "http://data.perseus.org/people/smith:hector-1#this",
+            "snap:has-bond": {
+              "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.92fbcbd0ca8101322b0e0ada42b1fd09#bond-1"
+            }
+          },
+          {
+            "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.92fbcbd0ca8101322b0e0ada42b1fd09#bond-1",
+            "@type": "perseusrdf:EnemyOf",
+            "snap:bond-with": {
+              "@id": "http://data.perseus.org/people/smith:achilles-1#this"
+            }
+          }
+        ]
+      },
+      "hasTarget": {
+        "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.92fbcbd0ca8101322b0e0ada42b1fd09#target-1",
+        "@type": "oa:SpecificResource",
+        "hasSelector": {
+          "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.92fbcbd0ca8101322b0e0ada42b1fd09#target-1-sel-1",
+          "@type": "oa:TextQuoteSelector",
+          "exact": "Achilles",
+          "prefix": "nd fell pierced by the spear of",
+          "suffix": "(22.182-330; comp Dict. Cret. 3"
+        },
+        "hasSource": {
+          "@id": "urn:cts:pdlrefwk:viaf88890045.003.perseus-eng1:H.hector_1"
+        }
+      },
+      "motivatedBy": "oa:identifying",
+      "serializedBy": {
+        "@id": "https://hypothes.is",
+        "@type": "prov:SoftwareAgent"
+      }
+    },
+    {
+      "@context": "http://www.w3.org/ns/oa-context-20130208.json",
+      "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.6d7babc0cc0f0132d5e80ada42b1fd09",
+      "@type": "oa:Annotation",
+      "annotatedAt": "2015-04-10T19:01:20.181378+00:00",
+      "annotatedBy": {
+        "@id": "http://data.perseus.org/sosol/users/Amy%20Vasquez%20&%20Richa%20Parande",
+        "@type": "foaf:Group",
+        "foaf:member": []
+      },
+      "dcterms:source": "https://hypothes.is/api/annotations/PtyG3wanSCWcwhUCMHjngQ",
+      "dcterms:title": "http://data.perseus.org/people/smith:pan-1#this identifies Pan as snap:SonOf in urn:cts:pdlrefwk:viaf88890045.003.perseus-eng1:P.penelope_1",
+      "hasBody": {
+        "@context": {
+          "lawd": "http://lawd.info/ontology/",
+          "perseusrdf": "http://data.perseus.org/rdfvocab/addons/",
+          "snap": "http://onto.snapdrgn.net/snap#"
+        },
+        "@graph": [
+          {
+            "@id": "http://data.perseus.org/people/smith:penelope-1#this",
+            "snap:has-bond": {
+              "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.6d7babc0cc0f0132d5e80ada42b1fd09#bond-1"
+            }
+          },
+          {
+            "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.6d7babc0cc0f0132d5e80ada42b1fd09#bond-1",
+            "@type": "snap:SonOf",
+            "snap:bond-with": {
+              "@id": "http://data.perseus.org/people/smith:pan-1#this"
+            }
+          }
+        ]
+      },
+      "hasTarget": {
+        "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.6d7babc0cc0f0132d5e80ada42b1fd09#target-1",
+        "@type": "oa:SpecificResource",
+        "hasSelector": {
+          "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.6d7babc0cc0f0132d5e80ada42b1fd09#target-1-sel-1",
+          "@type": "oa:TextQuoteSelector",
+          "exact": "Pan",
+          "prefix": "gether she became the mother of",
+          "suffix": ". (Lycoph. 772; Schol. ad Herod."
+        },
+        "hasSource": {
+          "@id": "urn:cts:pdlrefwk:viaf88890045.003.perseus-eng1:P.penelope_1"
+        }
+      },
+      "motivatedBy": "oa:identifying",
+      "serializedBy": {
+        "@id": "https://hypothes.is",
+        "@type": "prov:SoftwareAgent"
+      }
+    },
+    {
+      "@context": "http://www.w3.org/ns/oa-context-20130208.json",
+      "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.c87a0950c82c01321cef0ada42b1fd09",
+      "@type": "oa:Annotation",
+      "annotatedAt": "2015-02-16T21:06:43.039936+00:00",
+      "annotatedBy": {
+        "@id": "http://data.perseus.org/sosol/users/Tucker",
+        "@type": "foaf:Group",
+        "foaf:member": [
+          {
+            "@type": "foaf:Person",
+            "foaf:name": "Tucker Taylor"
+          },
+          {
+            "@type": "foaf:Person",
+            "foaf:name": " Sam Goldsmith"
+          },
+          {
+            "@type": "foaf:Person",
+            "foaf:name": " Nishant Joshi"
+          }
+        ]
+      },
+      "dcterms:source": "https://hypothes.is/api/annotations/twwSObPPQy2U8VtY-78Dgg",
+      "dcterms:title": "http://data.perseus.org/people/smith:priamus-1#this identifies Priam as snap:FatherOf in urn:cts:pdlrefwk:viaf88890045.003.perseus-eng1:P.polyxena_1",
+      "hasBody": {
+        "@context": {
+          "lawd": "http://lawd.info/ontology/",
+          "perseusrdf": "http://data.perseus.org/rdfvocab/addons/",
+          "snap": "http://onto.snapdrgn.net/snap#"
+        },
+        "@graph": [
+          {
+            "@id": "http://data.perseus.org/people/smith:polyxena-1#this",
+            "snap:has-bond": {
+              "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.c87a0950c82c01321cef0ada42b1fd09#bond-1"
+            }
+          },
+          {
+            "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.c87a0950c82c01321cef0ada42b1fd09#bond-1",
+            "@type": "snap:FatherOf",
+            "snap:bond-with": {
+              "@id": "http://data.perseus.org/people/smith:priamus-1#this"
+            }
+          }
+        ]
+      },
+      "hasTarget": {
+        "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.c87a0950c82c01321cef0ada42b1fd09#target-1",
+        "@type": "oa:SpecificResource",
+        "hasSelector": {
+          "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.c87a0950c82c01321cef0ada42b1fd09#target-1-sel-1",
+          "@type": "oa:TextQuoteSelector",
+          "exact": "Priam",
+          "prefix": "ctor's body was delivered up to",
+          "suffix": ". After the murder of Achilles P"
+        },
+        "hasSource": {
+          "@id": "urn:cts:pdlrefwk:viaf88890045.003.perseus-eng1:P.polyxena_1"
+        }
+      },
+      "motivatedBy": "oa:identifying",
+      "serializedBy": {
+        "@id": "https://hypothes.is",
+        "@type": "prov:SoftwareAgent"
+      }
+    },
+    {
+      "@context": "http://www.w3.org/ns/oa-context-20130208.json",
+      "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.9b24e3a1cc0d013271e90ada42b1fd09",
+      "@type": "oa:Annotation",
+      "annotatedAt": "2015-03-02T21:11:37.539027+00:00",
+      "annotatedBy": {
+        "@id": "http://data.perseus.org/sosol/users/Ian%20Lam,%20Nathalie%20Dumornay,%20Miguel%20Carral%C3%B3n%20Del%20Cerro%20",
+        "@type": "foaf:Group",
+        "foaf:member": [
+          {
+            "@type": "foaf:Person",
+            "foaf:name": "Ian Lam"
+          },
+          {
+            "@type": "foaf:Person",
+            "foaf:name": "Jared David Cohn"
+          },
+          {
+            "@type": "foaf:Person",
+            "foaf:name": "Chris Hamblin"
+          }
+        ]
+      },
+      "dcterms:source": "https://hypothes.is/api/annotations/IpDrBzKUTYKtWDntA9rEFQ",
+      "dcterms:title": "http://data.perseus.org/people/smith:tarpeia-1#this identifies Tarpeia as perseusrdf:EnemyOf in urn:cts:pdlrefwk:viaf88890045.003.perseus-eng1:R.romulus_1",
+      "hasBody": {
+        "@context": {
+          "lawd": "http://lawd.info/ontology/",
+          "perseusrdf": "http://data.perseus.org/rdfvocab/addons/",
+          "snap": "http://onto.snapdrgn.net/snap#"
+        },
+        "@graph": [
+          {
+            "@id": "http://data.perseus.org/people/smith:romulus-1#this",
+            "snap:has-bond": {
+              "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.9b24e3a1cc0d013271e90ada42b1fd09#bond-1"
+            }
+          },
+          {
+            "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.9b24e3a1cc0d013271e90ada42b1fd09#bond-1",
+            "@type": "perseusrdf:EnemyOf",
+            "snap:bond-with": {
+              "@id": "http://data.perseus.org/people/smith:tarpeia-1#this"
+            }
+          }
+        ]
+      },
+      "hasTarget": {
+        "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.9b24e3a1cc0d013271e90ada42b1fd09#target-1",
+        "@type": "oa:SpecificResource",
+        "hasSelector": {
+          "@id": "http://data.perseus.org/collections/urn:cite:perseus:pdljann.9b24e3a1cc0d013271e90ada42b1fd09#target-1-sel-1",
+          "@type": "oa:TextQuoteSelector",
+          "exact": "Tarpeia",
+          "prefix": "ley, the site of the forum. But",
+          "suffix": ", the daughter of the commander"
+        },
+        "hasSource": {
+          "@id": "urn:cts:pdlrefwk:viaf88890045.003.perseus-eng1:R.romulus_1"
+        }
+      },
+      "motivatedBy": "oa:identifying",
+      "serializedBy": {
+        "@id": "https://hypothes.is",
+        "@type": "prov:SoftwareAgent"
+      }
+    }
+  ]
+}

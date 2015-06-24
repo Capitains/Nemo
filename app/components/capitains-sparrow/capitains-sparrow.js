@@ -22,7 +22,7 @@ angular.module('capitainsSparrow.models', [])
         }
         return deferred.promise;
       };
-      this.Repository = new CTS.repository.repository(endpoint, 3)
+      this.Repository = new CTS.repository.repository(endpoint, version)
 
       this.find = function (urn) {
         var index = localStorageService.get("index-urn");

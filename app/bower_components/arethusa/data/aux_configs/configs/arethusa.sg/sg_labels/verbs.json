@@ -1,0 +1,28 @@
+{
+  "nested" : {
+    "fin" : {
+      "short" : "fin",
+      "long" : "finite verb",
+      "dependency" : {
+        "pers" : "*"
+      },
+      "@include" : "./arethusa.sg/sg_labels/finite_verbs.json"
+    },
+    "inf" : {
+      "short" : "inf",
+      "long" : "infinitive",
+      "dependency" : {
+        "mood" : "inf"
+      },
+      "@include" : "./arethusa.sg/sg_labels/infinitives.json"
+    },
+    "prt" : {
+      "short" : "prt",
+      "long" : "participle",
+      "dependency" : {
+        "mood" : "part"
+      },
+      "@include" : "./arethusa.sg/sg_labels/participles.json"
+    }
+  }
+}

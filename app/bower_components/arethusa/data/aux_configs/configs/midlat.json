@@ -1,0 +1,14 @@
+{
+  "plugins": {
+    "morph" : {
+      "retrievers" : {
+        "BspMorphRetriever" : {
+          "resource" : "morphologyServiceLat"
+        }
+      }
+    },
+    "relation" : {
+      "@include" : "./arethusa.relation/midlat.json"
+    }
+  }
+}
