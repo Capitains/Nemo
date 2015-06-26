@@ -139,7 +139,15 @@ angular.module('capitainsSparrow.models', [])
         window.texts[self.urn].passages[self.passage].body = window.texts[self.urn].passages[self.passage].getXml("body", "string");
         window.texts[self.urn].passages[self.passage].next = (function() { 
           var next = window.texts[self.urn].passages[self.passage].getXml("next");
-          if(next.length === 1 && next[0].textContent !== "") { return next[0].textContent; }
+          if(next.length === 1) { 
+            // cts5 has next wrapped in a urn element
+            var nexturn = next[0].getElementsByTagNameNS("*", 'urn');
+            if (nexturn.length == 1) {
+              return nexturn[0].textContent;
+            } else if (next[0].textContent != "") {
+              return next[0].textContent; 
+            }
+          }
           else { return false; }
         })()
         window.texts[self.urn].passages[self.passage].notes = {};

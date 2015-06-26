@@ -16,7 +16,7 @@
     var WURI = new URI();
     var WURI = WURI.search(true);
     window.CTSAPI = WURI.api || "http://sosol.perseids.org/exist/rest/db/xq/CTS.xq";
-    window.CTSinventories = ["latin"]|| ["annotsrc"];
+    window.CTSinventories = WURI["inv[]"] || ["annotsrc"];
     if(typeof window.CTSinventories === "string") {
       window.CTSinventories = [window.CTSinventories];
     }
