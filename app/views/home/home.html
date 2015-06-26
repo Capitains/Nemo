@@ -1,5 +1,13 @@
   <div class="top-bar">
-    <div class="title">Capitains Nemo</div>
+    <div class="row">
+      <div class="col-md-6 title">Capitains Nemo</div>
+      <div class="col-md-6 text-right" style="height:100%; line-height: 40px;">
+        <a ng-click="clearCache()" style="color:white !important; cursor:pointer;">
+          <span class=" glyphicon glyphicon-refresh"></span>
+          Clear Cache
+        </a>
+      </div>
+    </div>
   </div>
   <div class="content">
     <div class="col-md-3 col-menu" ng-class="{'deactivated' : !layout.menu}">

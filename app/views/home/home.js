@@ -17,9 +17,16 @@ angular.module('capitainsNemo.home', ['ngRoute'])
     'Repository',
     'Passage', 
     'Layout', 
-  function($scope, $route, Repository, Passage, Layout) {
+    'localStorageService',
+  function($scope, $route, Repository, Passage, Layout, localStorageService) {
   $scope.layout = new Layout();
   $scope.sidebar = new Layout(['notes']);
+
+  $scope.clearCache = function() {
+    if(localStorageService.clearAll()) {
+      location.reload()
+    }
+  };
 
   $scope.items = {
     parents : {
@@ -45,8 +52,11 @@ angular.module('capitainsNemo.home', ['ngRoute'])
     }
   }
 
-  $scope.repository = new Repository(window.CTSAPI, 3);
-  $scope.repository.Repository.addInventory("annotsrc", "Perseids Text");
+  $scope.repository = new Repository(window.CTSAPI, window.CTSVersion);
+  console.log($scope.repository)
+  for (var i = window.CTSinventories.length - 1; i >= 0; i--) {
+    $scope.repository.Repository.addInventory(window.CTSinventories[i], window.CTSinventories[i]);
+  };
   /* 
     Loading the data
   */
